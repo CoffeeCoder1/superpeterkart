@@ -8,6 +8,7 @@ extends CharacterBody3D
 
 var top_speed = TOP_SPEED
 var acceleration = ACCELERATION
+var boost_amount = 100
 
 func _ready() -> void:
 	# $Camera3D.make_current()
@@ -19,8 +20,10 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	# Boost
-	if Input.is_action_just_pressed("player1_boost"):
+	if Input.is_action_pressed("player1_boost") and boost_amount >= 0:
 		top_speed = move_toward(top_speed, BOOST_SPEED, delta)
+		boost_amount = move_toward(boost_amount, 0, delta)
+		print(boost_amount)
 	else:
 		top_speed = move_toward(top_speed, TOP_SPEED, delta)
 
