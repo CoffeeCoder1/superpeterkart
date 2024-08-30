@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk3207gtw8dmw"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/main_menu/main_menu.gd" id="1_y5qwt"]
+
+[node name="MainMenu" type="Control" groups=["menus"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y5qwt")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LocalGameButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Create Game"
+
+[node name="GridContainer" type="GridContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="OnlineGameButton" type="Button" parent="GridContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Join Online Game"
+
+[node name="SettingsButton" type="Button" parent="GridContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Settings
+"
+
+[connection signal="pressed" from="GridContainer/LocalGameButton" to="." method="_on_local_game_button_pressed"]
+[connection signal="pressed" from="GridContainer/GridContainer/OnlineGameButton" to="." method="_on_online_game_button_pressed"]
+[connection signal="pressed" from="GridContainer/GridContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

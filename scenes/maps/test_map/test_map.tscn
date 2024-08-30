@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://khkkj7jo5dp4"]
+
+[sub_resource type="Gradient" id="Gradient_7p0pk"]
+offsets = PackedFloat32Array(0, 0.904762)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3ggdo"]
+frequency = 0.0358
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_idsy7"]
+width = 1024
+height = 1024
+color_ramp = SubResource("Gradient_7p0pk")
+noise = SubResource("FastNoiseLite_3ggdo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_706p5"]
+albedo_texture = SubResource("NoiseTexture2D_idsy7")
+
+[sub_resource type="BoxMesh" id="BoxMesh_325wc"]
+material = SubResource("StandardMaterial3D_706p5")
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aoheh"]
+size = Vector3(1000, 1, 1000)
+
+[node name="TestMap" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_325wc")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_aoheh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.747601, 0.664148, 0, -0.664148, 0.747601, 0, 4.64005, 4.15957)
