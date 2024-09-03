@@ -13,7 +13,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_0heav"]
 events = [SubResource("InputEventAction_pbehn")]
 
-[node name="Main" type="Control"]
+[node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,4 +68,5 @@ text = "Back"
 [connection signal="online_game" from="VBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_online_game"]
 [connection signal="settings" from="VBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_settings"]
 [connection signal="player_number_selected" from="VBoxContainer/PanelContainer/PlayerNumberSelectionMenu" to="." method="_on_player_number_selection_menu_player_number_selected"]
+[connection signal="character_selected" from="VBoxContainer/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_character_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

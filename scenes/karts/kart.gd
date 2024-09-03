@@ -1,10 +1,11 @@
 extends CharacterBody3D
 
 
-@export var ACCELERATION = 10.0
-@export var TOP_SPEED = 1.0
-@export var BOOST_SPEED = 1.5
-@export var BRAKING = 15
+@export var ACCELERATION: float = 10.0
+@export var TOP_SPEED: float = 1.0
+@export var BOOST_SPEED: float = 1.5
+@export var BRAKING: float = 15
+@export var KART_NAME: String
 
 var top_speed = TOP_SPEED
 var acceleration = ACCELERATION
@@ -13,6 +14,7 @@ var boost_amount = 100
 func _ready() -> void:
 	# $Camera3D.make_current()
 	pass
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -42,3 +44,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y = clamp(velocity.y, -top_speed, top_speed)
 
 	move_and_slide()
+
+
+func get_kart_name() -> String:
+	return KART_NAME

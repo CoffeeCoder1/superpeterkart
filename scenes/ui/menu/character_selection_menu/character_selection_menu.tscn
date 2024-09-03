@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3ovvx3oxxrwr"]
+[gd_scene load_steps=4 format=3 uid="uid://c3ovvx3oxxrwr"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu/character_selection_menu/character_selection_menu.gd" id="1_7867g"]
+[ext_resource type="PackedScene" uid="uid://b8msk8mvgsvi0" path="res://scenes/karts/test_kart/test_kart.tscn" id="2_ipla4"]
+[ext_resource type="PackedScene" uid="uid://bjciw6mon03l2" path="res://scenes/karts/test_kart_2/test_kart_2.tscn" id="3_6gend"]
 
 [node name="CharacterSelectionMenu" type="Control" groups=["menus"]]
 layout_mode = 3
@@ -10,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7867g")
+karts = Array[PackedScene]([ExtResource("2_ipla4"), ExtResource("3_6gend")])
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1

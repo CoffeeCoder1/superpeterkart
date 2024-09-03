@@ -8,6 +8,7 @@
 
 [node name="TestKart" type="CharacterBody3D"]
 script = ExtResource("1_kwkn6")
+KART_NAME = "Test Kart"
 
 [node name="Pivot" type="Node3D" parent="."]
 

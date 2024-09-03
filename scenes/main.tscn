@@ -7,6 +7,8 @@
 [node name="Main" type="Node3D"]
 script = ExtResource("1_jayv1")
 
-[node name="Main" parent="." instance=ExtResource("2_mh2bb")]
+[node name="Menu" parent="." instance=ExtResource("2_mh2bb")]
 
 [node name="Game" parent="." instance=ExtResource("1_jxpmy")]
+
+[connection signal="game_started" from="Menu" to="." method="_on_menu_game_started"]

@@ -3,11 +3,11 @@ extends Node3D
 var players = []
 
 
-func new_game(karts) -> void:
+func new_game(karts: Array[Node]) -> void:
 	for e in karts:
-		var kart = load(e)
-		add_child(kart.instantiate())
-		players.append(kart)
+		e.get_parent().remove_child(e)
+		add_child(e)
+		players.append(e)
 
 
 # Called when the node enters the scene tree for the first time.

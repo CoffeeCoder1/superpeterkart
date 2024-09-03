@@ -1,5 +1,7 @@
 extends Control
 
+signal game_started(karts: Array[Node])
+
 enum Menu {START_MENU, MAIN_MENU, SETTINGS, ONLINE_GAME, PLAYER_NUMBER_SELECTION, CHARACTER_SELECTION}
 var menu_stack: Array[Menu] = [Menu.START_MENU]
 
@@ -70,3 +72,8 @@ func _on_player_number_selection_menu_player_number_selected(number: int) -> voi
 
 func _on_back_button_pressed() -> void:
 	back_menu()
+
+
+func _on_character_selection_menu_character_selected(karts: Array[Node]) -> void:
+	close_menu()
+	game_started.emit(karts)
