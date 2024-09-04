@@ -21,4 +21,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02977, 0)
 shape = SubResource("CylinderShape3D_jsfc4")
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["karts"]]
-transform = Transform3D(1, 0, 0, 0, 0.993768, 0.111469, 0, -0.111469, 0.993768, 0, 1.73038, 2.95312)
+transform = Transform3D(1, 0, 0, 0, 0.869504, 0.493927, 0, -0.493927, 0.869504, 0, 3.24663, 2.95312)

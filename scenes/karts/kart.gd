@@ -2,13 +2,15 @@ extends CharacterBody3D
 
 
 @export var ACCELERATION: float = 10.0
-@export var TOP_SPEED: float = 1.0
-@export var BOOST_SPEED: float = 1.5
+@export var TOP_SPEED: float = 10.0
+@export var BOOST_SPEED: float = 15.0
 @export var BRAKING: float = 15
 @export var KART_NAME: String
+@export var STEERING_AMOUNT: float = 25
 
-var top_speed = TOP_SPEED
-var acceleration = ACCELERATION
+var _top_speed = TOP_SPEED
+var _acceleration = ACCELERATION
+var _steer_target = 0
 var boost_amount = 100
 
 func _ready() -> void:
@@ -23,26 +25,31 @@ func _physics_process(delta: float) -> void:
 	
 	# Boost
 	if Input.is_action_pressed("player1_boost") and boost_amount >= 0:
-		top_speed = move_toward(top_speed, BOOST_SPEED, delta)
+		_top_speed = move_toward(_top_speed, BOOST_SPEED, delta)
 		boost_amount = move_toward(boost_amount, 0, delta)
 		print(boost_amount)
 	else:
-		top_speed = move_toward(top_speed, TOP_SPEED, delta)
-
+		_top_speed = move_toward(_top_speed, TOP_SPEED, delta)
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var throttle := Input.get_axis("ui_up", "ui_down")
+	var direction := (transform.basis * Vector3(0, 0, throttle)).normalized()
 	if direction:
-		velocity.x += direction.x * acceleration * delta
-		velocity.z += direction.z * acceleration * delta
+		velocity.x += direction.x * _acceleration * delta
+		velocity.z += direction.z * _acceleration * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, BRAKING * delta)
 		velocity.z = move_toward(velocity.z, 0, BRAKING * delta)
 	
-	velocity.x = clamp(velocity.x, -top_speed, top_speed)
-	velocity.y = clamp(velocity.y, -top_speed, top_speed)
-
+	velocity.z = clamp(velocity.z, -_top_speed, _top_speed)
+	velocity.x = clamp(velocity.x, -_top_speed, _top_speed)
+	
+	# Steering
+	var steering = Input.get_axis("ui_right", "ui_left")
+	_steer_target = steering * STEERING_AMOUNT * delta
+	rotate_y(_steer_target * delta)
+	
 	move_and_slide()
 
 
