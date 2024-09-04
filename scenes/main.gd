@@ -14,4 +14,7 @@ func _process(delta: float) -> void:
 
 
 func _on_menu_game_started(karts: Array[Node]) -> void:
+	var menu = self.get_node("Menu")
+	self.remove_child(menu)
+	menu.call_deferred("free")
 	$Game.new_game(karts)
