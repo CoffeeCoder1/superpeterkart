@@ -1,11 +1,13 @@
 extends Node3D
 
 
+@onready var menu: Node
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#var karts = ["res://scenes/karts/test_kart/test_kart.tscn", "res://scenes/karts/test_kart_2/test_kart_2.tscn"]
-	#$Game.new_game(karts)
-	pass
+	menu = self.get_node("Menu")
+	menu.open_menu(menu.Menu.START_MENU)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,7 +16,5 @@ func _process(delta: float) -> void:
 
 
 func _on_menu_game_started(karts: Array[Node]) -> void:
-	var menu = self.get_node("Menu")
-	self.remove_child(menu)
-	menu.call_deferred("free")
+	menu.close_menu()
 	$Game.new_game(karts)

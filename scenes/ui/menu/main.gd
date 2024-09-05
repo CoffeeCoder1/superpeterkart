@@ -5,9 +5,11 @@ signal game_started(karts: Array[Node])
 enum Menu {START_MENU, MAIN_MENU, SETTINGS, ONLINE_GAME, PLAYER_NUMBER_SELECTION, CHARACTER_SELECTION}
 var menu_stack: Array[Menu] = [Menu.START_MENU]
 
+var karts: Array[Node]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_show_menu(Menu.START_MENU)
+	pass
 
 
 func open_menu(menu: Menu) -> void:
@@ -74,6 +76,7 @@ func _on_back_button_pressed() -> void:
 	back_menu()
 
 
-func _on_character_selection_menu_character_selected(karts: Array[Node]) -> void:
+func _on_character_selection_menu_character_selected(selected_karts: Array[Node]) -> void:
+	karts = selected_karts
 	close_menu()
 	game_started.emit(karts)
