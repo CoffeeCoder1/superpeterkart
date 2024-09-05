@@ -3,7 +3,8 @@ extends Control
 signal character_selected(karts: Array[Node])
 
 @export var karts: Array[PackedScene]
-var selectedKarts: Array[Node]
+var selected_karts: Array[Node]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,5 +29,6 @@ func _process(delta: float) -> void:
 
 func _on_character_selected(kart: Node) -> void:
 	print(kart.get_kart_name())
-	selectedKarts.append(kart)
-	character_selected.emit(selectedKarts)
+	selected_karts.append(kart)
+	kart.get_parent().remove_child(kart)
+	character_selected.emit(selected_karts)

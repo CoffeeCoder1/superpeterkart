@@ -5,7 +5,6 @@ var players = []
 
 func new_game(karts: Array[Node]) -> void:
 	for e in karts:
-		e.get_parent().remove_child(e)
 		add_child(e)
 		players.append(e)
 
