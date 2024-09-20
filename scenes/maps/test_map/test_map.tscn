@@ -35,3 +35,6 @@ shape = SubResource("BoxShape3D_aoheh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.747601, 0.664148, 0, -0.664148, 0.747601, 0, 4.64005, 4.15957)
+
+[node name="SpawnLocation" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
