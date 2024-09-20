@@ -33,6 +33,8 @@ func load_map(map: MapMetadata) -> void:
 	# Remove the last map if one was loaded
 	if loaded_map:
 		loaded_map.get_parent().remove_child(loaded_map)
+		# Schedules the map to be deleted from memory
+		loaded_map.queue_free()
 	
 	# Add the map to the scene
 	add_child(map_node)
