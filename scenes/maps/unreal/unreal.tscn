@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://fluqs2j2tp"]
+[gd_scene load_steps=8 format=3 uid="uid://fluqs2j2tp"]
+
+[ext_resource type="Script" path="res://scenes/classes/map.gd" id="1_afrj1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw1p3"]
 albedo_color = Color(0.654232, 0.654232, 0.654232, 1)
@@ -30,6 +32,7 @@ reflected_light_source = 1
 volumetric_fog_density = 0.012
 
 [node name="Unreal" type="Node3D"]
+script = ExtResource("1_afrj1")
 
 [node name="World" type="CSGCombiner3D" parent="."]
 use_collision = true

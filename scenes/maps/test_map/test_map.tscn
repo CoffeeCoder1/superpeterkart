@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://khkkj7jo5dp4"]
+[gd_scene load_steps=8 format=3 uid="uid://khkkj7jo5dp4"]
+
+[ext_resource type="Script" path="res://scenes/classes/map.gd" id="1_q3f2m"]
 
 [sub_resource type="Gradient" id="Gradient_7p0pk"]
 offsets = PackedFloat32Array(0, 0.904762)
@@ -23,6 +25,7 @@ size = Vector3(1000, 1, 1000)
 size = Vector3(1000, 1, 1000)
 
 [node name="TestMap" type="Node3D"]
+script = ExtResource("1_q3f2m")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
