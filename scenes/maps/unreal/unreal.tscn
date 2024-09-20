@@ -1,0 +1,274 @@
+[gd_scene load_steps=7 format=3 uid="uid://fluqs2j2tp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw1p3"]
+albedo_color = Color(0.654232, 0.654232, 0.654232, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yijh7"]
+albedo_color = Color(0.41024, 0.41024, 0.41024, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvi8y"]
+albedo_color = Color(0, 0.655955, 0.93817, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bymhv"]
+sky_top_color = Color(0.407945, 0.64784, 0.940922, 1)
+sky_horizon_color = Color(0.349597, 0.565578, 0.640195, 1)
+sky_curve = 0.113679
+ground_bottom_color = Color(0.0876739, 0.231535, 0.342704, 1)
+ground_horizon_color = Color(0.34902, 0.564706, 0.639216, 1)
+ground_curve = 0.034822
+
+[sub_resource type="Sky" id="Sky_bsnx4"]
+sky_material = SubResource("ProceduralSkyMaterial_bymhv")
+
+[sub_resource type="Environment" id="Environment_cqnta"]
+background_mode = 2
+background_energy_multiplier = 2.01
+sky = SubResource("Sky_bsnx4")
+ambient_light_source = 2
+ambient_light_color = Color(0.777177, 0.777177, 0.777177, 1)
+reflected_light_source = 1
+volumetric_fog_density = 0.012
+
+[node name="Unreal" type="Node3D"]
+
+[node name="World" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="World"]
+size = Vector3(33, 0.5, 30)
+material = SubResource("StandardMaterial3D_uw1p3")
+
+[node name="Ramp" type="CSGCombiner3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.34215, 0.718287, 3.00273)
+
+[node name="RampBase" type="CSGBox3D" parent="World/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.341675)
+size = Vector3(2, 1, 4)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="RampCut" type="CSGBox3D" parent="World/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 0.995088, -0.0989895, 0, 0.0989895, 0.995088, 0, 0.305216, -0.146817)
+operation = 2
+size = Vector3(2, 1.1886, 4.49152)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cylinder" type="CSGCylinder3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.24048, 0.75, -4.69196)
+radius = 2.0
+height = 1.0
+sides = 32
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="CenterObject" type="CSGCombiner3D" parent="World"]
+
+[node name="Body" type="CSGBox3D" parent="World/CenterObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.25, -2.5)
+size = Vector3(5, 2, 6)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="MiddleRight" type="CSGBox3D" parent="World/CenterObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.25, -1.5)
+size = Vector3(1, 2, 2)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Extension" type="CSGBox3D" parent="World/CenterObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.25, -6.5)
+size = Vector3(1, 2, 2)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="CornerPiece1" type="CSGCombiner3D" parent="World/CenterObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.25, -0.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/CenterObject/CornerPiece1"]
+radius = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut1" type="CSGBox3D" parent="World/CenterObject/CornerPiece1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+operation = 2
+size = Vector3(2, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut2" type="CSGBox3D" parent="World/CenterObject/CornerPiece1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+operation = 2
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="CornerPiece2" type="CSGCombiner3D" parent="World/CenterObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 1.25, -2.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/CenterObject/CornerPiece2"]
+radius = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut1" type="CSGBox3D" parent="World/CenterObject/CornerPiece2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+operation = 2
+size = Vector3(2, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut2" type="CSGBox3D" parent="World/CenterObject/CornerPiece2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+operation = 2
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="ShortObject" type="CSGCombiner3D" parent="World"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, 9)
+
+[node name="Body" type="CSGBox3D" parent="World/ShortObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.25, -1.5)
+size = Vector3(3, 2, 4)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="MiddleRight" type="CSGBox3D" parent="World/ShortObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.25, -1.5)
+size = Vector3(1, 2, 2)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="CornerPiece1" type="CSGCombiner3D" parent="World/ShortObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.25, -0.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/ShortObject/CornerPiece1"]
+radius = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut1" type="CSGBox3D" parent="World/ShortObject/CornerPiece1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+operation = 2
+size = Vector3(2, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut2" type="CSGBox3D" parent="World/ShortObject/CornerPiece1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+operation = 2
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="CornerPiece2" type="CSGCombiner3D" parent="World/ShortObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 1.25, -2.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/ShortObject/CornerPiece2"]
+radius = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut1" type="CSGBox3D" parent="World/ShortObject/CornerPiece2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+operation = 2
+size = Vector3(2, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut2" type="CSGBox3D" parent="World/ShortObject/CornerPiece2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+operation = 2
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="LongObject" type="CSGCombiner3D" parent="World"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 0, -8.96398)
+
+[node name="Body" type="CSGBox3D" parent="World/LongObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.25, -1.5)
+size = Vector3(10, 2, 4)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="MiddleRight" type="CSGBox3D" parent="World/LongObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.25, -1.5)
+size = Vector3(1, 2, 2)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="CornerPiece1" type="CSGCombiner3D" parent="World/LongObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.25, -0.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/LongObject/CornerPiece1"]
+radius = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut1" type="CSGBox3D" parent="World/LongObject/CornerPiece1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+operation = 2
+size = Vector3(2, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut2" type="CSGBox3D" parent="World/LongObject/CornerPiece1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+operation = 2
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="CornerPiece2" type="CSGCombiner3D" parent="World/LongObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 1.25, -2.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/LongObject/CornerPiece2"]
+radius = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut1" type="CSGBox3D" parent="World/LongObject/CornerPiece2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+operation = 2
+size = Vector3(2, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Cut2" type="CSGBox3D" parent="World/LongObject/CornerPiece2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+operation = 2
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_yijh7")
+
+[node name="Walls" type="CSGCombiner3D" parent="World"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95, 15)
+size = Vector3(34, 4.5, 1)
+material = SubResource("StandardMaterial3D_uw1p3")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95, -15)
+size = Vector3(34, 4.5, 1)
+material = SubResource("StandardMaterial3D_uw1p3")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 1.95, -0.1)
+size = Vector3(1, 4.5, 30)
+material = SubResource("StandardMaterial3D_uw1p3")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 1.95, -0.1)
+size = Vector3(1, 4.5, 30)
+material = SubResource("StandardMaterial3D_uw1p3")
+
+[node name="BlueCube1" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 1.1)
+material = SubResource("StandardMaterial3D_rvi8y")
+
+[node name="BlueCube2" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 2.31119)
+material = SubResource("StandardMaterial3D_rvi8y")
+
+[node name="BlueCube3" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.976387, 0, 0.216031, 0, 1, 0, -0.216031, 0, 0.976387, 7.503, 0.7, 1.67653)
+material = SubResource("StandardMaterial3D_rvi8y")
+
+[node name="BlueCube4" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.938614, 0, 0.344971, 0, 1, 0, -0.344971, 0, 0.938614, 3.82715, 0.7, 10.4862)
+material = SubResource("StandardMaterial3D_rvi8y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.457269, 0.889329, 0, -0.889329, 0.457269, 0, 8.03117, -0.1789)
+light_energy = 1.423
+light_indirect_energy = 3.514
+light_volumetric_fog_energy = 3.438
+light_angular_distance = 8.3
+shadow_enabled = true
+shadow_bias = 0.78
+shadow_blur = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cqnta")
