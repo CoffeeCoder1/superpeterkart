@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 
 
 # Adds players and loads the map
-func new_game(karts: Array[Node], map: Map) -> void:
+func new_game(karts: Array[Node], map: MapMetadata) -> void:
 	# Add players
 	for e in karts:
 		add_child(e)
@@ -26,7 +26,7 @@ func new_game(karts: Array[Node], map: Map) -> void:
 
 
 # Loads a new map and moves the players to their starting positions
-func load_map(map: Map) -> void:
+func load_map(map: MapMetadata) -> void:
 	# Instantiate the map
 	var map_node = map.instantiate()
 	

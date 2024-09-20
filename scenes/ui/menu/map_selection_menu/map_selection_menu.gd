@@ -1,9 +1,9 @@
 extends Control
 
-signal map_selected(map: Map)
+signal map_selected(map: MapMetadata)
 
-@export var maps: Array[Map]
-var selected_map: Map
+@export var maps: Array[MapMetadata]
+var selected_map: MapMetadata
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,6 +22,6 @@ func _process(delta: float) -> void:
 
 
 # Called when a map is selected
-func _on_map_selected(map: Map) -> void:
+func _on_map_selected(map: MapMetadata) -> void:
 	selected_map = map
 	map_selected.emit(selected_map)

@@ -1,6 +1,6 @@
 extends Control
 
-signal game_started(karts: Array[Node], map: Map)
+signal game_started(karts: Array[Node], map: MapMetadata)
 
 enum Menu {
 	START_MENU,
@@ -91,6 +91,6 @@ func _on_character_selection_menu_character_selected(selected_karts: Array[Node]
 	open_menu(Menu.MAP_SELECTION)
 
 
-func _on_map_selection_menu_map_selected(map: Map) -> void:
+func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
 	close_menu()
 	game_started.emit(karts, map)

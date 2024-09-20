@@ -1,4 +1,4 @@
-class_name Map extends Resource
+class_name MapMetadata extends Resource
 
 @export var name: String
 @export var scene: PackedScene
