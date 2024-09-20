@@ -21,5 +21,5 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warnings
 
 
-func get_spawn_location() -> Vector3:
+func get_spawn_location() -> Transform3D:
 	return $SpawnLocation.transform
