@@ -19,3 +19,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Map must have a SpawnLocation.")
 	
 	return warnings
+
+
+func get_spawn_location() -> Vector3:
+	return $SpawnLocation.transform

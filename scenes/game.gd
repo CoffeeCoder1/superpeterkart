@@ -40,6 +40,6 @@ func load_map(map: MapMetadata) -> void:
 	# Save the map so it can be unloaded later
 	loaded_map = map_node
 	
-	# Move the players to the starting position
+	# Move the players to the spawn location
 	for player in players:
-		player.transform = loaded_map.get_node("SpawnLocation").transform
+		player.transform = loaded_map.get_spawn_location()
