@@ -8,7 +8,6 @@
 
 [node name="TestKart" type="CharacterBody3D"]
 script = ExtResource("1_rkavp")
-KART_NAME = "Test Kart"
 
 [node name="Pivot" type="Node3D" parent="."]
 

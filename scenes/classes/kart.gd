@@ -4,7 +4,6 @@ class_name Kart extends CharacterBody3D
 @export var TOP_SPEED: float = 10.0
 @export var BOOST_SPEED: float = 15.0
 @export var BRAKING: float = 15
-@export var KART_NAME: String
 @export var STEERING_AMOUNT: float = 25
 
 var _top_speed = TOP_SPEED
@@ -51,7 +50,3 @@ func _physics_process(delta: float) -> void:
 	rotate_y(_steer_target * delta)
 	
 	move_and_slide()
-
-
-func get_kart_name() -> String:
-	return KART_NAME

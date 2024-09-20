@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="KartMetadata" load_steps=3 format=3 uid="uid://d15tyhy1weacy"]
+
+[ext_resource type="Script" path="res://scenes/classes/kart_metadata.gd" id="1_4257t"]
+[ext_resource type="PackedScene" uid="uid://b8msk8mvgsvi0" path="res://scenes/karts/test_kart/test_kart.tscn" id="1_d26do"]
+
+[resource]
+script = ExtResource("1_4257t")
+name = "Test Kart"
+scene = ExtResource("1_d26do")

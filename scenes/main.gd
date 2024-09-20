@@ -1,6 +1,5 @@
 extends Node3D
 
-
 @onready var menu: Node
 
 
@@ -15,6 +14,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_menu_game_started(karts: Array[Node], map: MapMetadata) -> void:
+func _on_menu_game_started(karts: Array[KartMetadata], map: MapMetadata) -> void:
 	menu.close_menu()
 	$Game.new_game(karts, map)

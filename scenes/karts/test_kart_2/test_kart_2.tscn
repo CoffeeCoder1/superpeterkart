@@ -8,7 +8,6 @@
 
 [node name="TestKart2" type="CharacterBody3D"]
 script = ExtResource("1_auakt")
-KART_NAME = "Test Kart 2"
 
 [node name="Pivot" type="Node3D" parent="."]
 

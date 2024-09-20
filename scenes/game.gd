@@ -1,6 +1,6 @@
 extends Node3D
 
-var players: Array[Node] = []
+var players: Array[Kart] = []
 var loaded_map: Node
 
 
@@ -15,11 +15,12 @@ func _process(delta: float) -> void:
 
 
 # Adds players and loads the map
-func new_game(karts: Array[Node], map: MapMetadata) -> void:
+func new_game(karts: Array[KartMetadata], map: MapMetadata) -> void:
 	# Add players
-	for e in karts:
-		add_child(e)
-		players.append(e)
+	for kart in karts:
+		var kart_node = kart.instantiate()
+		add_child(kart_node)
+		players.append(kart_node)
 	
 	# Load map
 	load_map(map)

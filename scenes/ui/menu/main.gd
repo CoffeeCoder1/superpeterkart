@@ -1,6 +1,6 @@
 extends Control
 
-signal game_started(karts: Array[Node], map: MapMetadata)
+signal game_started(karts: Array[KartMetadata], map: MapMetadata)
 
 enum Menu {
 	START_MENU,
@@ -13,7 +13,7 @@ enum Menu {
 }
 var menu_stack: Array[Menu] = [Menu.START_MENU]
 
-var karts: Array[Node]
+var karts: Array[KartMetadata]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -86,7 +86,7 @@ func _on_back_button_pressed() -> void:
 	back_menu()
 
 
-func _on_character_selection_menu_character_selected(selected_karts: Array[Node]) -> void:
+func _on_character_selection_menu_character_selected(selected_karts: Array[KartMetadata]) -> void:
 	karts = selected_karts
 	open_menu(Menu.MAP_SELECTION)
 
