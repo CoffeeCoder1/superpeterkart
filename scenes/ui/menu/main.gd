@@ -1,8 +1,16 @@
 extends Control
 
-signal game_started(karts: Array[Node])
+signal game_started(karts: Array[Node], map: Map)
 
-enum Menu {START_MENU, MAIN_MENU, SETTINGS, ONLINE_GAME, PLAYER_NUMBER_SELECTION, CHARACTER_SELECTION}
+enum Menu {
+	START_MENU,
+	MAIN_MENU,
+	SETTINGS,
+	ONLINE_GAME,
+	PLAYER_NUMBER_SELECTION,
+	CHARACTER_SELECTION,
+	MAP_SELECTION
+}
 var menu_stack: Array[Menu] = [Menu.START_MENU]
 
 var karts: Array[Node]
@@ -45,6 +53,8 @@ func _show_menu(menu: Menu) -> void:
 		pass
 	elif (menu == Menu.CHARACTER_SELECTION):
 		$VBoxContainer/PanelContainer/CharacterSelectionMenu.show()
+	elif (menu == Menu.MAP_SELECTION):
+		$VBoxContainer/PanelContainer/MapSelectionMenu.show()
 	
 	if (menu == Menu.START_MENU):
 		$VBoxContainer.hide()
@@ -78,5 +88,9 @@ func _on_back_button_pressed() -> void:
 
 func _on_character_selection_menu_character_selected(selected_karts: Array[Node]) -> void:
 	karts = selected_karts
+	open_menu(Menu.MAP_SELECTION)
+
+
+func _on_map_selection_menu_map_selected(map: Map) -> void:
 	close_menu()
-	game_started.emit(karts)
+	game_started.emit(karts, map)

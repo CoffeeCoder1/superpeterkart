@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmqdrl4gr8ikv"]
+[gd_scene load_steps=10 format=3 uid="uid://bmqdrl4gr8ikv"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu/main.gd" id="1_bjv5w"]
 [ext_resource type="PackedScene" uid="uid://dk3207gtw8dmw" path="res://scenes/ui/menu/main_menu/main_menu.tscn" id="1_hb36d"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://3phbp3v6np27" path="res://scenes/ui/menu/settings_menu/settings_menu.tscn" id="3_1n28g"]
 [ext_resource type="PackedScene" uid="uid://ddl6hmbolemig" path="res://scenes/ui/menu/player_number_selection_menu/player_number_selection_menu.tscn" id="4_8pmct"]
 [ext_resource type="PackedScene" uid="uid://c3ovvx3oxxrwr" path="res://scenes/ui/menu/character_selection_menu/character_selection_menu.tscn" id="5_gl5ct"]
+[ext_resource type="PackedScene" uid="uid://c7yilrpey1l1o" path="res://scenes/ui/menu/map_selection_menu/map_selection_menu.tscn" id="7_g6686"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_pbehn"]
 action = &"ui_cancel"
@@ -54,6 +55,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="MapSelectionMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("7_g6686")]
+visible = false
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -69,4 +74,5 @@ text = "Back"
 [connection signal="settings" from="VBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_settings"]
 [connection signal="player_number_selected" from="VBoxContainer/PanelContainer/PlayerNumberSelectionMenu" to="." method="_on_player_number_selection_menu_player_number_selected"]
 [connection signal="character_selected" from="VBoxContainer/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_character_selected"]
+[connection signal="map_selected" from="VBoxContainer/PanelContainer/MapSelectionMenu" to="." method="_on_map_selection_menu_map_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

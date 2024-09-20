@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7yilrpey1l1o"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/map_selection_menu/map_selection_menu.gd" id="1_j30jl"]
+[ext_resource type="Script" path="res://scenes/classes/map.gd" id="2_fs5bl"]
+[ext_resource type="Resource" uid="uid://dcfoqbbe4cjh7" path="res://scenes/maps/test_map/test_map.tres" id="3_t352r"]
+[ext_resource type="Resource" uid="uid://6gvuydbjt16o" path="res://scenes/maps/unreal/unreal.tres" id="4_4lsjs"]
+
+[node name="MapSelectionMenu" type="Control" groups=["menus"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j30jl")
+maps = Array[ExtResource("2_fs5bl")]([ExtResource("3_t352r"), ExtResource("4_4lsjs")])
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
