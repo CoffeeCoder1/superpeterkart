@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjciw6mon03l2"]
 
-[ext_resource type="Script" path="res://scenes/karts/kart.gd" id="1_7cuab"]
+[ext_resource type="Script" path="res://scenes/classes/kart.gd" id="1_auakt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_k8h6i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_foseb"]
 
-[node name="TestKart" type="CharacterBody3D"]
-script = ExtResource("1_7cuab")
+[node name="TestKart2" type="CharacterBody3D"]
+script = ExtResource("1_auakt")
 KART_NAME = "Test Kart 2"
 
 [node name="Pivot" type="Node3D" parent="."]
@@ -22,3 +22,4 @@ shape = SubResource("BoxShape3D_foseb")
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["karts"]]
 transform = Transform3D(1, 0, 0, 0, 0.912292, 0.409541, 0, -0.409541, 0.912292, 0, 2.88429, 3.37129)
+current = true

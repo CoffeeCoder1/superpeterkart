@@ -1,5 +1,4 @@
-extends CharacterBody3D
-
+class_name Kart extends CharacterBody3D
 
 @export var ACCELERATION: float = 10.0
 @export var TOP_SPEED: float = 10.0
@@ -12,6 +11,7 @@ var _top_speed = TOP_SPEED
 var _acceleration = ACCELERATION
 var _steer_target = 0
 var boost_amount = 100
+
 
 func _ready() -> void:
 	# $Camera3D.make_current()
