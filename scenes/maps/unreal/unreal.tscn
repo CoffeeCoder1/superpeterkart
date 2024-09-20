@@ -2,15 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/classes/map.gd" id="1_afrj1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw1p3"]
-albedo_color = Color(0.654232, 0.654232, 0.654232, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yijh7"]
-albedo_color = Color(0.41024, 0.41024, 0.41024, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvi8y"]
-albedo_color = Color(0, 0.655955, 0.93817, 1)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bymhv"]
 sky_top_color = Color(0.407945, 0.64784, 0.940922, 1)
 sky_horizon_color = Color(0.349597, 0.565578, 0.640195, 1)
@@ -31,8 +22,33 @@ ambient_light_color = Color(0.777177, 0.777177, 0.777177, 1)
 reflected_light_source = 1
 volumetric_fog_density = 0.012
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw1p3"]
+albedo_color = Color(0.654232, 0.654232, 0.654232, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yijh7"]
+albedo_color = Color(0.41024, 0.41024, 0.41024, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvi8y"]
+albedo_color = Color(0, 0.655955, 0.93817, 1)
+
 [node name="Unreal" type="Node3D"]
 script = ExtResource("1_afrj1")
+
+[node name="SpawnLocation" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 5.37738)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cqnta")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.457269, 0.889329, 0, -0.889329, 0.457269, 0, 8.03117, -0.1789)
+light_energy = 1.423
+light_indirect_energy = 3.514
+light_volumetric_fog_energy = 3.438
+light_angular_distance = 8.3
+shadow_enabled = true
+shadow_bias = 0.78
+shadow_blur = 0.5
 
 [node name="World" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -262,19 +278,3 @@ material = SubResource("StandardMaterial3D_rvi8y")
 [node name="BlueCube4" type="CSGBox3D" parent="World"]
 transform = Transform3D(0.938614, 0, 0.344971, 0, 1, 0, -0.344971, 0, 0.938614, 3.82715, 0.7, 10.4862)
 material = SubResource("StandardMaterial3D_rvi8y")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.457269, 0.889329, 0, -0.889329, 0.457269, 0, 8.03117, -0.1789)
-light_energy = 1.423
-light_indirect_energy = 3.514
-light_volumetric_fog_energy = 3.438
-light_angular_distance = 8.3
-shadow_enabled = true
-shadow_bias = 0.78
-shadow_blur = 0.5
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_cqnta")
-
-[node name="SpawnLocation" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 5.37738)
