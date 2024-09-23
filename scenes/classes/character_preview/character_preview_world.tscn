@@ -11,6 +11,7 @@ environment = SubResource("Environment_uw327")
 [node name="CharacterPreviewWorld" type="SubViewport"]
 own_world_3d = true
 world_3d = SubResource("World3D_s0vgr")
+transparent_bg = true
 script = ExtResource("1_jd4a2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
