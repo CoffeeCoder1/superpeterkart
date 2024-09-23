@@ -7,7 +7,7 @@ extends SubViewport
 		
 		# Instantiate the kart
 		var kart_node: Kart = kart.instantiate()
-		kart_node.KART_PREVIEW = true
+		kart_node.kart_preview = true
 		add_child(kart_node)
 
 
