@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbevyeyo7mhsh"]
+
+[ext_resource type="Script" path="res://scenes/classes/character_preview/character_preview_world.gd" id="1_jd4a2"]
+
+[sub_resource type="Environment" id="Environment_uw327"]
+background_color = Color(0.556953, 0.556953, 0.556953, 1)
+
+[sub_resource type="World3D" id="World3D_s0vgr"]
+environment = SubResource("Environment_uw327")
+
+[node name="CharacterPreviewWorld" type="SubViewport"]
+own_world_3d = true
+world_3d = SubResource("World3D_s0vgr")
+script = ExtResource("1_jd4a2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.517952, 0.855409, 0, -0.855409, 0.517952, 0, 0, 0)
