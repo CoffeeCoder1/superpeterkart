@@ -4,16 +4,6 @@ var players: Array[Kart] = []
 var loaded_map: Node
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 # Adds players and loads the map
 func new_game(karts: Array[KartMetadata], map: MapMetadata) -> void:
 	# Add players

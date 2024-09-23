@@ -15,10 +15,6 @@ var menu_stack: Array[Menu] = [Menu.START_MENU]
 
 var karts: Array[KartMetadata]
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
 
 func open_menu(menu: Menu) -> void:
 	menu_stack.append(menu)

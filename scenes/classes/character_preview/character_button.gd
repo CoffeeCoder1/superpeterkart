@@ -14,11 +14,6 @@ func _ready() -> void:
 	self.hidden.connect(_on_hide)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_hide() -> void:
 	# Remove the texture so Godot doesn't try to draw it and error because the viewport doesn't exist
 	if icon:

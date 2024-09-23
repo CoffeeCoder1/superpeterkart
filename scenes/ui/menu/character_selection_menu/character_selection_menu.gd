@@ -20,11 +20,6 @@ func _ready() -> void:
 		button_node.pressed.connect(self._on_character_selected.bind(kart))
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_character_selected(kart: KartMetadata) -> void:
 	print(kart.get_kart_name())
 	selected_karts.append(kart)

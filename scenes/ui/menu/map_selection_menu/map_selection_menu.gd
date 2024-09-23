@@ -16,11 +16,6 @@ func _ready() -> void:
 		button.pressed.connect(self._on_map_selected.bind(map))
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 # Called when a map is selected
 func _on_map_selected(map: MapMetadata) -> void:
 	selected_map = map

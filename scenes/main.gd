@@ -9,11 +9,6 @@ func _ready() -> void:
 	menu.open_menu(menu.Menu.START_MENU)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_menu_game_started(karts: Array[KartMetadata], map: MapMetadata) -> void:
 	menu.close_menu()
 	$Game.new_game(karts, map)
