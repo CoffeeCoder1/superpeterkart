@@ -1,4 +1,4 @@
-class_name CharacterButton extends TextureButton
+class_name CharacterButton extends Button
 
 var character_preview_world: Node
 
@@ -21,8 +21,8 @@ func _process(delta: float) -> void:
 
 func _on_hide() -> void:
 	# Remove the texture so Godot doesn't try to draw it and error because the viewport doesn't exist
-	if texture_normal:
-		texture_normal = null
+	if icon:
+		icon = null
 	
 	# Unload the character preview world to save memory
 	if character_preview_world:
@@ -39,4 +39,4 @@ func _draw() -> void:
 	character_preview_world.kart = kart
 	
 	# Set the button texture to the viewport texture
-	texture_normal = character_preview_world.get_texture()
+	icon = character_preview_world.get_texture()
