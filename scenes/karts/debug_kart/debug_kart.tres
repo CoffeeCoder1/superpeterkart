@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="KartMetadata" load_steps=3 format=3 uid="uid://ci8wrqbomg6wj"]
 
-[ext_resource type="PackedScene" uid="uid://bjciw6mon03l2" path="res://scenes/karts/test_kart_2/test_kart_2.tscn" id="1_f6nri"]
+[ext_resource type="PackedScene" uid="uid://bjciw6mon03l2" path="res://scenes/karts/debug_kart/debug_kart.tscn" id="1_htc10"]
 [ext_resource type="Script" path="res://scenes/classes/kart/kart_metadata.gd" id="1_li2qb"]
 
 [resource]
 script = ExtResource("1_li2qb")
-name = "Test Kart 2"
-scene = ExtResource("1_f6nri")
+name = "Debug Kart"
+scene = ExtResource("1_htc10")

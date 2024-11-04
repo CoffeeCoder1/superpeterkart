@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bjciw6mon03l2"]
 
-[ext_resource type="Script" path="res://scenes/classes/kart/kart.gd" id="1_auakt"]
+[ext_resource type="Script" path="res://scenes/classes/kart/kart.gd" id="1_ak1w3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c46t3"]
 transparency = 1
@@ -25,8 +25,8 @@ albedo_color = Color(0, 1, 1, 1)
 material = SubResource("StandardMaterial3D_low1t")
 size = Vector3(0.25, 0.25, 0.25)
 
-[node name="TestKart2" type="CharacterBody3D"]
-script = ExtResource("1_auakt")
+[node name="DebugKart" type="CharacterBody3D"]
+script = ExtResource("1_ak1w3")
 
 [node name="Pivot" type="Node3D" parent="."]
 
@@ -42,14 +42,12 @@ shape = SubResource("BoxShape3D_foseb")
 transform = Transform3D(1, 0, 0, 0, 0.912292, 0.409541, 0, -0.409541, 0.912292, 0, 2.88429, 3.37129)
 current = true
 
-[node name="FrontAxle" type="Node3D" parent="."]
+[node name="FrontAxle" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FrontAxle"]
 mesh = SubResource("BoxMesh_xm7no")
+skeleton = NodePath("")
 
-[node name="RearAxle" type="Node3D" parent="."]
+[node name="RearAxle" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RearAxle"]
 mesh = SubResource("BoxMesh_jbtg7")
+skeleton = NodePath("")
