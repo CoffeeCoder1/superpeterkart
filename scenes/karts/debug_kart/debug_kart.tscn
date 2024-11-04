@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bjciw6mon03l2"]
 
-[ext_resource type="Script" path="res://scenes/classes/kart/kart.gd" id="1_ak1w3"]
+[ext_resource type="Script" path="res://scenes/karts/debug_kart/debug_kart.gd" id="1_2hvw2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c46t3"]
 transparency = 1
@@ -26,7 +26,7 @@ material = SubResource("StandardMaterial3D_low1t")
 size = Vector3(0.25, 0.25, 0.25)
 
 [node name="DebugKart" type="CharacterBody3D"]
-script = ExtResource("1_ak1w3")
+script = ExtResource("1_2hvw2")
 
 [node name="Pivot" type="Node3D" parent="."]
 

@@ -10,13 +10,14 @@ class_name Kart extends CharacterBody3D
 ## Is the kart instantiated for a kart preview?
 @export var kart_preview: bool = false
 
-@onready var front_axle: Node3D = $FrontAxle
-@onready var rear_axle: Node3D = $RearAxle
 
 var _top_speed = top_speed
 var _acceleration = acceleration
 var _steer_target = 0
 var boost_amount = 100
+
+var front_wheel: Vector3
+var rear_wheel: Vector3
 
 
 func _ready() -> void:
@@ -54,8 +55,8 @@ func _physics_process(delta: float) -> void:
 		
 		# Steering
 		var steering = Input.get_axis("ui_right", "ui_left")
-		var front_wheel: Vector3 = transform.origin - transform.basis.z * (wheel_spacing / 2)
-		var rear_wheel: Vector3 = transform.origin + transform.basis.z * (wheel_spacing / 2)
+		front_wheel = transform.origin - transform.basis.z * (wheel_spacing / 2)
+		rear_wheel = transform.origin + transform.basis.z * (wheel_spacing / 2)
 		var velocity_total: float = (velocity * Vector3(1, 0, 1)).length()
 		# Move the axles forward, rotating the front one's direction to steer
 		front_wheel += velocity.rotated(transform.basis.y, steering) * delta
@@ -72,9 +73,5 @@ func _physics_process(delta: float) -> void:
 		
 		# Rotate the kart
 		look_at(transform.origin + new_heading, transform.basis.y)
-		
-		# Debug things
-		front_axle.global_position = front_wheel
-		rear_axle.global_position = rear_wheel
 		
 		move_and_slide()
