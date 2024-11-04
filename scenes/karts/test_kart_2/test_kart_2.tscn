@@ -1,10 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjciw6mon03l2"]
+[gd_scene load_steps=9 format=3 uid="uid://bjciw6mon03l2"]
 
-[ext_resource type="Script" path="res://scenes/classes/kart.gd" id="1_auakt"]
+[ext_resource type="Script" path="res://scenes/classes/kart/kart.gd" id="1_auakt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c46t3"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.380392)
 
 [sub_resource type="BoxMesh" id="BoxMesh_k8h6i"]
+material = SubResource("StandardMaterial3D_c46t3")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_foseb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itiwb"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xm7no"]
+material = SubResource("StandardMaterial3D_itiwb")
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_low1t"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jbtg7"]
+material = SubResource("StandardMaterial3D_low1t")
+size = Vector3(0.25, 0.25, 0.25)
 
 [node name="TestKart2" type="CharacterBody3D"]
 script = ExtResource("1_auakt")
@@ -12,13 +31,25 @@ script = ExtResource("1_auakt")
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02245, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_k8h6i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02977, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_foseb")
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["karts"]]
 transform = Transform3D(1, 0, 0, 0, 0.912292, 0.409541, 0, -0.409541, 0.912292, 0, 2.88429, 3.37129)
 current = true
+
+[node name="FrontAxle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FrontAxle"]
+mesh = SubResource("BoxMesh_xm7no")
+
+[node name="RearAxle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RearAxle"]
+mesh = SubResource("BoxMesh_jbtg7")

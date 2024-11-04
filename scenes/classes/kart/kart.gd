@@ -4,9 +4,14 @@ class_name Kart extends CharacterBody3D
 @export var top_speed: float = 10.0
 @export var boost_speed: float = 15.0
 @export var braking: float = 15
-@export var steering_amount: float = 25
-# Is the kart instantiated for a kart preview?
+@export var steering_amount: float = 10
+## Distance from front to rear wheel
+@export var wheel_spacing: float = 1
+## Is the kart instantiated for a kart preview?
 @export var kart_preview: bool = false
+
+@onready var front_axle: Node3D = $FrontAxle
+@onready var rear_axle: Node3D = $RearAxle
 
 var _top_speed = top_speed
 var _acceleration = acceleration
@@ -44,12 +49,32 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, braking * delta)
 			velocity.z = move_toward(velocity.z, 0, braking * delta)
 		
-		velocity.z = clamp(velocity.z, -_top_speed, _top_speed)
 		velocity.x = clamp(velocity.x, -_top_speed, _top_speed)
+		velocity.z = clamp(velocity.z, -_top_speed, _top_speed)
 		
 		# Steering
 		var steering = Input.get_axis("ui_right", "ui_left")
-		_steer_target = steering * steering_amount * delta
-		rotate_y(_steer_target * delta)
+		var front_wheel: Vector3 = transform.origin - transform.basis.z * (wheel_spacing / 2)
+		var rear_wheel: Vector3 = transform.origin + transform.basis.z * (wheel_spacing / 2)
+		var velocity_total: float = (velocity * Vector3(1, 0, 1)).length()
+		# Move the axles forward, rotating the front one's direction to steer
+		front_wheel += velocity.rotated(transform.basis.y, steering) * delta
+		rear_wheel += velocity * delta
+		
+		var new_heading = rear_wheel.direction_to(front_wheel)
+		
+		# Somehow magically fixes some things
+		var heading_dot: float = new_heading.dot(velocity.normalized())
+		if heading_dot > 0:
+			velocity = new_heading * velocity.length()
+		if heading_dot < 0:
+			velocity = -new_heading * min(velocity.length(), 10)
+		
+		# Rotate the kart
+		look_at(transform.origin + new_heading, transform.basis.y)
+		
+		# Debug things
+		front_axle.global_position = front_wheel
+		rear_axle.global_position = rear_wheel
 		
 		move_and_slide()
