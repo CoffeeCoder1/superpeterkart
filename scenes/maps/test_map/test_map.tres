@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Map" load_steps=3 format=3 uid="uid://dcfoqbbe4cjh7"]
+[gd_resource type="Resource" script_class="MapMetadata" load_steps=3 format=3 uid="uid://dcfoqbbe4cjh7"]
 
 [ext_resource type="Script" path="res://scenes/classes/map/map_metadata.gd" id="1_dt4bw"]
 [ext_resource type="PackedScene" uid="uid://khkkj7jo5dp4" path="res://scenes/maps/test_map/test_map.tscn" id="1_e25du"]
