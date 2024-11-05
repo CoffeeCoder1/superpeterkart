@@ -1,10 +1,10 @@
 class_name Kart extends CharacterBody3D
 
-@export var acceleration: float = 10.0
-@export var top_speed: float = 10.0
+@export var acceleration: float = 50.0
+@export var top_speed: float = 30.0
 @export var boost_speed: float = 15.0
 @export var braking: float = 15
-@export var steering_amount: float = 10
+@export var steering_amount: float = 0.3
 ## Distance from front to rear wheel
 @export var wheel_spacing: float = 1
 ## Is the kart instantiated for a kart preview?
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = clamp(velocity.z, -_top_speed, _top_speed)
 		
 		# Steering
-		var steering = Input.get_axis("ui_right", "ui_left")
+		var steering := Input.get_axis("ui_right", "ui_left") * steering_amount
 		front_wheel = transform.origin - transform.basis.z * (wheel_spacing / 2)
 		rear_wheel = transform.origin + transform.basis.z * (wheel_spacing / 2)
 		var velocity_total: float = (velocity * Vector3(1, 0, 1)).length()
