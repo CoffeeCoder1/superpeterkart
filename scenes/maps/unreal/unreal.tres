@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Map" load_steps=3 format=3 uid="uid://6gvuydbjt16o"]
+[gd_resource type="Resource" script_class="MapMetadata" load_steps=3 format=3 uid="uid://6gvuydbjt16o"]
 
 [ext_resource type="PackedScene" uid="uid://fluqs2j2tp" path="res://scenes/maps/unreal/unreal.tscn" id="1_p6sve"]
-[ext_resource type="Script" path="res://scenes/classes/map_metadata.gd" id="1_vo1q0"]
+[ext_resource type="Script" path="res://scenes/classes/map/map_metadata.gd" id="1_vo1q0"]
 
 [resource]
 script = ExtResource("1_vo1q0")

@@ -1,9 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://khkkj7jo5dp4"]
 
-[ext_resource type="Script" path="res://scenes/classes/map.gd" id="1_q3f2m"]
+[ext_resource type="Script" path="res://scenes/classes/map/map.gd" id="1_q3f2m"]
 
 [sub_resource type="Gradient" id="Gradient_7p0pk"]
 offsets = PackedFloat32Array(0, 0.904762)
+colors = PackedColorArray(0, 0, 0, 0.470588, 1, 1, 1, 0.470588)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3ggdo"]
 frequency = 0.0358
@@ -15,6 +16,7 @@ color_ramp = SubResource("Gradient_7p0pk")
 noise = SubResource("FastNoiseLite_3ggdo")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_706p5"]
+transparency = 1
 albedo_texture = SubResource("NoiseTexture2D_idsy7")
 
 [sub_resource type="BoxMesh" id="BoxMesh_325wc"]

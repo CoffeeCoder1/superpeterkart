@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scenes/test/test_game.gd" id="1_waxo1"]
 [ext_resource type="Script" path="res://scenes/classes/kart/kart_metadata.gd" id="2_picpd"]
-[ext_resource type="Resource" uid="uid://6gvuydbjt16o" path="res://scenes/maps/unreal/unreal.tres" id="2_wy0wt"]
 [ext_resource type="PackedScene" uid="uid://4lj582lanxly" path="res://scenes/game/game.tscn" id="2_xfpde"]
-[ext_resource type="Resource" uid="uid://ci8wrqbomg6wj" path="res://scenes/karts/test_kart_2/test_kart_2.tres" id="3_g7qbg"]
+[ext_resource type="Resource" uid="uid://ci8wrqbomg6wj" path="res://scenes/karts/debug_kart/debug_kart.tres" id="3_g7qbg"]
+[ext_resource type="Resource" uid="uid://dcfoqbbe4cjh7" path="res://scenes/maps/test_map/test_map.tres" id="4_lfhhx"]
 
 [node name="TestGame" type="Node3D"]
 script = ExtResource("1_waxo1")
 karts = Array[ExtResource("2_picpd")]([ExtResource("3_g7qbg")])
-map = ExtResource("2_wy0wt")
+map = ExtResource("4_lfhhx")
 
 [node name="Game" parent="." instance=ExtResource("2_xfpde")]
