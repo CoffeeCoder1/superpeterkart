@@ -1,6 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://fluqs2j2tp"]
 
 [ext_resource type="Script" path="res://scenes/classes/map/map.gd" id="1_afrj1"]
+[ext_resource type="PackedScene" uid="uid://cng1qe8rwtdgo" path="res://scenes/maps/unreal/blue_cube.tscn" id="2_eqbdd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bymhv"]
 sky_top_color = Color(0.407945, 0.64784, 0.940922, 1)
@@ -27,9 +28,6 @@ albedo_color = Color(0.654232, 0.654232, 0.654232, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yijh7"]
 albedo_color = Color(0.41024, 0.41024, 0.41024, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvi8y"]
-albedo_color = Color(0, 0.655955, 0.93817, 1)
 
 [node name="Unreal" type="Node3D"]
 script = ExtResource("1_afrj1")
@@ -263,18 +261,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 1.95, -0.1)
 size = Vector3(1, 4.5, 30)
 material = SubResource("StandardMaterial3D_uw1p3")
 
-[node name="BlueCube1" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 1.1)
-material = SubResource("StandardMaterial3D_rvi8y")
+[node name="BlueCube1" parent="." instance=ExtResource("2_eqbdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 1.189)
 
-[node name="BlueCube2" type="CSGBox3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 2.31119)
-material = SubResource("StandardMaterial3D_rvi8y")
+[node name="BlueCube2" parent="." instance=ExtResource("2_eqbdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 2.3602)
 
-[node name="BlueCube3" type="CSGBox3D" parent="World"]
-transform = Transform3D(0.976387, 0, 0.216031, 0, 1, 0, -0.216031, 0, 0.976387, 7.503, 0.7, 1.67653)
-material = SubResource("StandardMaterial3D_rvi8y")
+[node name="BlueCube3" parent="." instance=ExtResource("2_eqbdd")]
+transform = Transform3D(0.976563, 0, 0.21523, 0, 1, 0, -0.21523, 0, 0.976563, 7.49931, 0.75, 1.68173)
 
-[node name="BlueCube4" type="CSGBox3D" parent="World"]
-transform = Transform3D(0.938614, 0, 0.344971, 0, 1, 0, -0.344971, 0, 0.938614, 3.82715, 0.7, 10.4862)
-material = SubResource("StandardMaterial3D_rvi8y")
+[node name="BlueCube4" parent="." instance=ExtResource("2_eqbdd")]
+transform = Transform3D(0.94046, 0, 0.339904, 0, 1, 0, -0.339904, 0, 0.94046, 3.834, 0.75, 10.48)
