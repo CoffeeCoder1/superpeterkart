@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3ovvx3oxxrwr"]
+[gd_scene load_steps=6 format=3 uid="uid://c3ovvx3oxxrwr"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu/character_selection_menu/character_selection_menu.gd" id="1_7867g"]
 [ext_resource type="Script" path="res://scenes/classes/kart/kart_metadata.gd" id="2_pvnaj"]
 [ext_resource type="Resource" uid="uid://d15tyhy1weacy" path="res://scenes/karts/test_kart/test_kart.tres" id="3_82mdp"]
 [ext_resource type="Resource" uid="uid://ci8wrqbomg6wj" path="res://scenes/karts/debug_kart/debug_kart.tres" id="4_gb8u4"]
+[ext_resource type="Resource" uid="uid://dicvyd6ie2j13" path="res://scenes/karts/suzanne/suzanne.tres" id="5_jajew"]
 
 [node name="CharacterSelectionMenu" type="Control" groups=["menus"]]
 layout_mode = 3
@@ -13,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7867g")
-kart_list = Array[ExtResource("2_pvnaj")]([ExtResource("3_82mdp"), ExtResource("4_gb8u4")])
+kart_list = Array[ExtResource("2_pvnaj")]([ExtResource("3_82mdp"), ExtResource("4_gb8u4"), ExtResource("5_jajew")])
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
