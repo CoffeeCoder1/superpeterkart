@@ -4,19 +4,20 @@ var players: Array[Kart] = []
 var loaded_map: Node
 
 
-# Adds players and loads the map
+## Loads a map with the provided karts.
 func new_game(karts: Array[KartMetadata], map: MapMetadata) -> void:
+	# Load map
+	load_map(map)
+	
 	# Add players
 	for kart in karts:
 		var kart_node = kart.instantiate()
+		kart_node.transform = loaded_map.get_spawn_location()
 		add_child(kart_node)
 		players.append(kart_node)
-	
-	# Load map
-	load_map(map)
 
 
-# Loads a new map and moves the players to their starting positions
+## Loads a new map.
 func load_map(map: MapMetadata) -> void:
 	# Instantiate the map
 	var map_node = map.instantiate()
@@ -32,7 +33,3 @@ func load_map(map: MapMetadata) -> void:
 	
 	# Save the map so it can be unloaded later
 	loaded_map = map_node
-	
-	# Move the players to the spawn location
-	for player in players:
-		player.transform = loaded_map.get_spawn_location()
