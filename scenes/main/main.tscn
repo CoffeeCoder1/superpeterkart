@@ -16,6 +16,19 @@ script = ExtResource("1_jayv1")
 script = ExtResource("4_vjoha")
 game_node = NodePath("../Game")
 
+[node name="MultiplayerStatusLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="game_started" from="Menu" to="." method="_on_menu_game_started"]
 [connection signal="host_online_game" from="Menu" to="." method="_on_menu_host_online_game"]
 [connection signal="join_online_game" from="Menu" to="." method="_on_menu_join_online_game"]
+[connection signal="connected_to_server" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connected_to_server"]
+[connection signal="connection_failed" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connection_failed"]
+[connection signal="server_disconnected" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_server_disconnected"]
