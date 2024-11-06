@@ -57,7 +57,7 @@ func _show_menu(menu: Menu) -> void:
 	elif (menu == Menu.PLAYER_NUMBER_SELECTION):
 		$VBoxContainer/PanelContainer/PlayerNumberSelectionMenu.show()
 	elif (menu == Menu.ONLINE_GAME):
-		pass
+		$VBoxContainer/PanelContainer/OnlineGameMenu.show()
 	elif (menu == Menu.CHARACTER_SELECTION):
 		$VBoxContainer/PanelContainer/CharacterSelectionMenu.show()
 	elif (menu == Menu.MAP_SELECTION):
@@ -101,8 +101,7 @@ func _on_main_menu_local_game() -> void:
 
 
 func _on_main_menu_online_game() -> void:
-	close_menu()
-	join_online_game.emit()
+	open_menu(Menu.ONLINE_GAME)
 
 
 func _on_main_menu_settings() -> void:
@@ -134,3 +133,8 @@ func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
 func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
 	online_game = enabled
 	_start_or_stop_server()
+
+
+func _on_online_game_menu_join_online_game() -> void:
+	join_online_game.emit()
+	close_menu()
