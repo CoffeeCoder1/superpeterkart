@@ -1,7 +1,7 @@
 extends Control
 
 signal game_started(karts: Array[KartMetadata], map: MapMetadata)
-signal join_online_game
+signal join_online_game(ip_address: String)
 signal host_online_game
 signal stop_online_server
 
@@ -135,6 +135,6 @@ func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
 	_start_or_stop_server()
 
 
-func _on_online_game_menu_join_online_game() -> void:
-	join_online_game.emit()
+func _on_online_game_menu_join_online_game(ip_address: String) -> void:
+	join_online_game.emit(ip_address)
 	close_menu()

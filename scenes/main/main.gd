@@ -17,8 +17,8 @@ func _on_menu_game_started(karts: Array[KartMetadata], map: MapMetadata) -> void
 	multiplayer_lobby.load_game.rpc("unreal")
 
 
-func _on_menu_join_online_game() -> void:
-	multiplayer_lobby.join_game()
+func _on_menu_join_online_game(ip_address: String) -> void:
+	multiplayer_lobby.join_game(ip_address)
 	multiplayer_status_label.text = "Connecting..."
 	multiplayer_status_label.show()
 
