@@ -1,4 +1,4 @@
-extends Control
+class_name Menu extends Control
 
 signal game_started(karts: Array[KartMetadata], map: MapMetadata)
 signal join_online_game(ip_address: String)

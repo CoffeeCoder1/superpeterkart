@@ -1,13 +1,13 @@
 extends Node3D
 
-@onready var menu: Node = $Menu
+@onready var menu: Menu = $Menu
 @onready var multiplayer_lobby: MultiplayerLobby = $MultiplayerLobby
 @onready var multiplayer_status_label: Label = $MultiplayerStatusLabel
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	menu.open_menu(menu.MenuPage.START_MENU)
+	menu.open_menu(Menu.MenuPage.START_MENU)
 	multiplayer.connected_to_server.connect(_on_server_connected_ok)
 
 
@@ -36,11 +36,11 @@ func _on_multiplayer_lobby_connection_failed() -> void:
 	multiplayer_status_label.show()
 	await get_tree().create_timer(2.0).timeout
 	multiplayer_status_label.hide()
-	menu.open_menu(menu.MenuPage.ONLINE_GAME)
+	menu.open_menu(Menu.MenuPage.ONLINE_GAME)
 
 
 func _on_multiplayer_lobby_server_disconnected() -> void:
-	menu.open_menu(menu.MenuPage.MAIN_MENU)
+	menu.open_menu(Menu.MenuPage.MAIN_MENU)
 
 
 func _on_multiplayer_lobby_connected_to_server() -> void:
