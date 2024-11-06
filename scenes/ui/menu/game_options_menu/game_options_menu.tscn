@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp6eb6f3ixlrh"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/game_options_menu/game_options_menu.gd" id="1_0qi6r"]
+
+[node name="GameOptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0qi6r")
+
+[node name="OnlineGameSwitch" type="CheckButton" parent="."]
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 24.0
+text = "Online Multiplayer"
+
+[connection signal="toggled" from="OnlineGameSwitch" to="." method="_on_online_game_switch_toggled"]

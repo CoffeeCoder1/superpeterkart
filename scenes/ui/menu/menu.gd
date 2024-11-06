@@ -3,6 +3,7 @@ extends Control
 signal game_started(karts: Array[KartMetadata], map: MapMetadata)
 signal join_online_game
 signal host_online_game
+signal stop_online_server
 
 enum Menu {
 	START_MENU,
@@ -17,6 +18,12 @@ enum Menu {
 var menu_stack: Array[Menu] = [Menu.START_MENU]
 
 var karts: Array[KartMetadata]
+## Is the game being created going to be an online game?
+var online_game: bool
+## Is the user in the process of creating a local game?
+var creating_game: bool
+## Has the server already been started?
+var server_started: bool
 
 
 func open_menu(menu: Menu) -> void:
@@ -44,6 +51,7 @@ func _show_menu(menu: Menu) -> void:
 		$StartMenu.show()
 	elif (menu == Menu.MAIN_MENU):
 		$VBoxContainer/PanelContainer/MainMenu.show()
+		creating_game = false
 	elif (menu == Menu.SETTINGS):
 		$VBoxContainer/PanelContainer/SettingsMenu.show()
 	elif (menu == Menu.PLAYER_NUMBER_SELECTION):
@@ -61,6 +69,25 @@ func _show_menu(menu: Menu) -> void:
 		$VBoxContainer.hide()
 	else:
 		$VBoxContainer.show()
+	
+	if creating_game:
+		$VBoxContainer/HBoxContainer/GameOptionsButton.show()
+	else:
+		$VBoxContainer/HBoxContainer/GameOptionsButton.hide()
+	
+	_start_or_stop_server()
+
+
+## Starts or stops the server depending on the state of the menu.
+func _start_or_stop_server() -> void:
+	if creating_game and online_game:
+		if !server_started:
+			host_online_game.emit()
+			server_started = true
+	else:
+		if server_started:
+			stop_online_server.emit()
+			server_started = false
 
 
 func _on_start_menu_start_game() -> void:
@@ -68,8 +95,9 @@ func _on_start_menu_start_game() -> void:
 
 
 func _on_main_menu_local_game() -> void:
+	creating_game = true
 	open_menu(Menu.PLAYER_NUMBER_SELECTION)
-	host_online_game.emit()
+	_start_or_stop_server()
 
 
 func _on_main_menu_online_game() -> void:
@@ -101,3 +129,8 @@ func _on_character_selection_menu_character_selected(selected_karts: Array[KartM
 func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
 	close_menu()
 	game_started.emit(karts, map)
+
+
+func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
+	online_game = enabled
+	_start_or_stop_server()
