@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/menu/game_options_menu/game_options_menu.gd" id="1_0qi6r"]
 
-[node name="GameOptionsMenu" type="Control"]
+[node name="GameOptionsMenu" type="Control" groups=["menus"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/menu/online_game_menu/online_game_menu.gd" id="1_6ssbg"]
 
-[node name="OnlineGameMenu" type="Control"]
+[node name="OnlineGameMenu" type="Control" groups=["menus"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -61,7 +61,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="GameOptionsMenu" parent="VBoxContainer/PanelContainer" groups=["menus"] instance=ExtResource("8_d3ybf")]
+[node name="GameOptionsMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("8_d3ybf")]
 visible = false
 layout_mode = 2
 
