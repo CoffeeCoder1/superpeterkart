@@ -1,7 +1,14 @@
-extends Node3D
+class_name Game extends Node3D
+
+@onready var players_node: Node3D = $Players
 
 var players: Array[Kart] = []
 var loaded_map: Node
+
+var map_metadatas: Dictionary = {
+	"test_map": "res://scenes/maps/test_map/test_map.tres",
+	"unreal": "res://scenes/maps/unreal/unreal.tres",
+}
 
 
 ## Loads a map with the provided karts.
@@ -13,7 +20,7 @@ func new_game(karts: Array[KartMetadata], map: MapMetadata) -> void:
 	for kart in karts:
 		var kart_node = kart.instantiate()
 		kart_node.transform = loaded_map.get_spawn_location()
-		add_child(kart_node)
+		players_node.add_child(kart_node)
 		players.append(kart_node)
 
 
@@ -33,3 +40,15 @@ func load_map(map: MapMetadata) -> void:
 	
 	# Save the map so it can be unloaded later
 	loaded_map = map_node
+
+
+func is_game_loaded() -> bool:
+	if loaded_map:
+		return true
+	else:
+		return false
+
+
+func get_map_metadata_by_id(id: String) -> MapMetadata:
+	print(id)
+	return load(map_metadatas.get(id)) as MapMetadata

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwhovv243wj43"]
+[gd_scene load_steps=5 format=3 uid="uid://cwhovv243wj43"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_jayv1"]
 [ext_resource type="PackedScene" uid="uid://4lj582lanxly" path="res://scenes/game/game.tscn" id="1_jxpmy"]
 [ext_resource type="PackedScene" uid="uid://bmqdrl4gr8ikv" path="res://scenes/ui/menu/menu.tscn" id="2_mh2bb"]
+[ext_resource type="Script" path="res://scenes/classes/multiplayer/multiplayer_lobby.gd" id="4_vjoha"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_jayv1")
@@ -11,4 +12,10 @@ script = ExtResource("1_jayv1")
 
 [node name="Game" parent="." instance=ExtResource("1_jxpmy")]
 
+[node name="MultiplayerLobby" type="Node" parent="." node_paths=PackedStringArray("game_node")]
+script = ExtResource("4_vjoha")
+game_node = NodePath("../Game")
+
 [connection signal="game_started" from="Menu" to="." method="_on_menu_game_started"]
+[connection signal="host_online_game" from="Menu" to="." method="_on_menu_host_online_game"]
+[connection signal="join_online_game" from="Menu" to="." method="_on_menu_join_online_game"]

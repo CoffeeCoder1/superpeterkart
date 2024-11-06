@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://32a3i8lh0r0o"]
+[gd_scene load_steps=10 format=4 uid="uid://32a3i8lh0r0o"]
 
 [ext_resource type="Script" path="res://scenes/classes/kart/kart.gd" id="1_vtkup"]
 
@@ -81,6 +81,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4dmla")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kf4ma"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Suzanne" type="CharacterBody3D"]
 script = ExtResource("1_vtkup")
 braking = 20.0
@@ -92,7 +100,6 @@ shape = SubResource("BoxShape3D_eav6o")
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["karts"]]
 transform = Transform3D(1, 0, 0, 0, 0.861017, 0.508576, 0, -0.508576, 0.861017, 0, 3.72544, 3.72346)
-current = true
 
 [node name="KartBody" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -106,3 +113,6 @@ skeleton = NodePath("")
 transform = Transform3D(-100, -0.0173481, -7.58311e-10, 0, -4.37114e-06, 100, -0.0173481, 100, 4.37114e-06, 0.00016008, 3.4023, 0.000271254)
 mesh = SubResource("ArrayMesh_jxx5v")
 skeleton = NodePath("")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_kf4ma")

@@ -1,6 +1,8 @@
 extends Control
 
 signal game_started(karts: Array[KartMetadata], map: MapMetadata)
+signal join_online_game
+signal host_online_game
 
 enum Menu {
 	START_MENU,
@@ -9,7 +11,8 @@ enum Menu {
 	ONLINE_GAME,
 	PLAYER_NUMBER_SELECTION,
 	CHARACTER_SELECTION,
-	MAP_SELECTION
+	MAP_SELECTION,
+	GAME_OPTIONS,
 }
 var menu_stack: Array[Menu] = [Menu.START_MENU]
 
@@ -51,6 +54,8 @@ func _show_menu(menu: Menu) -> void:
 		$VBoxContainer/PanelContainer/CharacterSelectionMenu.show()
 	elif (menu == Menu.MAP_SELECTION):
 		$VBoxContainer/PanelContainer/MapSelectionMenu.show()
+	elif (menu == Menu.GAME_OPTIONS):
+		$VBoxContainer/PanelContainer/GameOptionsMenu.show()
 	
 	if (menu == Menu.START_MENU):
 		$VBoxContainer.hide()
@@ -64,10 +69,12 @@ func _on_start_menu_start_game() -> void:
 
 func _on_main_menu_local_game() -> void:
 	open_menu(Menu.PLAYER_NUMBER_SELECTION)
+	host_online_game.emit()
 
 
 func _on_main_menu_online_game() -> void:
-	open_menu(Menu.ONLINE_GAME)
+	close_menu()
+	join_online_game.emit()
 
 
 func _on_main_menu_settings() -> void:
@@ -76,6 +83,10 @@ func _on_main_menu_settings() -> void:
 
 func _on_player_number_selection_menu_player_number_selected(number: int) -> void:
 	open_menu(Menu.CHARACTER_SELECTION)
+
+
+func _on_game_options_button_pressed() -> void:
+	open_menu(Menu.GAME_OPTIONS)
 
 
 func _on_back_button_pressed() -> void:

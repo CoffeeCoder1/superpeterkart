@@ -10,6 +10,7 @@ class_name Kart extends CharacterBody3D
 ## Is the kart instantiated for a kart preview?
 @export var kart_preview: bool = false
 
+@onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 
 var _top_speed = top_speed
 var _acceleration = acceleration
@@ -21,12 +22,14 @@ var rear_wheel: Vector3
 
 
 func _ready() -> void:
-	# $Camera3D.make_current()
-	pass
+	# If this is the local kart, focus the camera.
+	if get_multiplayer_authority() == multiplayer.get_unique_id():
+		$Camera3D.make_current()
 
 
 func _physics_process(delta: float) -> void:
-	if !kart_preview:
+	# Allow disabling the kart for preview displays and when not being controlled by the local player.
+	if !kart_preview and get_multiplayer_authority() == multiplayer.get_unique_id():
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
