@@ -17,7 +17,7 @@ enum MenuPage {
 	MAP_SELECTION,
 	GAME_OPTIONS,
 }
-var menu_stack: Array[MenuPage] = [MenuPage.START_MENU]
+var menu_stack: Array[MenuPage] = []
 
 var karts: Array[KartMetadata]
 ## Is the game being created going to be an online game?
