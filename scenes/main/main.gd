@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var menu: Menu = $Menu
+@onready var game: Game = $Game
 @onready var multiplayer_lobby: MultiplayerLobby = $MultiplayerLobby
 @onready var multiplayer_status_label: Label = $MultiplayerStatusLabel
 
@@ -13,7 +14,7 @@ func _ready() -> void:
 
 func _on_menu_game_started(karts: Array[KartMetadata], map: MapMetadata) -> void:
 	menu.close_menu()
-	$Game.new_game(karts, map)
+	game.new_game(karts, map)
 	multiplayer_lobby.load_game.rpc("unreal")
 
 
@@ -29,6 +30,7 @@ func _on_menu_host_online_game() -> void:
 
 func _on_server_connected_ok() -> void:
 	multiplayer_status_label.hide()
+	menu.open_menu(Menu.MenuPage.PLAYER_NUMBER_SELECTION)
 
 
 func _on_multiplayer_lobby_connection_failed() -> void:
@@ -45,3 +47,7 @@ func _on_multiplayer_lobby_server_disconnected() -> void:
 
 func _on_multiplayer_lobby_connected_to_server() -> void:
 	multiplayer_status_label.hide()
+
+
+func _on_menu_karts_selected(karts: Array[KartMetadata]) -> void:
+	game.add_kart_by_id.rpc_id(1, "suzanne")

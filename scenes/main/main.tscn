@@ -29,6 +29,7 @@ vertical_alignment = 1
 [connection signal="game_started" from="Menu" to="." method="_on_menu_game_started"]
 [connection signal="host_online_game" from="Menu" to="." method="_on_menu_host_online_game"]
 [connection signal="join_online_game" from="Menu" to="." method="_on_menu_join_online_game"]
+[connection signal="karts_selected" from="Menu" to="." method="_on_menu_karts_selected"]
 [connection signal="connected_to_server" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connected_to_server"]
 [connection signal="connection_failed" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connection_failed"]
 [connection signal="server_disconnected" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_server_disconnected"]

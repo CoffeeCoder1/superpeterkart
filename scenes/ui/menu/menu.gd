@@ -1,6 +1,8 @@
 class_name Menu extends Control
 
 signal game_started(karts: Array[KartMetadata], map: MapMetadata)
+## Emitted when karts are selected in multiplayer.
+signal karts_selected(karts: Array[KartMetadata])
 signal join_online_game(ip_address: String)
 signal host_online_game
 signal stop_online_server
@@ -21,6 +23,7 @@ var karts: Array[KartMetadata]
 ## Is the game being created going to be an online game?
 var online_game: bool
 ## Is the user in the process of creating a local game?
+## If the user is selecting game options and this is false, the user is joining an online game.
 var creating_game: bool
 ## Has the server already been started?
 var server_started: bool
@@ -101,6 +104,7 @@ func _on_main_menu_local_game() -> void:
 
 
 func _on_main_menu_online_game() -> void:
+	creating_game = false
 	open_menu(MenuPage.ONLINE_GAME)
 
 
@@ -122,7 +126,11 @@ func _on_back_button_pressed() -> void:
 
 func _on_character_selection_menu_character_selected(selected_karts: Array[KartMetadata]) -> void:
 	karts = selected_karts
-	open_menu(MenuPage.MAP_SELECTION)
+	if creating_game:
+		open_menu(MenuPage.MAP_SELECTION)
+	else:
+		close_menu()
+		karts_selected.emit(karts)
 
 
 func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:

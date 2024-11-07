@@ -10,18 +10,16 @@ var map_metadatas: Dictionary = {
 	"unreal": "res://scenes/maps/unreal/unreal.tres",
 }
 
+var kart_metadatas: Dictionary = {
+	"debug_kart": "res://scenes/karts/debug_kart/debug_kart.tres",
+	"suzanne": "res://scenes/karts/suzanne/suzanne.tres",
+}
+
 
 ## Loads a map with the provided karts.
 func new_game(karts: Array[KartMetadata], map: MapMetadata) -> void:
-	# Load map
 	load_map(map)
-	
-	# Add players
-	for kart in karts:
-		var kart_node = kart.instantiate()
-		kart_node.transform = loaded_map.get_spawn_location()
-		players_node.add_child(kart_node)
-		players.append(kart_node)
+	add_karts(karts)
 
 
 ## Loads a new map.
@@ -42,6 +40,15 @@ func load_map(map: MapMetadata) -> void:
 	loaded_map = map_node
 
 
+## Adds karts to the game.
+func add_karts(karts: Array[KartMetadata]) -> void:
+	for kart in karts:
+		var kart_node = kart.instantiate()
+		kart_node.transform = loaded_map.get_spawn_location()
+		players_node.add_child(kart_node)
+		players.append(kart_node)
+
+
 func is_game_loaded() -> bool:
 	if loaded_map:
 		return true
@@ -50,5 +57,13 @@ func is_game_loaded() -> bool:
 
 
 func get_map_metadata_by_id(id: String) -> MapMetadata:
-	print(id)
 	return load(map_metadatas.get(id)) as MapMetadata
+
+
+func get_kart_metadata_by_id(id: String) -> KartMetadata:
+	return load(kart_metadatas.get(id)) as KartMetadata
+
+
+@rpc("any_peer", "reliable")
+func add_kart_by_id(id: String) -> void:
+	add_karts([get_kart_metadata_by_id(id)])
