@@ -1,14 +1,15 @@
 extends Control
 
+@export var kart_list: KartList
+
 signal character_selected(karts: Array[KartMetadata])
 
-@export var kart_list: Array[KartMetadata]
 var selected_karts: Array[KartMetadata]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for kart in kart_list:
+	for kart in kart_list.get_karts():
 		# Create a button
 		var button_node = CharacterButton.new()
 		button_node.kart = kart
