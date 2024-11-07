@@ -7,3 +7,4 @@
 script = ExtResource("1_fo0hs")
 name = "Suzanne"
 scene = ExtResource("1_6g34t")
+id = "suzanne"

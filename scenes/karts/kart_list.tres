@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KartList" load_steps=5 format=3 uid="uid://y4vfj42jsk13"]
+
+[ext_resource type="Script" path="res://scenes/classes/kart/kart_list.gd" id="1_3nqbm"]
+[ext_resource type="Script" path="res://scenes/classes/kart/kart_metadata.gd" id="1_6apsv"]
+[ext_resource type="Resource" uid="uid://dicvyd6ie2j13" path="res://scenes/karts/suzanne/suzanne.tres" id="2_0ii2c"]
+[ext_resource type="Resource" uid="uid://ci8wrqbomg6wj" path="res://scenes/karts/debug_kart/debug_kart.tres" id="3_2fqf6"]
+
+[resource]
+script = ExtResource("1_3nqbm")
+karts = Array[ExtResource("1_6apsv")]([ExtResource("2_0ii2c"), ExtResource("3_2fqf6")])

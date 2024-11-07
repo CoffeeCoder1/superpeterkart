@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var kart_list: KartList
+
 @onready var menu: Menu = $Menu
 @onready var game: Game = $Game
 @onready var multiplayer_lobby: MultiplayerLobby = $MultiplayerLobby
@@ -50,4 +52,5 @@ func _on_multiplayer_lobby_connected_to_server() -> void:
 
 
 func _on_menu_karts_selected(karts: Array[KartMetadata]) -> void:
-	game.add_kart_by_id.rpc_id(1, "suzanne")
+	for kart in karts:
+		game.add_kart_by_id.rpc_id(1, kart_list.get_kart_id(kart))

@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwhovv243wj43"]
+[gd_scene load_steps=6 format=3 uid="uid://cwhovv243wj43"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_jayv1"]
 [ext_resource type="PackedScene" uid="uid://4lj582lanxly" path="res://scenes/game/game.tscn" id="1_jxpmy"]
 [ext_resource type="PackedScene" uid="uid://bmqdrl4gr8ikv" path="res://scenes/ui/menu/menu.tscn" id="2_mh2bb"]
+[ext_resource type="Resource" uid="uid://y4vfj42jsk13" path="res://scenes/karts/kart_list.tres" id="4_hr5qd"]
 [ext_resource type="Script" path="res://scenes/classes/multiplayer/multiplayer_lobby.gd" id="4_vjoha"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_jayv1")
+kart_list = ExtResource("4_hr5qd")
 
 [node name="Menu" parent="." instance=ExtResource("2_mh2bb")]
 
 [node name="Game" parent="." instance=ExtResource("1_jxpmy")]
+kart_list = ExtResource("4_hr5qd")
 
 [node name="MultiplayerLobby" type="Node" parent="." node_paths=PackedStringArray("game_node")]
 script = ExtResource("4_vjoha")
