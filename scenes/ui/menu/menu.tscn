@@ -26,10 +26,12 @@ grow_vertical = 2
 script = ExtResource("1_bjv5w")
 
 [node name="StartMenu" parent="." instance=ExtResource("2_ruy6j")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,61 +39,69 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MenuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MainMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("1_hb36d")]
+[node name="MainMenu" parent="MenuContainer/PanelContainer" instance=ExtResource("1_hb36d")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="SettingsMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("3_1n28g")]
+[node name="SettingsMenu" parent="MenuContainer/PanelContainer" instance=ExtResource("3_1n28g")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="PlayerNumberSelectionMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("4_8pmct")]
+[node name="PlayerNumberSelectionMenu" parent="MenuContainer/PanelContainer" instance=ExtResource("4_8pmct")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="CharacterSelectionMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("5_gl5ct")]
+[node name="CharacterSelectionMenu" parent="MenuContainer/PanelContainer" instance=ExtResource("5_gl5ct")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="MapSelectionMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("7_g6686")]
+[node name="MapSelectionMenu" parent="MenuContainer/PanelContainer" instance=ExtResource("7_g6686")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="GameOptionsMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("8_d3ybf")]
+[node name="GameOptionsMenu" parent="MenuContainer/PanelContainer" instance=ExtResource("8_d3ybf")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="OnlineGameMenu" parent="VBoxContainer/PanelContainer" instance=ExtResource("9_txm8y")]
+[node name="OnlineGameMenu" parent="MenuContainer/PanelContainer" instance=ExtResource("9_txm8y")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="BackButton" type="Button" parent="MenuContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_0heav")
 text = "Back"
 
-[node name="GameOptionsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="GameOptionsButton" type="Button" parent="MenuContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Options"
 
 [connection signal="start_game" from="StartMenu" to="." method="_on_start_menu_start_game"]
-[connection signal="local_game" from="VBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_local_game"]
-[connection signal="online_game" from="VBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_online_game"]
-[connection signal="settings" from="VBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_settings"]
-[connection signal="player_number_selected" from="VBoxContainer/PanelContainer/PlayerNumberSelectionMenu" to="." method="_on_player_number_selection_menu_player_number_selected"]
-[connection signal="character_selected" from="VBoxContainer/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_character_selected"]
-[connection signal="map_selected" from="VBoxContainer/PanelContainer/MapSelectionMenu" to="." method="_on_map_selection_menu_map_selected"]
-[connection signal="online_game_toggled" from="VBoxContainer/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_online_game_toggled"]
-[connection signal="join_online_game" from="VBoxContainer/PanelContainer/OnlineGameMenu" to="." method="_on_online_game_menu_join_online_game"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/GameOptionsButton" to="." method="_on_game_options_button_pressed"]
+[connection signal="local_game" from="MenuContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_local_game"]
+[connection signal="online_game" from="MenuContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_online_game"]
+[connection signal="settings" from="MenuContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_settings"]
+[connection signal="player_number_selected" from="MenuContainer/PanelContainer/PlayerNumberSelectionMenu" to="." method="_on_player_number_selection_menu_player_number_selected"]
+[connection signal="character_selected" from="MenuContainer/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_character_selected"]
+[connection signal="map_selected" from="MenuContainer/PanelContainer/MapSelectionMenu" to="." method="_on_map_selection_menu_map_selected"]
+[connection signal="online_game_toggled" from="MenuContainer/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_online_game_toggled"]
+[connection signal="join_online_game" from="MenuContainer/PanelContainer/OnlineGameMenu" to="." method="_on_online_game_menu_join_online_game"]
+[connection signal="pressed" from="MenuContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MenuContainer/HBoxContainer/GameOptionsButton" to="." method="_on_game_options_button_pressed"]

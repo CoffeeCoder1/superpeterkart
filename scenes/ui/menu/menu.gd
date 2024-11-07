@@ -28,6 +28,18 @@ var creating_game: bool
 ## Has the server already been started?
 var server_started: bool
 
+@onready var menu_container: VBoxContainer = %MenuContainer
+@onready var game_options_button: Button = %GameOptionsButton
+
+@onready var start_menu: Control = %StartMenu
+@onready var main_menu: Control = %MainMenu
+@onready var settings_menu: Control = %SettingsMenu
+@onready var player_number_selection_menu: Control = %PlayerNumberSelectionMenu
+@onready var character_selection_menu: Control = %CharacterSelectionMenu
+@onready var map_selection_menu: Control = %MapSelectionMenu
+@onready var game_options_menu: Control = %GameOptionsMenu
+@onready var online_game_menu: Control = %OnlineGameMenu
+
 
 func open_menu(menu: MenuPage) -> void:
 	menu_stack.append(menu)
@@ -51,32 +63,32 @@ func _show_menu(menu: MenuPage) -> void:
 	self.show()
 	get_tree().call_group("menus", "hide")
 	if (menu == MenuPage.START_MENU):
-		$StartMenu.show()
+		start_menu.show()
 	elif (menu == MenuPage.MAIN_MENU):
-		$VBoxContainer/PanelContainer/MainMenu.show()
+		main_menu.show()
 		creating_game = false
 	elif (menu == MenuPage.SETTINGS):
-		$VBoxContainer/PanelContainer/SettingsMenu.show()
+		settings_menu.show()
 	elif (menu == MenuPage.PLAYER_NUMBER_SELECTION):
-		$VBoxContainer/PanelContainer/PlayerNumberSelectionMenu.show()
+		player_number_selection_menu.show()
 	elif (menu == MenuPage.ONLINE_GAME):
-		$VBoxContainer/PanelContainer/OnlineGameMenu.show()
+		online_game_menu.show()
 	elif (menu == MenuPage.CHARACTER_SELECTION):
-		$VBoxContainer/PanelContainer/CharacterSelectionMenu.show()
+		character_selection_menu.show()
 	elif (menu == MenuPage.MAP_SELECTION):
-		$VBoxContainer/PanelContainer/MapSelectionMenu.show()
+		map_selection_menu.show()
 	elif (menu == MenuPage.GAME_OPTIONS):
-		$VBoxContainer/PanelContainer/GameOptionsMenu.show()
+		game_options_menu.show()
 	
 	if (menu == MenuPage.START_MENU):
-		$VBoxContainer.hide()
+		menu_container.hide()
 	else:
-		$VBoxContainer.show()
+		menu_container.show()
 	
 	if creating_game:
-		$VBoxContainer/HBoxContainer/GameOptionsButton.show()
+		game_options_button.show()
 	else:
-		$VBoxContainer/HBoxContainer/GameOptionsButton.hide()
+		game_options_button.hide()
 	
 	_start_or_stop_server()
 
