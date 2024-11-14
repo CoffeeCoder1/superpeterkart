@@ -3,6 +3,7 @@ class_name Game extends Node3D
 @export var kart_list: KartList
 
 @onready var players_node: Node3D = $Players
+@onready var heads_up_display: HeadsUpDisplay = $HeadsUpDisplay
 
 var players: Array[Kart] = []
 var loaded_map: Map
@@ -79,3 +80,6 @@ func _spawn_kart_by_id(id: String, player_id: int) -> void:
 	# Move player to spawn position
 	if loaded_map:
 		player.transform = loaded_map.get_spawn_location()
+		
+	if player_id == multiplayer.get_unique_id():
+		heads_up_display.player = player

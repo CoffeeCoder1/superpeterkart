@@ -1,11 +1,11 @@
-extends Control
+class_name HeadsUpDisplay extends Control
 
+@export var player: Kart
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var speed_label: Label = $SpeedLabel
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if player:
+		speed_label.text = str(player.get_speed())

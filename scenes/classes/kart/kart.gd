@@ -11,6 +11,8 @@ class_name Kart extends CharacterBody3D
 @export var kart_preview: bool = false
 ## The ID of the player controlling the kart
 @export var player_id: int = 1
+## The current speed of the kart.
+@export var speed: float
 
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 
@@ -85,7 +87,15 @@ func _physics_process(delta: float) -> void:
 		if heading_dot < 0:
 			velocity = -new_heading * min(velocity.length(), 10)
 		
+		# Kart speed (used for display in the HUD)
+		speed = velocity_total
+		
 		# Rotate the kart
 		look_at(transform.origin + new_heading, transform.basis.y)
 		
 		move_and_slide()
+
+
+## Returns the speed of the kart.
+func get_speed() -> float:
+	return speed
