@@ -30,6 +30,11 @@ var input_proxy: InputProxy
 func _ready() -> void:
 	input_proxy = InputProxy.new()
 	add_child(input_proxy)
+	
+	# Set up the MultiplayerSynchronizer
+	multiplayer_synchronizer.replication_config.add_property(":position")
+	multiplayer_synchronizer.replication_config.add_property(":rotation")
+	multiplayer_synchronizer.replication_config.add_property(":speed")
 
 
 func _process(delta: float) -> void:
