@@ -59,6 +59,12 @@ func close_menu() -> void:
 	self.hide()
 
 
+## Opens the start menu.
+## Intended to be run at the start of the game.
+func open_menu_start() -> void:
+	open_menu(MenuPage.START_MENU)
+
+
 func _show_menu(menu: MenuPage) -> void:
 	self.show()
 	get_tree().call_group("menus", "hide")

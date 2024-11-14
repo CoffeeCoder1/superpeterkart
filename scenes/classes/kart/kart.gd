@@ -9,6 +9,8 @@ class_name Kart extends CharacterBody3D
 @export var wheel_spacing: float = 1
 ## Is the kart instantiated for a kart preview?
 @export var kart_preview: bool = false
+## The ID of the player controlling the kart
+@export var player_id: int = 1
 
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 
@@ -20,10 +22,20 @@ var boost_amount = 100
 var front_wheel: Vector3
 var rear_wheel: Vector3
 
+var input_proxy: InputProxy
+
 
 func _ready() -> void:
+	input_proxy = InputProxy.new()
+	add_child(input_proxy)
+
+
+func _process(delta: float) -> void:
+	# TODO: Move this to a setter
+	input_proxy.player_id = player_id
+	
 	# If this is the local kart, focus the camera.
-	if get_multiplayer_authority() == multiplayer.get_unique_id():
+	if player_id == multiplayer.get_unique_id():
 		$Camera3D.make_current()
 
 
@@ -35,7 +47,7 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta
 		
 		# Boost
-		if Input.is_action_pressed("player1_boost") and boost_amount >= 0:
+		if input_proxy.get_boost() and boost_amount >= 0:
 			_top_speed = move_toward(_top_speed, boost_speed, delta)
 			boost_amount = move_toward(boost_amount, 0, delta)
 			print(boost_amount)
@@ -44,8 +56,7 @@ func _physics_process(delta: float) -> void:
 		
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
-		var throttle := Input.get_axis("ui_up", "ui_down")
-		var direction := (transform.basis * Vector3(0, 0, throttle)).normalized()
+		var direction := (transform.basis * Vector3(0, 0, input_proxy.get_throttle())).normalized()
 		if direction:
 			velocity.x += direction.x * _acceleration * delta
 			velocity.z += direction.z * _acceleration * delta
@@ -57,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = clamp(velocity.z, -_top_speed, _top_speed)
 		
 		# Steering
-		var steering := Input.get_axis("ui_right", "ui_left") * steering_amount
+		var steering := input_proxy.get_steering() * steering_amount
 		front_wheel = transform.origin - transform.basis.z * (wheel_spacing / 2)
 		rear_wheel = transform.origin + transform.basis.z * (wheel_spacing / 2)
 		var velocity_total: float = (velocity * Vector3(1, 0, 1)).length()

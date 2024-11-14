@@ -9,7 +9,3 @@ script = ExtResource("1_rdoy7")
 transform = Transform3D(1, 0, 0, 0, 0.790262, 0.612769, 0, -0.612769, 0.790262, 0, 9.47898, 4.50726)
 
 [node name="Players" type="Node3D" parent="."]
-
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/karts/suzanne/suzanne.tscn")
-spawn_path = NodePath("../Players")
