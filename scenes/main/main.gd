@@ -10,8 +10,14 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	menu.open_menu(Menu.MenuPage.START_MENU)
 	multiplayer.connected_to_server.connect(_on_server_connected_ok)
+	if (OS.get_cmdline_args().has("host")):
+		menu._on_main_menu_local_game()
+		_on_menu_host_online_game()
+	elif (OS.get_cmdline_args().has("join")):
+		_on_menu_join_online_game("127.0.0.1")
+	else:
+		menu.open_menu(Menu.MenuPage.START_MENU)
 
 
 func _on_menu_game_started(karts: Array[KartMetadata], map: MapMetadata) -> void:
