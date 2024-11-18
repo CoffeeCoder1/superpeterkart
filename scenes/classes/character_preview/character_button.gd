@@ -20,7 +20,7 @@ func _on_hide() -> void:
 		icon = null
 	
 	# Unload the character preview world to save memory
-	if character_preview_world:
+	if is_instance_valid(character_preview_world):
 		character_preview_world.queue_free()
 
 
