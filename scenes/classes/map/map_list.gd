@@ -13,7 +13,7 @@ func get_map_id(map: MapMetadata) -> String:
 	return map.get_map_id()
 
 
-func get_kart_by_id(id: String) -> MapMetadata:
+func get_map_by_id(id: String) -> MapMetadata:
 	for map in maps:
 		if map.get_map_id() == id:
 			return map
