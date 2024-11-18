@@ -1,19 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwhovv243wj43"]
+[gd_scene load_steps=7 format=3 uid="uid://cwhovv243wj43"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_jayv1"]
 [ext_resource type="PackedScene" uid="uid://4lj582lanxly" path="res://scenes/game/game.tscn" id="1_jxpmy"]
 [ext_resource type="PackedScene" uid="uid://bmqdrl4gr8ikv" path="res://scenes/ui/menu/menu.tscn" id="2_mh2bb"]
 [ext_resource type="Resource" uid="uid://y4vfj42jsk13" path="res://scenes/karts/kart_list.tres" id="4_hr5qd"]
 [ext_resource type="Script" path="res://scenes/classes/multiplayer/multiplayer_lobby.gd" id="4_vjoha"]
+[ext_resource type="Resource" uid="uid://dk5gglgb3xy1a" path="res://scenes/maps/map_list.tres" id="5_ftatt"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_jayv1")
 kart_list = ExtResource("4_hr5qd")
+map_list = ExtResource("5_ftatt")
 
 [node name="Menu" parent="." instance=ExtResource("2_mh2bb")]
 
 [node name="Game" parent="." instance=ExtResource("1_jxpmy")]
 kart_list = ExtResource("4_hr5qd")
+map_list = ExtResource("5_ftatt")
 
 [node name="MultiplayerLobby" type="Node" parent="." node_paths=PackedStringArray("game_node")]
 script = ExtResource("4_vjoha")
@@ -29,10 +32,13 @@ grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="game_started" from="Menu" to="." method="_on_menu_game_started"]
+[connection signal="create_local_game" from="Menu" to="." method="_on_menu_create_local_game"]
 [connection signal="host_online_game" from="Menu" to="." method="_on_menu_host_online_game"]
 [connection signal="join_online_game" from="Menu" to="." method="_on_menu_join_online_game"]
 [connection signal="karts_selected" from="Menu" to="." method="_on_menu_karts_selected"]
+[connection signal="map_selected" from="Menu" to="." method="_on_menu_map_selected"]
+[connection signal="game_ended" from="Game" to="." method="_on_game_ended"]
+[connection signal="game_started" from="Game" to="." method="_on_game_started"]
 [connection signal="connected_to_server" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connected_to_server"]
 [connection signal="connection_failed" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connection_failed"]
 [connection signal="server_disconnected" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_server_disconnected"]

@@ -1,21 +1,22 @@
 class_name Menu extends Control
 
-signal game_started(karts: Array[KartMetadata], map: MapMetadata)
+signal create_local_game
 ## Emitted when karts are selected in multiplayer.
 signal karts_selected(karts: Array[KartMetadata])
 signal join_online_game(ip_address: String)
 signal host_online_game
 signal stop_online_server
+signal map_selected(map: MapMetadata)
 
 enum MenuPage {
 	START_MENU,
 	MAIN_MENU,
 	SETTINGS,
 	ONLINE_GAME,
-	PLAYER_NUMBER_SELECTION,
 	CHARACTER_SELECTION,
 	MAP_SELECTION,
 	GAME_OPTIONS,
+	MULTIPLAYER_CONNECTING,
 }
 var menu_stack: Array[MenuPage] = []
 
@@ -34,11 +35,11 @@ var server_started: bool
 @onready var start_menu: Control = %StartMenu
 @onready var main_menu: Control = %MainMenu
 @onready var settings_menu: Control = %SettingsMenu
-@onready var player_number_selection_menu: Control = %PlayerNumberSelectionMenu
 @onready var character_selection_menu: Control = %CharacterSelectionMenu
 @onready var map_selection_menu: Control = %MapSelectionMenu
 @onready var game_options_menu: Control = %GameOptionsMenu
 @onready var online_game_menu: Control = %OnlineGameMenu
+@onready var multiplayer_connecting_menu: Control = %MultiplayerConnecting
 
 
 func open_menu(menu: MenuPage) -> void:
@@ -56,7 +57,7 @@ func back_menu() -> void:
 
 func close_menu() -> void:
 	menu_stack = []
-	self.hide()
+	hide()
 
 
 ## Opens the start menu.
@@ -66,7 +67,7 @@ func open_menu_start() -> void:
 
 
 func _show_menu(menu: MenuPage) -> void:
-	self.show()
+	show()
 	get_tree().call_group("menus", "hide")
 	if (menu == MenuPage.START_MENU):
 		start_menu.show()
@@ -75,8 +76,6 @@ func _show_menu(menu: MenuPage) -> void:
 		creating_game = false
 	elif (menu == MenuPage.SETTINGS):
 		settings_menu.show()
-	elif (menu == MenuPage.PLAYER_NUMBER_SELECTION):
-		player_number_selection_menu.show()
 	elif (menu == MenuPage.ONLINE_GAME):
 		online_game_menu.show()
 	elif (menu == MenuPage.CHARACTER_SELECTION):
@@ -85,6 +84,8 @@ func _show_menu(menu: MenuPage) -> void:
 		map_selection_menu.show()
 	elif (menu == MenuPage.GAME_OPTIONS):
 		game_options_menu.show()
+	elif (menu == MenuPage.MULTIPLAYER_CONNECTING):
+		multiplayer_connecting_menu.show()
 	
 	if (menu == MenuPage.START_MENU):
 		menu_container.hide()
@@ -111,14 +112,26 @@ func _start_or_stop_server() -> void:
 			server_started = false
 
 
+func _on_back_button_pressed() -> void:
+	back_menu()
+
+
+func _on_game_options_button_pressed() -> void:
+	open_menu(MenuPage.GAME_OPTIONS)
+
+
 func _on_start_menu_start_game() -> void:
 	open_menu(MenuPage.MAIN_MENU)
 
 
+func _on_main_menu_settings() -> void:
+	open_menu(MenuPage.SETTINGS)
+
+
 func _on_main_menu_local_game() -> void:
 	creating_game = true
-	open_menu(MenuPage.PLAYER_NUMBER_SELECTION)
-	_start_or_stop_server()
+	create_local_game.emit()
+	open_menu(MenuPage.CHARACTER_SELECTION)
 
 
 func _on_main_menu_online_game() -> void:
@@ -126,41 +139,20 @@ func _on_main_menu_online_game() -> void:
 	open_menu(MenuPage.ONLINE_GAME)
 
 
-func _on_main_menu_settings() -> void:
-	open_menu(MenuPage.SETTINGS)
-
-
-func _on_player_number_selection_menu_player_number_selected(number: int) -> void:
-	open_menu(MenuPage.CHARACTER_SELECTION)
-
-
-func _on_game_options_button_pressed() -> void:
-	open_menu(MenuPage.GAME_OPTIONS)
-
-
-func _on_back_button_pressed() -> void:
-	back_menu()
+func _on_online_game_menu_join_online_game(ip_address: String) -> void:
+	join_online_game.emit(ip_address)
+	open_menu(MenuPage.MULTIPLAYER_CONNECTING)
 
 
 func _on_character_selection_menu_character_selected(selected_karts: Array[KartMetadata]) -> void:
 	karts = selected_karts
-	if creating_game:
-		open_menu(MenuPage.MAP_SELECTION)
-	else:
-		close_menu()
-		karts_selected.emit(karts)
+	karts_selected.emit(karts)
 
 
 func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
-	close_menu()
-	game_started.emit(karts, map)
+	map_selected.emit(map)
 
 
 func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
 	online_game = enabled
 	_start_or_stop_server()
-
-
-func _on_online_game_menu_join_online_game(ip_address: String) -> void:
-	join_online_game.emit(ip_address)
-	close_menu()
