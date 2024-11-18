@@ -18,7 +18,6 @@ class_name Kart extends CharacterBody3D
 
 var _top_speed = top_speed
 var _acceleration = acceleration
-var _steer_target = 0
 var boost_amount = 100
 
 var front_wheel: Vector3
