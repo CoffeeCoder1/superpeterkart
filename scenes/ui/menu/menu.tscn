@@ -96,12 +96,10 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_0heav")
 text = "Back"
 
-[node name="GameOptionsButton" type="Button" parent="MenuContainer/HBoxContainer"]
+[node name="NextButton" type="Button" parent="MenuContainer/HBoxContainer" groups=["menus"]]
 unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Options"
+text = "Next"
 
 [connection signal="start_game" from="StartMenu" to="." method="_on_start_menu_start_game"]
 [connection signal="local_game" from="MenuContainer/HBoxContainer2/PanelContainer/MainMenu" to="." method="_on_main_menu_local_game"]
@@ -112,4 +110,4 @@ text = "Options"
 [connection signal="online_game_toggled" from="MenuContainer/HBoxContainer2/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_online_game_toggled"]
 [connection signal="join_online_game" from="MenuContainer/HBoxContainer2/PanelContainer/OnlineGameMenu" to="." method="_on_online_game_menu_join_online_game"]
 [connection signal="pressed" from="MenuContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="MenuContainer/HBoxContainer/GameOptionsButton" to="." method="_on_game_options_button_pressed"]
+[connection signal="pressed" from="MenuContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]

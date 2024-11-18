@@ -28,9 +28,13 @@ var online_game: bool
 var creating_game: bool
 ## Has the server already been started?
 var server_started: bool
+## What menu should the NextButton advance to?
+var next_menu: MenuPage
+## Should the NextButton be enabled?
+var next_menu_enabled: bool
 
 @onready var menu_container: VBoxContainer = %MenuContainer
-@onready var game_options_button: Button = %GameOptionsButton
+@onready var next_button: Button = %NextButton
 
 @onready var start_menu: Control = %StartMenu
 @onready var main_menu: Control = %MainMenu
@@ -69,6 +73,7 @@ func open_menu_start() -> void:
 func _show_menu(menu: MenuPage) -> void:
 	show()
 	get_tree().call_group("menus", "hide")
+	next_menu_enabled = false
 	if (menu == MenuPage.START_MENU):
 		start_menu.show()
 	elif (menu == MenuPage.MAIN_MENU):
@@ -84,6 +89,8 @@ func _show_menu(menu: MenuPage) -> void:
 		map_selection_menu.show()
 	elif (menu == MenuPage.GAME_OPTIONS):
 		game_options_menu.show()
+		next_menu = MenuPage.CHARACTER_SELECTION
+		next_menu_enabled = true
 	elif (menu == MenuPage.MULTIPLAYER_CONNECTING):
 		multiplayer_connecting_menu.show()
 	
@@ -92,10 +99,10 @@ func _show_menu(menu: MenuPage) -> void:
 	else:
 		menu_container.show()
 	
-	if creating_game:
-		game_options_button.show()
+	if next_menu_enabled:
+		next_button.show()
 	else:
-		game_options_button.hide()
+		next_button.hide()
 	
 	_start_or_stop_server()
 
@@ -112,12 +119,13 @@ func _start_or_stop_server() -> void:
 			server_started = false
 
 
+func _on_next_button_pressed() -> void:
+	if next_menu_enabled:
+		open_menu(next_menu)
+
+
 func _on_back_button_pressed() -> void:
 	back_menu()
-
-
-func _on_game_options_button_pressed() -> void:
-	open_menu(MenuPage.GAME_OPTIONS)
 
 
 func _on_start_menu_start_game() -> void:
@@ -131,7 +139,12 @@ func _on_main_menu_settings() -> void:
 func _on_main_menu_local_game() -> void:
 	creating_game = true
 	create_local_game.emit()
-	open_menu(MenuPage.CHARACTER_SELECTION)
+	open_menu(MenuPage.GAME_OPTIONS)
+
+
+func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
+	online_game = enabled
+	_start_or_stop_server()
 
 
 func _on_main_menu_online_game() -> void:
@@ -151,8 +164,3 @@ func _on_character_selection_menu_character_selected(selected_karts: Array[KartM
 
 func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
 	map_selected.emit(map)
-
-
-func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
-	online_game = enabled
-	_start_or_stop_server()
