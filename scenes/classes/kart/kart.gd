@@ -41,6 +41,10 @@ func _process(delta: float) -> void:
 	# TODO: Move this to a setter
 	input_proxy.player_id = player_id
 	
+	# Disable multiplayer calls if the kart is disabled.
+	input_proxy.set_process(kart_enabled)
+	multiplayer_synchronizer.set_process(kart_enabled)
+	
 	# If this is the local kart, focus the camera.
 	if player_id == multiplayer.get_unique_id():
 		$Camera3D.make_current()
