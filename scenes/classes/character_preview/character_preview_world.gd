@@ -12,7 +12,7 @@ var kart_node: Kart
 			
 			# Instantiate the new kart
 			kart_node = new_kart.instantiate()
-			kart_node.kart_preview = true
+			kart_node.kart_enabled = false
 			add_child(kart_node)
 		
 		# Set the kart to the new kart

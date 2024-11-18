@@ -7,8 +7,8 @@ class_name Kart extends CharacterBody3D
 @export var steering_amount: float = 0.3
 ## Distance from front to rear wheel
 @export var wheel_spacing: float = 1
-## Is the kart instantiated for a kart preview?
-@export var kart_preview: bool = false
+## Should the kart be enabled?
+@export var kart_enabled: bool = true
 ## The ID of the player controlling the kart
 @export var player_id: int = 1
 ## The current speed of the kart.
@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Allow disabling the kart for preview displays and when not being controlled by the local player.
-	if !kart_preview and get_multiplayer_authority() == multiplayer.get_unique_id():
+	if kart_enabled and get_multiplayer_authority() == multiplayer.get_unique_id():
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
