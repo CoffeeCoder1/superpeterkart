@@ -16,7 +16,6 @@ func _ready() -> void:
 	if (OS.get_cmdline_args().has("host")):
 		menu._on_main_menu_local_game()
 		_on_menu_create_local_game()
-		_on_menu_host_online_game()
 	elif (OS.get_cmdline_args().has("join")):
 		_on_menu_join_online_game("127.0.0.1")
 	else:
