@@ -140,12 +140,13 @@ func _spawn_kart(player_id: int, kart_id: String) -> void:
 	kart_node.player_id = player_id
 	
 	if player_id == multiplayer.get_unique_id():
-			heads_up_display.player = kart_node
+		heads_up_display.player = kart_node
 	
 	# Disable the kart if the game hasn't started yet
 	kart_node.kart_enabled = (game_state == GameState.PLAYING)
 	
 	# Spawn in the new kart.
+	kart_node.set_name(kart_id + str(player_id))
 	players_node.add_child(kart_node)
 	
 	if multiplayer.get_unique_id() == get_multiplayer_authority() and old_transform:
