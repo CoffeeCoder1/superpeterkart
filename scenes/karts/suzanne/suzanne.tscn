@@ -110,3 +110,7 @@ skeleton = NodePath("")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_kf4ma")
+
+[node name="TrackRayCast" type="RayCast3D" parent="."]
+hit_from_inside = true
+collide_with_areas = true

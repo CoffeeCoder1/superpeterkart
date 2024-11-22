@@ -13,12 +13,19 @@ class_name Kart extends CharacterBody3D
 @export var player_id: int = 1
 ## The current speed of the kart.
 @export var speed: float
+## Drag applied when the kart is off the track.
+@export var off_track_drag: float = 10.0
+## Rate at which the track drag is changed.
+@export var track_drag_smoothing: float = 10.0
 
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
+@onready var track_ray_cast: RayCast3D = $TrackRayCast
 
 var _top_speed = top_speed
 var _acceleration = acceleration
 var boost_amount = 100
+var on_track: bool
+var track_drag: float = 0
 
 var front_wheel: Vector3
 var rear_wheel: Vector3
@@ -52,6 +59,15 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Allow disabling the kart for preview displays and when not being controlled by the local player.
 	if kart_enabled and get_multiplayer_authority() == multiplayer.get_unique_id():
+		# Check if the kart is on the track or not
+		if track_ray_cast:
+			var drive_mesh: = track_ray_cast.get_collider()
+			on_track = drive_mesh is DriveMesh
+			if on_track:
+				track_drag = move_toward(track_drag, drive_mesh.get_track_drag(), delta * track_drag_smoothing)
+			else:
+				track_drag = move_toward(track_drag, off_track_drag, delta * track_drag_smoothing)
+		
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -64,6 +80,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			_top_speed = move_toward(_top_speed, top_speed, delta)
 		
+		## Top speed calculated each frame
+		var speed_limit: float = _top_speed
+		
+		# Apply track drag
+		speed_limit -= track_drag
+		print(speed_limit)
+		
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := (transform.basis * Vector3(0, 0, input_proxy.get_throttle())).normalized()
@@ -74,8 +97,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, braking * delta)
 			velocity.z = move_toward(velocity.z, 0, braking * delta)
 		
-		velocity.x = clamp(velocity.x, -_top_speed, _top_speed)
-		velocity.z = clamp(velocity.z, -_top_speed, _top_speed)
+		velocity.x = clamp(velocity.x, -speed_limit, speed_limit)
+		velocity.z = clamp(velocity.z, -speed_limit, speed_limit)
 		
 		# Steering
 		var steering := input_proxy.get_steering() * steering_amount

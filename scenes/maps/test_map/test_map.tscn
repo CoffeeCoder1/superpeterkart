@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://khkkj7jo5dp4"]
+[gd_scene load_steps=7 format=3 uid="uid://khkkj7jo5dp4"]
 
 [ext_resource type="Script" path="res://scenes/classes/map/map.gd" id="1_q3f2m"]
 [ext_resource type="Texture2D" uid="uid://vmmty31gbhi3" path="res://scenes/maps/test_map/map_texture.png" id="2_jp2sp"]
+[ext_resource type="Script" path="res://scenes/classes/map/drive_mesh.gd" id="3_cus6x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_706p5"]
 transparency = 1
@@ -31,3 +32,10 @@ transform = Transform3D(1, 0, 0, 0, 0.747601, 0.664148, 0, -0.664148, 0.747601, 
 
 [node name="SpawnLocation" type="Marker3D" parent="."]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -155.934, 0.5, 28.1306)
+
+[node name="DriveMesh" type="Area3D" parent="."]
+script = ExtResource("3_cus6x")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="DriveMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+polygon = PackedVector2Array(-168.292, 9.74258, -169.887, 42.0426, -17.2612, 42.2002, -16.615, 8.50748)
