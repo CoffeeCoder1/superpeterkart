@@ -85,7 +85,6 @@ func _physics_process(delta: float) -> void:
 		
 		# Apply track drag
 		speed_limit -= track_drag
-		print(speed_limit)
 		
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
