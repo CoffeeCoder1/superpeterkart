@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://4lj582lanxly"]
+[gd_scene load_steps=5 format=3 uid="uid://4lj582lanxly"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_rdoy7"]
 [ext_resource type="PackedScene" uid="uid://bi8hv8llm0ieu" path="res://scenes/ui/heads_up_display/heads_up_display.tscn" id="2_bxdhk"]
+[ext_resource type="Resource" uid="uid://y4vfj42jsk13" path="res://scenes/karts/kart_list.tres" id="2_eapua"]
+[ext_resource type="Resource" uid="uid://dk5gglgb3xy1a" path="res://scenes/maps/map_list.tres" id="3_vl22w"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_rdoy7")
+kart_list = ExtResource("2_eapua")
+map_list = ExtResource("3_vl22w")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.790262, 0.612769, 0, -0.612769, 0.790262, 0, 9.47898, 4.50726)

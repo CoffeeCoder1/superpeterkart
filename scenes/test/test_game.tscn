@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnsbkhsf8oar6"]
+[gd_scene load_steps=7 format=3 uid="uid://dnsbkhsf8oar6"]
 
 [ext_resource type="Script" path="res://scenes/test/test_game.gd" id="1_waxo1"]
 [ext_resource type="Script" path="res://scenes/classes/kart/kart_metadata.gd" id="2_picpd"]
+[ext_resource type="Resource" uid="uid://y4vfj42jsk13" path="res://scenes/karts/kart_list.tres" id="2_vvkec"]
 [ext_resource type="PackedScene" uid="uid://4lj582lanxly" path="res://scenes/game/game.tscn" id="2_xfpde"]
-[ext_resource type="Resource" uid="uid://ci8wrqbomg6wj" path="res://scenes/karts/debug_kart/debug_kart.tres" id="3_g7qbg"]
-[ext_resource type="Resource" uid="uid://dcfoqbbe4cjh7" path="res://scenes/maps/test_map/test_map.tres" id="4_lfhhx"]
+[ext_resource type="Resource" uid="uid://dicvyd6ie2j13" path="res://scenes/karts/suzanne/suzanne.tres" id="3_m2rxo"]
+[ext_resource type="Resource" uid="uid://dcfoqbbe4cjh7" path="res://scenes/maps/test_map/test_map.tres" id="5_ssetm"]
 
 [node name="TestGame" type="Node3D"]
 script = ExtResource("1_waxo1")
-karts = Array[ExtResource("2_picpd")]([ExtResource("3_g7qbg")])
-map = ExtResource("4_lfhhx")
+kart_list = ExtResource("2_vvkec")
+karts = Array[ExtResource("2_picpd")]([ExtResource("3_m2rxo")])
+map = ExtResource("5_ssetm")
 
 [node name="Game" parent="." instance=ExtResource("2_xfpde")]
