@@ -1,19 +1,13 @@
-extends SubViewport
+class_name CharacterPreviewWorld extends SubViewport
 
-var kart_node: Kart
-
-@export var kart: KartMetadata:
+@export var kart: Kart:
 	set(new_kart):
-		# Swap the kart out if the kart has changed
-		if kart != new_kart:
-			# If a kart already exists, delete it
-			if kart_node:
-				kart_node.queue_free()
-			
-			# Instantiate the new kart
-			kart_node = new_kart.instantiate()
-			kart_node.kart_enabled = false
-			add_child(kart_node)
+		if new_kart != kart and new_kart is Kart:
+			new_kart.kart_enabled = false
+			new_kart.position = Vector3.ZERO
+			if new_kart.get_parent():
+				new_kart.get_parent().remove_child(new_kart)
+			add_child(new_kart)
 		
 		# Set the kart to the new kart
 		kart = new_kart

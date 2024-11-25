@@ -1,14 +1,13 @@
-class_name CharacterButton extends Button
+class_name CharacterPreviewRect extends TextureRect
 
 var character_preview_world: CharacterPreviewWorld
-var kart_node: Kart
 
 @export var character_preview_world_scene: PackedScene = preload("res://scenes/classes/character_preview/character_preview_world.tscn")
-@export var kart: KartMetadata:
+@export var kart: Kart:
 	set(new_kart):
 		# Swap the kart out if the kart has changed
-		if kart != new_kart:
-			_load_kart(new_kart)
+		if kart != new_kart and is_instance_valid(character_preview_world):
+			character_preview_world.kart = new_kart
 		
 		# Set the kart to the new kart
 		kart = new_kart
@@ -19,22 +18,10 @@ func _ready() -> void:
 	self.hidden.connect(_on_hide)
 
 
-func _load_kart(kart: KartMetadata) -> void:
-	if is_instance_valid(character_preview_world):
-		# If a kart already exists, delete it
-		if is_instance_valid(kart_node):
-			kart_node.queue_free()
-		
-		# Instantiate the new kart
-		kart_node = kart.instantiate()
-		
-		character_preview_world.kart = kart_node
-
-
 func _on_hide() -> void:
 	# Remove the texture so Godot doesn't try to draw it and error because the viewport doesn't exist
-	if icon:
-		icon = null
+	if texture:
+		texture = null
 	
 	# Unload the character preview world to save memory
 	if is_instance_valid(character_preview_world):
@@ -47,8 +34,5 @@ func _draw() -> void:
 		character_preview_world = character_preview_world_scene.instantiate()
 		add_child(character_preview_world)
 	
-	# Set the preview world kart
-	_load_kart(kart)
-	
 	# Set the button texture to the viewport texture
-	icon = character_preview_world.get_texture()
+	texture = character_preview_world.get_texture()
