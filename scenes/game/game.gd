@@ -2,6 +2,7 @@ class_name Game extends Node3D
 
 @export var kart_list: KartList
 @export var map_list: MapList
+@export var players: PlayerList
 
 ## Emitted when the game starts.
 signal game_started
@@ -16,7 +17,6 @@ enum GameState {
 	PLAYING,
 }
 
-var players: PlayerList = PlayerList.new()
 var current_map_id: String
 var loaded_map: Map
 var loaded_karts: Array[Kart]

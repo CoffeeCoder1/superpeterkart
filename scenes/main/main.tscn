@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwhovv243wj43"]
+[gd_scene load_steps=8 format=3 uid="uid://cwhovv243wj43"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_jayv1"]
 [ext_resource type="PackedScene" uid="uid://4lj582lanxly" path="res://scenes/game/game.tscn" id="1_jxpmy"]
@@ -6,15 +6,18 @@
 [ext_resource type="Resource" uid="uid://y4vfj42jsk13" path="res://scenes/karts/kart_list.tres" id="4_hr5qd"]
 [ext_resource type="Script" path="res://scenes/classes/multiplayer/multiplayer_lobby.gd" id="4_vjoha"]
 [ext_resource type="Resource" uid="uid://dk5gglgb3xy1a" path="res://scenes/maps/map_list.tres" id="5_ftatt"]
+[ext_resource type="Script" path="res://scenes/classes/player/player_list.gd" id="7_u4ro4"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_jayv1")
 kart_list = ExtResource("4_hr5qd")
 map_list = ExtResource("5_ftatt")
 
-[node name="Menu" parent="." instance=ExtResource("2_mh2bb")]
+[node name="Menu" parent="." node_paths=PackedStringArray("players") instance=ExtResource("2_mh2bb")]
+players = NodePath("../PlayerList")
 
-[node name="Game" parent="." instance=ExtResource("1_jxpmy")]
+[node name="Game" parent="." node_paths=PackedStringArray("players") instance=ExtResource("1_jxpmy")]
+players = NodePath("../PlayerList")
 
 [node name="MultiplayerLobby" type="Node" parent="." node_paths=PackedStringArray("game_node")]
 script = ExtResource("4_vjoha")
@@ -29,6 +32,10 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerList" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_u4ro4")
 
 [connection signal="create_local_game" from="Menu" to="." method="_on_menu_create_local_game"]
 [connection signal="host_online_game" from="Menu" to="." method="_on_menu_host_online_game"]

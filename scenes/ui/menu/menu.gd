@@ -1,5 +1,7 @@
 class_name Menu extends Control
 
+@export var players: PlayerList
+
 signal create_local_game
 ## Emitted when karts are selected in multiplayer.
 signal karts_selected(karts: Array[KartMetadata])
@@ -44,6 +46,11 @@ var next_menu_enabled: bool
 @onready var game_options_menu: Control = %GameOptionsMenu
 @onready var online_game_menu: Control = %OnlineGameMenu
 @onready var multiplayer_connecting_menu: Control = %MultiplayerConnecting
+@onready var player_list: Control = %PlayerList
+
+
+func _ready() -> void:
+	player_list.player_list = players
 
 
 func open_menu(menu: MenuPage) -> void:
