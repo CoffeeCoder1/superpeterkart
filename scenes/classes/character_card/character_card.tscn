@@ -20,5 +20,7 @@ layout_mode = 2
 
 [node name="CharacterDisplay" type="TextureRect" parent="HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+expand_mode = 1
 script = ExtResource("2_l6u87")

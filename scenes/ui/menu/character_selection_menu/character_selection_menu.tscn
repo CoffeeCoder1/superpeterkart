@@ -21,5 +21,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
-
-[connection signal="hidden" from="." to="." method="_hide"]
