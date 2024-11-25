@@ -56,11 +56,16 @@ func load_map(map: MapMetadata) -> void:
 	current_map_id = map_id
 	_load_map.rpc(map_id)
 	
+	# Prepare karts
 	for i in len(players.players):
 		var player := players.players[i]
-		# Move the karts to the spawn location and set their velocities to 0
 		if player.kart:
+			# Unload preview kart if it exists
+			if is_instance_valid(player.preview_kart):
+				player.preview_kart.queue_free()
+			# Move the kart to the spawn location
 			player.kart.transform = loaded_map.get_spawn_location().translated(Vector3.RIGHT * (2 * i))
+			# Set their velocity to 0
 			player.kart.velocity = Vector3.ZERO
 	
 	# Enable players

@@ -6,6 +6,8 @@ class_name Player extends Node
 @export var kart_metadata: KartMetadata
 ## Kart that is loaded for the player.
 @export var kart: Kart
+## Kart that is loaded for character previews.
+@export var preview_kart: Kart
 ## Unique ID assigned for multiplayer.
 @export var player_id: int
 ## Is the player waiting to join the game in the next round?
