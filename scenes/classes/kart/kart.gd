@@ -20,6 +20,8 @@ class_name Kart extends CharacterBody3D
 
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var track_ray_cast: RayCast3D = $TrackRayCast
+@onready var camera: Camera3D = $Camera3D
+@onready var preview_camera: Camera3D = $PreviewCamera
 
 var _top_speed = top_speed
 var _acceleration = acceleration
@@ -52,8 +54,12 @@ func _process(delta: float) -> void:
 	multiplayer_synchronizer.set_process(kart_enabled)
 	
 	# If this is the local kart, focus the camera.
-	if player_id == multiplayer.get_unique_id():
-		$Camera3D.make_current()
+	if player_id == multiplayer.get_unique_id() and kart_enabled:
+		if is_instance_valid(camera):
+			camera.make_current()
+	elif !kart_enabled:
+		if is_instance_valid(preview_camera):
+			preview_camera.make_current()
 
 
 func _physics_process(delta: float) -> void:

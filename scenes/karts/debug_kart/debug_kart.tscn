@@ -43,6 +43,9 @@ shape = SubResource("BoxShape3D_foseb")
 [node name="Camera3D" type="Camera3D" parent="." groups=["karts"]]
 transform = Transform3D(1, 0, 0, 0, 0.912292, 0.409541, 0, -0.409541, 0.912292, 0, 2.88429, 3.37129)
 
+[node name="PreviewCamera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 7.38134e-08, -4.68437e-08, 5.11385e-08, 0.928486, 0.371368, 7.09056e-08, 0.371368, -0.928486, 0, 1.44659, -2.20323)
+
 [node name="FrontAxle" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 mesh = SubResource("BoxMesh_xm7no")
@@ -55,3 +58,7 @@ skeleton = NodePath("")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_xow35")
+
+[node name="TrackRayCast" type="RayCast3D" parent="."]
+hit_from_inside = true
+collide_with_areas = true
