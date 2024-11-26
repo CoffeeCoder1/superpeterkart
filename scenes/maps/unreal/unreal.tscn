@@ -1,7 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://fluqs2j2tp"]
+[gd_scene load_steps=27 format=3 uid="uid://fluqs2j2tp"]
 
 [ext_resource type="Script" path="res://scenes/classes/map/map.gd" id="1_afrj1"]
 [ext_resource type="PackedScene" uid="uid://cng1qe8rwtdgo" path="res://scenes/maps/unreal/blue_cube.tscn" id="2_eqbdd"]
+[ext_resource type="Resource" uid="uid://cslvcweyejh3c" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/default_camera_movement_component.tres" id="2_fgl1c"]
+[ext_resource type="Resource" uid="uid://iru8ynu04i00" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/default_camera_rotation_component.tres" id="3_l1720"]
+[ext_resource type="Resource" uid="uid://rp3mpjmisoyh" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/default_object_movement_component.tres" id="4_ek8m6"]
+[ext_resource type="Resource" uid="uid://c8ulad7utgrg7" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/pre_blur_processing_stage.tres" id="5_ukyu4"]
+[ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/pre_blur_processor.gd" id="6_gi5ud"]
+[ext_resource type="Resource" uid="uid://ca45noqewsyvp" path="res://addons/SphynxMotionBlurToolkit/Guertin/guertin_experimental_blur_stage.tres" id="7_elt3f"]
+[ext_resource type="Resource" uid="uid://cvb65hfs2lrxo" path="res://addons/SphynxMotionBlurToolkit/Guertin/guertin_neighbor_max_stage.tres" id="8_hw6d8"]
+[ext_resource type="Resource" uid="uid://bidsfymvdyhek" path="res://addons/SphynxMotionBlurToolkit/Guertin/guertin_overlay_stage.tres" id="9_0k586"]
+[ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/Guertin/new_guertin_motion_blur.gd" id="10_u3jtv"]
+[ext_resource type="Resource" uid="uid://dipvwksvqb3dm" path="res://addons/SphynxMotionBlurToolkit/Guertin/guertin_tile_max_x_stage.tres" id="11_8lc16"]
+[ext_resource type="Resource" uid="uid://bxfg45ubc2pv7" path="res://addons/SphynxMotionBlurToolkit/Guertin/guertin_tile_max_y_stage.tres" id="12_i5feo"]
+[ext_resource type="Resource" uid="uid://bqehecsdgt70s" path="res://addons/SphynxMotionBlurToolkit/Guertin/guertin_tile_variance_stage.tres" id="13_svxla"]
+[ext_resource type="Resource" uid="uid://o2bivm33b0v4" path="res://addons/SphynxMotionBlurToolkit/Debug/debug_overlay_shader_stage.tres" id="14_0yaf0"]
+[ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/BaseClasses/mb_compositor.gd" id="14_agvby"]
+[ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/Debug/post_process_debug.gd" id="15_f3kdh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bymhv"]
 sky_top_color = Color(0.407945, 0.64784, 0.940922, 1)
@@ -23,6 +38,64 @@ ambient_light_color = Color(0.777177, 0.777177, 0.777177, 1)
 reflected_light_source = 1
 volumetric_fog_density = 0.012
 
+[sub_resource type="CompositorEffect" id="CompositorEffect_oqa8i"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("6_gi5ud")
+pre_blur_processor_stage = ExtResource("5_ukyu4")
+camera_rotation_component = ExtResource("3_l1720")
+camera_movement_component = ExtResource("2_fgl1c")
+object_movement_component = ExtResource("4_ek8m6")
+debug = false
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_47715"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("10_u3jtv")
+blur_stage = ExtResource("7_elt3f")
+overlay_stage = ExtResource("9_0k586")
+tile_max_x_stage = ExtResource("11_8lc16")
+tile_max_y_stage = ExtResource("12_i5feo")
+neighbor_max_stage = ExtResource("8_hw6d8")
+tile_variance_stage = ExtResource("13_svxla")
+tile_size = 40
+linear_falloff_slope = 1.0
+importance_bias = 40.0
+maximum_jitter_value = 0.95
+minimum_user_threshold = 1.5
+debug = false
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_irihn"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("15_f3kdh")
+overlay_stage = ExtResource("14_0yaf0")
+draw_debug = false
+debug_page = 0
+debug = false
+
+[sub_resource type="Compositor" id="Compositor_y36m0"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_oqa8i"), SubResource("CompositorEffect_47715"), SubResource("CompositorEffect_irihn")])
+script = ExtResource("14_agvby")
+samples = 16
+intensity = 1.0
+center_fade = 0.0
+framerate_independent = true
+uncapped_independence = false
+target_constant_framerate = 30.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw1p3"]
 albedo_color = Color(0.654232, 0.654232, 0.654232, 1)
 
@@ -37,6 +110,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 5.37738)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cqnta")
+compositor = SubResource("Compositor_y36m0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.457269, 0.889329, 0, -0.889329, 0.457269, 0, 8.03117, -0.1789)
