@@ -25,9 +25,10 @@ func _on_hide() -> void:
 	
 	# Unload the character preview world to save memory
 	if is_instance_valid(character_preview_world):
-		# Don't queue free the kart with the preview world
-		if kart.get_parent():
-			kart.get_parent().remove_child(kart)
+		if is_instance_valid(kart):
+			# Don't queue free the kart with the preview world
+			if kart.get_parent():
+				kart.get_parent().remove_child(kart)
 		character_preview_world.queue_free()
 
 
