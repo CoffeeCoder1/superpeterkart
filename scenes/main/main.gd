@@ -61,7 +61,7 @@ func _on_menu_karts_selected(karts: Array[KartMetadata]) -> void:
 	
 	# Add karts to the game
 	for kart in karts:
-		game.set_player_kart.rpc_id(1, kart_list.get_kart_id(kart))
+		game.set_player_kart(kart)
 
 
 func _on_menu_map_selected(map: MapMetadata) -> void:

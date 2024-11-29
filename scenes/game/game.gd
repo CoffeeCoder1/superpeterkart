@@ -1,6 +1,5 @@
 class_name Game extends Node3D
 
-@export var kart_list: KartList
 @export var players: PlayerList
 
 ## Emitted when the game starts.
@@ -8,18 +7,21 @@ signal game_started
 ## Emitted when the game ends.
 signal game_ended
 
-@onready var players_node: Node3D = $Players
 @onready var heads_up_display: HeadsUpDisplay = $HeadsUpDisplay
-@onready var map_loader: Node = %MapLoader
+@onready var map_loader: MapLoader = %MapLoader
+@onready var kart_loader: KartLoader = %KartLoader
 
 enum GameState {
 	CREATING,
 	PLAYING,
 }
 
-var loaded_karts: Array[Kart]
 ## What state is the game in?
 var game_state: GameState = GameState.CREATING
+
+
+func _ready() -> void:
+	kart_loader.players = players
 
 
 ## Starts the game.
@@ -37,11 +39,12 @@ func _start_game() -> void:
 
 
 ## Ends the game.
+## Should only be called on the server.
 @rpc("any_peer", "reliable", "call_local")
 func end_game() -> void:
-	_set_players_enabled.rpc(false)
+	kart_loader.set_players_enabled(false)
 	_end_game.rpc()
-	_spawn_queued_players()
+	kart_loader.spawn_queued_players()
 
 
 ## Ends the game on the client.
@@ -53,17 +56,13 @@ func _end_game() -> void:
 	map_loader.unload_map()
 
 
-## Adds a player to the game
+## Adds a player to the game and syncs the map and karts to it.
 func add_player(player_id: int) -> void:
 	_add_player.rpc(player_id, game_state == GameState.PLAYING)
 	
-	# Load the current map.
-	map_loader.sync_map_to_client(player_id)
-	
-	# Add the current players
-	for player in players.players:
-		if player.kart:
-			_spawn_kart(player.player_id, kart_list.get_kart_id(player.kart_metadata))
+	# Load the current map and karts.
+	map_loader.sync_to_client(player_id)
+	kart_loader.sync_to_client(player_id)
 
 
 @rpc("authority", "reliable", "call_local")
@@ -75,93 +74,20 @@ func _add_player(player_id: int, queued: bool = true) -> void:
 	player.queued = queued
 	
 	players.add_player(player)
-
-
-## Sets a player's kart.
-@rpc("any_peer", "reliable", "call_local")
-func set_player_kart(kart_id: String) -> void:
-	var player_id := multiplayer.get_remote_sender_id()
-	var player := players.get_player_by_id(player_id)
-	
-	print(player.queued)
-	
-	player.kart_metadata = kart_list.get_kart_by_id(kart_id)
-	
-	# Spawn in the new player's kart
-	if !player.queued:
-		_spawn_kart.rpc(player_id, kart_id)
-
-
-## Load a kart in.
-## Called by the authority.
-@rpc("authority", "reliable", "call_local")
-func _spawn_kart(player_id: int, kart_id: String) -> void:
-	var kart_node := kart_list.get_kart_by_id(kart_id).instantiate() as Kart
-	# Used to place the new kart in the same place the last one was.
-	var old_transform: Transform3D
-	
-	var player := players.get_player_by_id(player_id)
-	if player:
-		if is_instance_valid(player.kart):
-			old_transform = player.kart.transform
-			player.kart.queue_free()
-		player.kart = kart_node
-	
-	# Set the player's ID so the player can control the kart they spawned.
-	kart_node.player_id = player_id
 	
 	if player_id == multiplayer.get_unique_id():
-		heads_up_display.player = kart_node
-	
-	# Disable the kart if the game hasn't started yet
-	kart_node.kart_enabled = (game_state == GameState.PLAYING)
-	
-	# Spawn in the new kart.
-	kart_node.set_name(kart_id + str(player_id))
-	players_node.add_child(kart_node)
-	
-	if multiplayer.get_unique_id() == get_multiplayer_authority() and old_transform:
-		kart_node.transform = old_transform
-
-
-## Spawns in any queued players.
-func _spawn_queued_players() -> void:
-	for player in players.players:
-		if player.kart_metadata and player.queued:
-			player.queued = false
-			_spawn_kart(player.player_id, kart_list.get_kart_id(player.kart_metadata))
-
-
-## Enables or disables the players
-@rpc("authority", "reliable", "call_local")
-func _set_players_enabled(enabled: bool) -> void:
-	for player in players.players:
-		if player.kart:
-			player.kart.kart_enabled = enabled
+		heads_up_display.player = player
 
 
 ## Loads a map and prepares the players.
 func load_map(map: MapMetadata) -> void:
 	map_loader.load_map(map)
-	_prepare_players()
+	kart_loader.prepare_players(map_loader.get_spawn_location())
 
 
-## Prepares the players for a game start.
-func _prepare_players() -> void:
-	# Prepare karts
-	for i in len(players.players):
-		var player := players.players[i]
-		if player.kart:
-			# Unload preview kart if it exists
-			if is_instance_valid(player.preview_kart):
-				player.preview_kart.queue_free()
-			# Move the kart to the spawn location
-			player.kart.transform = map_loader.get_spawn_location().translated(Vector3.RIGHT * (2 * i))
-			# Set their velocity to 0
-			player.kart.velocity = Vector3.ZERO
-	
-	# Enable players
-	_set_players_enabled.rpc(true)
+## Sets the kart of the local player.
+func set_player_kart(kart: KartMetadata) -> void:
+	kart_loader.set_local_player_kart(kart)
 
 
 func _input(event: InputEvent) -> void:

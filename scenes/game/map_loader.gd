@@ -1,4 +1,4 @@
-extends Node
+class_name MapLoader extends Node
 
 @export var map_list: MapList
 
@@ -31,7 +31,7 @@ func _load_map(map_id: String) -> void:
 
 
 ## Tells a client what the current map is.
-func sync_map_to_client(player_id: int):
+func sync_to_client(player_id: int):
 	if loaded_map_id:
 		_load_map.rpc_id(player_id, loaded_map_id)
 
