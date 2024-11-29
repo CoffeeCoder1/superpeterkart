@@ -1,11 +1,11 @@
 class_name HeadsUpDisplay extends Control
 
-@export var player: Kart
+@export var player: Player
 
 @onready var speed_label: Label = $SpeedLabel
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player:
-		speed_label.text = str(player.get_speed())
+		if is_instance_valid(player.kart):
+			speed_label.text = str(player.kart.get_speed())
