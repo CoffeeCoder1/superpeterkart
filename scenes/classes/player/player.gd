@@ -12,3 +12,5 @@ class_name Player extends Node
 @export var player_id: int
 ## Is the player waiting to join the game in the next round?
 @export var queued: bool
+## What map has the player voted for?
+@export var map_vote: String

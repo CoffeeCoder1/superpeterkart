@@ -80,6 +80,7 @@ func _add_player(player_id: int, queued: bool = true) -> void:
 
 
 ## Loads a map and prepares the players.
+## Should only be called on the server.
 func load_map(map: MapMetadata) -> void:
 	map_loader.load_map(map)
 	kart_loader.prepare_players(map_loader.get_spawn_location())

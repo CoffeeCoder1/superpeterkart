@@ -51,6 +51,7 @@ var next_menu_enabled: bool
 
 func _ready() -> void:
 	player_list.player_list = players
+	map_selection_menu.player_list = players
 
 
 func open_menu(menu: MenuPage) -> void:
@@ -94,6 +95,7 @@ func _show_menu(menu: MenuPage) -> void:
 		character_selection_menu.show()
 	elif (menu == MenuPage.MAP_SELECTION):
 		map_selection_menu.show()
+		map_selection_menu.start()
 	elif (menu == MenuPage.GAME_OPTIONS):
 		game_options_menu.show()
 		next_menu = MenuPage.CHARACTER_SELECTION

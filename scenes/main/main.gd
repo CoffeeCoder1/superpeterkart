@@ -65,8 +65,10 @@ func _on_menu_karts_selected(karts: Array[KartMetadata]) -> void:
 
 
 func _on_menu_map_selected(map: MapMetadata) -> void:
-	game.load_map(map)
-	game.start_game()
+	# Only load a map if calling on the authority
+	if multiplayer.get_unique_id() == get_multiplayer_authority():
+		game.load_map(map)
+		game.start_game()
 
 
 func _on_game_started() -> void:

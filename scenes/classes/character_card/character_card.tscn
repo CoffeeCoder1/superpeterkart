@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5l7lb2hu31xs"]
+[gd_scene load_steps=4 format=3 uid="uid://c5l7lb2hu31xs"]
 
 [ext_resource type="Script" path="res://scenes/classes/character_card/character_card.gd" id="1_08gqs"]
 [ext_resource type="Script" path="res://scenes/classes/character_preview/character_preview_rect.gd" id="2_l6u87"]
+[ext_resource type="Resource" uid="uid://dk5gglgb3xy1a" path="res://scenes/maps/map_list.tres" id="2_llijl"]
 
 [node name="CharacterCard" type="PanelContainer"]
 anchors_preset = 15
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_08gqs")
+map_list = ExtResource("2_llijl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -24,3 +26,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 1
 script = ExtResource("2_l6u87")
+
+[node name="MapLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
