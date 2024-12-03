@@ -3,8 +3,10 @@ class_name Menu extends Control
 @export var players: PlayerList
 
 signal create_local_game
-## Emitted when karts are selected in multiplayer.
-signal karts_selected(karts: Array[KartMetadata])
+## Emitted when a kart is selected for the local player.
+signal kart_selected(karts: KartMetadata)
+## Emitted when kart selection finishes.
+signal kart_selection_finished
 signal join_online_game(ip_address: String)
 signal host_online_game
 signal stop_online_server
@@ -22,7 +24,6 @@ enum MenuPage {
 }
 var menu_stack: Array[MenuPage] = []
 
-var karts: Array[KartMetadata]
 ## Is the game being created going to be an online game?
 var online_game: bool
 ## Is the user in the process of creating a local game?
@@ -93,6 +94,7 @@ func _show_menu(menu: MenuPage) -> void:
 		online_game_menu.show()
 	elif (menu == MenuPage.CHARACTER_SELECTION):
 		character_selection_menu.show()
+		character_selection_menu.start()
 	elif (menu == MenuPage.MAP_SELECTION):
 		map_selection_menu.show()
 		map_selection_menu.start()
@@ -166,9 +168,12 @@ func _on_online_game_menu_join_online_game(ip_address: String) -> void:
 	open_menu(MenuPage.MULTIPLAYER_CONNECTING)
 
 
-func _on_character_selection_menu_character_selected(selected_karts: Array[KartMetadata]) -> void:
-	karts = selected_karts
-	karts_selected.emit(karts)
+func _on_character_selection_menu_character_selected(kart: KartMetadata) -> void:
+	kart_selected.emit(kart)
+
+
+func _on_character_selection_menu_menu_advance() -> void:
+	kart_selection_finished.emit()
 
 
 func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:

@@ -13,7 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_7867g")
 kart_list = ExtResource("2_epd7e")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="ButtonContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,3 +21,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
+
+[node name="SelectionTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[connection signal="timeout" from="SelectionTimer" to="." method="_on_selection_timer_timeout"]

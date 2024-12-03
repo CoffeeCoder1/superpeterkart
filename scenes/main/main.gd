@@ -52,16 +52,16 @@ func _on_multiplayer_lobby_connected_to_server() -> void:
 	menu.open_menu(Menu.MenuPage.CHARACTER_SELECTION)
 
 
-func _on_menu_karts_selected(karts: Array[KartMetadata]) -> void:
+func _on_menu_kart_selected(kart: KartMetadata) -> void:
+	game.set_player_kart(kart)
+
+
+func _on_menu_kart_selection_finished() -> void:
 	# Open the next menu
 	if game.game_state == Game.GameState.CREATING:
 		menu.open_menu(Menu.MenuPage.MAP_SELECTION)
 	elif game.game_state == Game.GameState.PLAYING:
 		menu.close_menu()
-	
-	# Add karts to the game
-	for kart in karts:
-		game.set_player_kart(kart)
 
 
 func _on_menu_map_selected(map: MapMetadata) -> void:
