@@ -82,6 +82,18 @@ func open_menu_start() -> void:
 	open_menu(MenuPage.START_MENU)
 
 
+## Opens the character selection menu on local client and doesn't wait for the server.
+func select_local_character() -> void:
+	character_selection_menu.select_local()
+	open_menu(MenuPage.CHARACTER_SELECTION)
+
+
+## Opens the character selection menu and waits for the server.
+func select_characters() -> void:
+	character_selection_menu.select_remote()
+	open_menu(MenuPage.CHARACTER_SELECTION)
+
+
 func _show_menu(menu: MenuPage) -> void:
 	show()
 	get_tree().call_group("menus", "hide")
@@ -97,7 +109,6 @@ func _show_menu(menu: MenuPage) -> void:
 		online_game_menu.show()
 	elif (menu == MenuPage.CHARACTER_SELECTION):
 		character_selection_menu.show()
-		character_selection_menu.start()
 	elif (menu == MenuPage.MAP_SELECTION):
 		map_selection_menu.show()
 		map_selection_menu.start()

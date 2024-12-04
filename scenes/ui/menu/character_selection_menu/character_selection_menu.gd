@@ -2,17 +2,21 @@ extends Control
 
 @export var kart_list: KartList
 @export var button_minimum_size: Vector2 = Vector2(100, 100)
+## Should the character menu wait for the server to advance?
+@export var timed: bool = false
+@export var timer_time: float = 15.0
 
 ## Emitted when a character is selected on the client that selected the player.
 ## If the client didn't select a player, this will be emitted on timeout with a random player.
 signal character_selected(kart: KartMetadata)
-## Emitted when the timer ends.
+## Emitted when the timer ends or the menu is closed.
 signal menu_advance
 
 @onready var button_container: GridContainer = $ButtonContainer
-@onready var selection_timer: Timer = $SelectionTimer
+@onready var timer_label: Label = $TimerLabel
 
 var selected_kart: KartMetadata
+var time_left: float
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,22 +35,51 @@ func _ready() -> void:
 		button_node.pressed.connect(self._on_character_selected.bind(kart))
 
 
-## Starts the character selection timer.
+func _process(delta: float) -> void:
+	if timed and multiplayer.get_unique_id() == get_multiplayer_authority():
+		if time_left <= 0:
+			_timeout_reached.rpc()
+			time_left = 0
+			timed = false
+		else:
+			time_left -= delta
+			_sync_time.rpc(time_left)
+	timer_label.text = str(time_left)
+
+
+## Starts character selection and keeps clients synced to authority.
 func start() -> void:
-	selection_timer.start()
+	if multiplayer.get_unique_id() == get_multiplayer_authority():
+		select_remote.rpc()
+
+
+## Selects a kart and doesn't wait for the server.
+## The server will take over if it starts character selection.
+func select_local() -> void:
+	timed = false
+
+
+@rpc("authority", "reliable", "call_local")
+func select_remote() -> void:
+	timed = true
+	time_left = timer_time
+
+
+## Syncs time to a client
+@rpc("authority", "reliable")
+func _sync_time(time: float) -> void:
+	time_left = time
 
 
 func _on_character_selected(kart: KartMetadata) -> void:
 	selected_kart = kart
 	character_selected.emit(kart)
-
-
-func _on_selection_timer_timeout() -> void:
-	if multiplayer.get_unique_id() == get_multiplayer_authority():
-		_timeout_reached.rpc()
+	if not timed:
+		_timeout_reached()
 
 
 ## Called by the authority when the menu timeout is reached.
+## Called locally when timed is false.
 @rpc("authority", "reliable", "call_local")
 func _timeout_reached() -> void:
 	# Pick a random kart if the player didn't pick one.

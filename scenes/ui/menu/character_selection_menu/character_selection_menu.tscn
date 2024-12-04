@@ -22,8 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[node name="SelectionTimer" type="Timer" parent="."]
-wait_time = 15.0
-one_shot = true
-
-[connection signal="timeout" from="SelectionTimer" to="." method="_on_selection_timer_timeout"]
+[node name="TimerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

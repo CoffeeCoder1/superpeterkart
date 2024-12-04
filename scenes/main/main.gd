@@ -15,7 +15,6 @@ func _ready() -> void:
 	
 	if (OS.get_cmdline_args().has("host")):
 		menu._on_main_menu_local_game()
-		_on_menu_create_local_game()
 	elif (OS.get_cmdline_args().has("join")):
 		_on_menu_join_online_game("127.0.0.1")
 	else:
@@ -46,10 +45,6 @@ func _on_multiplayer_lobby_connection_failed() -> void:
 
 func _on_multiplayer_lobby_server_disconnected() -> void:
 	menu.open_menu(Menu.MenuPage.MAIN_MENU)
-
-
-func _on_multiplayer_lobby_connected_to_server() -> void:
-	menu.open_menu(Menu.MenuPage.CHARACTER_SELECTION)
 
 
 func _on_menu_kart_selected(kart: KartMetadata) -> void:
@@ -92,3 +87,8 @@ func _on_player_connected(id: int) -> void:
 @rpc("authority", "reliable")
 func set_game_info(current_state: Game.GameState) -> void:
 	game.game_state = current_state
+	
+	if game.game_state == Game.GameState.PLAYING:
+		menu.select_local_character()
+	else:
+		menu.select_characters()
