@@ -40,77 +40,87 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MenuContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="MenuContainer/HBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="MenuContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MainMenu" parent="MenuContainer/HBoxContainer2/PanelContainer" instance=ExtResource("1_hb36d")]
+[node name="MainMenu" parent="MenuContainer/HBoxContainer/PanelContainer" instance=ExtResource("1_hb36d")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="SettingsMenu" parent="MenuContainer/HBoxContainer2/PanelContainer" instance=ExtResource("3_1n28g")]
+[node name="SettingsMenu" parent="MenuContainer/HBoxContainer/PanelContainer" instance=ExtResource("3_1n28g")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="CharacterSelectionMenu" parent="MenuContainer/HBoxContainer2/PanelContainer" instance=ExtResource("5_gl5ct")]
+[node name="CharacterSelectionMenu" parent="MenuContainer/HBoxContainer/PanelContainer" instance=ExtResource("5_gl5ct")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="MapSelectionMenu" parent="MenuContainer/HBoxContainer2/PanelContainer" instance=ExtResource("7_g6686")]
+[node name="MapSelectionMenu" parent="MenuContainer/HBoxContainer/PanelContainer" instance=ExtResource("7_g6686")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="GameOptionsMenu" parent="MenuContainer/HBoxContainer2/PanelContainer" instance=ExtResource("8_d3ybf")]
+[node name="GameOptionsMenu" parent="MenuContainer/HBoxContainer/PanelContainer" instance=ExtResource("8_d3ybf")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="OnlineGameMenu" parent="MenuContainer/HBoxContainer2/PanelContainer" instance=ExtResource("9_txm8y")]
+[node name="OnlineGameMenu" parent="MenuContainer/HBoxContainer/PanelContainer" instance=ExtResource("9_txm8y")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="MultiplayerConnecting" parent="MenuContainer/HBoxContainer2/PanelContainer" instance=ExtResource("9_yo0ud")]
+[node name="MultiplayerConnecting" parent="MenuContainer/HBoxContainer/PanelContainer" instance=ExtResource("9_yo0ud")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="PlayerList" parent="MenuContainer/HBoxContainer2" instance=ExtResource("10_eejs4")]
+[node name="PlayerList" parent="MenuContainer/HBoxContainer" instance=ExtResource("10_eejs4")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="MenuContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="MenuContainer/HBoxContainer"]
+[node name="LeftContainer" type="HBoxContainer" parent="MenuContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="MenuContainer/ButtonContainer/LeftContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 shortcut = SubResource("Shortcut_0heav")
 text = "Back"
 
-[node name="NextButton" type="Button" parent="MenuContainer/HBoxContainer" groups=["menus"]]
+[node name="RightContainer" type="HBoxContainer" parent="MenuContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="NextButton" type="Button" parent="MenuContainer/ButtonContainer/RightContainer" groups=["menus"]]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Next"
 
 [connection signal="start_game" from="StartMenu" to="." method="_on_start_menu_start_game"]
-[connection signal="local_game" from="MenuContainer/HBoxContainer2/PanelContainer/MainMenu" to="." method="_on_main_menu_local_game"]
-[connection signal="online_game" from="MenuContainer/HBoxContainer2/PanelContainer/MainMenu" to="." method="_on_main_menu_online_game"]
-[connection signal="settings" from="MenuContainer/HBoxContainer2/PanelContainer/MainMenu" to="." method="_on_main_menu_settings"]
-[connection signal="character_selected" from="MenuContainer/HBoxContainer2/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_character_selected"]
-[connection signal="menu_advance" from="MenuContainer/HBoxContainer2/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_menu_advance"]
-[connection signal="map_selected" from="MenuContainer/HBoxContainer2/PanelContainer/MapSelectionMenu" to="." method="_on_map_selection_menu_map_selected"]
-[connection signal="menu_advance" from="MenuContainer/HBoxContainer2/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_menu_advance"]
-[connection signal="online_game_toggled" from="MenuContainer/HBoxContainer2/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_online_game_toggled"]
-[connection signal="join_online_game" from="MenuContainer/HBoxContainer2/PanelContainer/OnlineGameMenu" to="." method="_on_online_game_menu_join_online_game"]
-[connection signal="pressed" from="MenuContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="MenuContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="local_game" from="MenuContainer/HBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_local_game"]
+[connection signal="online_game" from="MenuContainer/HBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_online_game"]
+[connection signal="settings" from="MenuContainer/HBoxContainer/PanelContainer/MainMenu" to="." method="_on_main_menu_settings"]
+[connection signal="character_selected" from="MenuContainer/HBoxContainer/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_character_selected"]
+[connection signal="menu_advance" from="MenuContainer/HBoxContainer/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_menu_advance"]
+[connection signal="map_selected" from="MenuContainer/HBoxContainer/PanelContainer/MapSelectionMenu" to="." method="_on_map_selection_menu_map_selected"]
+[connection signal="menu_advance" from="MenuContainer/HBoxContainer/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_menu_advance"]
+[connection signal="online_game_toggled" from="MenuContainer/HBoxContainer/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_online_game_toggled"]
+[connection signal="join_online_game" from="MenuContainer/HBoxContainer/PanelContainer/OnlineGameMenu" to="." method="_on_online_game_menu_join_online_game"]
+[connection signal="pressed" from="MenuContainer/ButtonContainer/LeftContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MenuContainer/ButtonContainer/RightContainer/NextButton" to="." method="_on_next_button_pressed"]
