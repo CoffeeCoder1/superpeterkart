@@ -109,6 +109,7 @@ text = "Next"
 [connection signal="character_selected" from="MenuContainer/HBoxContainer2/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_character_selected"]
 [connection signal="menu_advance" from="MenuContainer/HBoxContainer2/PanelContainer/CharacterSelectionMenu" to="." method="_on_character_selection_menu_menu_advance"]
 [connection signal="map_selected" from="MenuContainer/HBoxContainer2/PanelContainer/MapSelectionMenu" to="." method="_on_map_selection_menu_map_selected"]
+[connection signal="menu_advance" from="MenuContainer/HBoxContainer2/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_menu_advance"]
 [connection signal="online_game_toggled" from="MenuContainer/HBoxContainer2/PanelContainer/GameOptionsMenu" to="." method="_on_game_options_menu_online_game_toggled"]
 [connection signal="join_online_game" from="MenuContainer/HBoxContainer2/PanelContainer/OnlineGameMenu" to="." method="_on_online_game_menu_join_online_game"]
 [connection signal="pressed" from="MenuContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

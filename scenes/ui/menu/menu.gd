@@ -31,8 +31,9 @@ var online_game: bool
 var creating_game: bool
 ## Has the server already been started?
 var server_started: bool
-## What menu should the NextButton advance to?
-var next_menu: MenuPage
+## What menu is currently selected?
+## Used by the NextButton.
+var current_menu: Control
 ## Should the NextButton be enabled?
 var next_menu_enabled: bool
 
@@ -100,8 +101,8 @@ func _show_menu(menu: MenuPage) -> void:
 		map_selection_menu.start()
 	elif (menu == MenuPage.GAME_OPTIONS):
 		game_options_menu.show()
-		next_menu = MenuPage.CHARACTER_SELECTION
 		next_menu_enabled = true
+		current_menu = game_options_menu
 	elif (menu == MenuPage.MULTIPLAYER_CONNECTING):
 		multiplayer_connecting_menu.show()
 	
@@ -131,8 +132,8 @@ func _start_or_stop_server() -> void:
 
 
 func _on_next_button_pressed() -> void:
-	if next_menu_enabled:
-		open_menu(next_menu)
+	if is_instance_valid(current_menu) and current_menu.has_method("_on_next_button"):
+		current_menu.call("_on_next_button")
 
 
 func _on_back_button_pressed() -> void:
@@ -156,6 +157,11 @@ func _on_main_menu_local_game() -> void:
 func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
 	online_game = enabled
 	_start_or_stop_server()
+
+
+func _on_game_options_menu_menu_advance() -> void:
+	character_selection_menu.start()
+	open_menu(MenuPage.CHARACTER_SELECTION)
 
 
 func _on_main_menu_online_game() -> void:
