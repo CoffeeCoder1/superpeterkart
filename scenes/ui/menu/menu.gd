@@ -54,6 +54,8 @@ var next_menu_enabled: bool
 func _ready() -> void:
 	player_list.player_list = players
 	map_selection_menu.player_list = players
+	
+	next_button.hide()
 
 
 func open_menu(menu: MenuPage) -> void:
