@@ -32,10 +32,7 @@ var creating_game: bool
 ## Has the server already been started?
 var server_started: bool
 ## What menu is currently selected?
-## Used by the NextButton.
 var current_menu: Control
-## Should the NextButton be enabled?
-var next_menu_enabled: bool
 
 @onready var menu_container: VBoxContainer = %MenuContainer
 @onready var next_button: Button = %NextButton
@@ -97,37 +94,36 @@ func select_characters() -> void:
 func _show_menu(menu: MenuPage) -> void:
 	show()
 	get_tree().call_group("menus", "hide")
-	next_menu_enabled = false
 	if (menu == MenuPage.START_MENU):
-		start_menu.show()
+		current_menu = start_menu
 	elif (menu == MenuPage.MAIN_MENU):
-		main_menu.show()
+		current_menu = main_menu
 		creating_game = false
 	elif (menu == MenuPage.SETTINGS):
-		settings_menu.show()
+		current_menu = settings_menu
 	elif (menu == MenuPage.ONLINE_GAME):
-		online_game_menu.show()
+		current_menu = online_game_menu
 	elif (menu == MenuPage.CHARACTER_SELECTION):
-		character_selection_menu.show()
+		current_menu = character_selection_menu
 	elif (menu == MenuPage.MAP_SELECTION):
-		map_selection_menu.show()
+		current_menu = map_selection_menu
 		map_selection_menu.start()
 	elif (menu == MenuPage.GAME_OPTIONS):
-		game_options_menu.show()
-		next_menu_enabled = true
 		current_menu = game_options_menu
 	elif (menu == MenuPage.MULTIPLAYER_CONNECTING):
-		multiplayer_connecting_menu.show()
+		current_menu = multiplayer_connecting_menu
 	
 	if (menu == MenuPage.START_MENU):
 		menu_container.hide()
 	else:
 		menu_container.show()
 	
-	if next_menu_enabled:
+	if current_menu.has_method("_on_next_button"):
 		next_button.show()
 	else:
 		next_button.hide()
+	
+	current_menu.show()
 	
 	_start_or_stop_server()
 
@@ -145,7 +141,7 @@ func _start_or_stop_server() -> void:
 
 
 func _on_next_button_pressed() -> void:
-	if is_instance_valid(current_menu) and current_menu.has_method("_on_next_button"):
+	if current_menu.has_method("_on_next_button"):
 		current_menu.call("_on_next_button")
 
 
