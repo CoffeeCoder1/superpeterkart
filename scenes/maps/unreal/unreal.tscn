@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://fluqs2j2tp"]
+[gd_scene load_steps=29 format=3 uid="uid://fluqs2j2tp"]
 
 [ext_resource type="Script" path="res://scenes/classes/map/map.gd" id="1_afrj1"]
 [ext_resource type="PackedScene" uid="uid://cng1qe8rwtdgo" path="res://scenes/maps/unreal/blue_cube.tscn" id="2_eqbdd"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://o2bivm33b0v4" path="res://addons/SphynxMotionBlurToolkit/Debug/debug_overlay_shader_stage.tres" id="14_0yaf0"]
 [ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/BaseClasses/mb_compositor.gd" id="14_agvby"]
 [ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/Debug/post_process_debug.gd" id="15_f3kdh"]
+[ext_resource type="Script" path="res://scenes/classes/map/drive_mesh.gd" id="18_ioxm2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bymhv"]
 sky_top_color = Color(0.407945, 0.64784, 0.940922, 1)
@@ -101,6 +102,13 @@ albedo_color = Color(0.654232, 0.654232, 0.654232, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yijh7"]
 albedo_color = Color(0.41024, 0.41024, 0.41024, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_grb7b"]
+_data = {
+"points": PackedVector3Array(-3.94025, 0, -0.0125103, 3.94025, 0, 0.0125103, -5.832, 0.25, 9.87, -2.16087, 0, 0.950341, 2.16087, 0, -0.950341, 4.077, 0.25, 7.042, -0.911127, 0, 0.787254, 0.911127, 0, -0.787254, 8.566, 0.25, 4.623, -0.0842066, 0, 1.86443, 0.0842066, 0, -1.86443, 13.229, 0.25, -1.934, 2.03602, 0, 2.60667, -2.03602, 0, -2.60667, 11.798, 0.25, -11.982, 1.80179, 0, -0.218052, -1.80179, 0, 0.218052, -5.553, 0.25, -13.318, 2.43839, 0, -1.26185, -2.43839, 0, 1.26185, -11.693, 0.25, -11.964, -1.31371, 0, -2.12417, 1.31371, 0, 2.12417, -12.186, 0.25, 6.6, -2.8423, 0, -0.0793018, 2.8423, 0, 0.0793018, -5.832, 0.25, 9.87),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
 
 [node name="Unreal" type="Node3D"]
 script = ExtResource("1_afrj1")
@@ -346,3 +354,14 @@ transform = Transform3D(0.976563, 0, 0.21523, 0, 1, 0, -0.21523, 0, 0.976563, 7.
 
 [node name="BlueCube4" parent="." instance=ExtResource("2_eqbdd")]
 transform = Transform3D(0.94046, 0, 0.339904, 0, 1, 0, -0.339904, 0, 0.94046, 3.834, 0.75, 10.48)
+
+[node name="DriveMesh" type="Area3D" parent="."]
+script = ExtResource("18_ioxm2")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="DriveMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+depth = 0.5
+polygon = PackedVector2Array(-5.67739, 8.55284, 2.5444, 6.18276, 7.69336, 3.40269, 11.888, -2.36893, 11.0159, -11.727, 6.21583, -12.3657, -4.6037, -12.2736, -11.0264, -10.9154, -11.5454, -5.61743, -10.6938, 6.93504, -5.67739, 8.55284, -6.04799, 11.4425, -12.2077, 9.67893, -14.0054, 6.02042, -14.4785, -5.58589, -13.7846, -13.376, -5.99452, -14.5745, 6.5151, -14.3685, 13.5711, -13.6377, 15.0444, -1.41393, 10.7166, 5.42309, 4.31696, 8.69197, -6.04799, 11.4425)
+
+[node name="DrivePath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_grb7b")
