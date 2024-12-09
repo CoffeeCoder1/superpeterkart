@@ -14,6 +14,9 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if !has_node("DriveMesh"):
 		warnings.append("Map must have a DriveMesh.")
 	
+	if !has_node("DrivePath"):
+		warnings.append("Map must have a DrivePath.")
+	
 	return warnings
 
 
