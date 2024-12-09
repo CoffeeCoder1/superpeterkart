@@ -1,4 +1,4 @@
-extends Control
+extends Menu
 
 signal join_online_game(ip_address: String)
 

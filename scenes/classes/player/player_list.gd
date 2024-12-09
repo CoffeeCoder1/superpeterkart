@@ -12,3 +12,8 @@ func get_player_by_id(id: int) -> Player:
 		if player.player_id == id:
 			return player
 	return null
+
+
+## Returns the Player of the local player.
+func get_local_player() -> Player:
+	return get_player_by_id(multiplayer.get_unique_id())

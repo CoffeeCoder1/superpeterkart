@@ -1,4 +1,4 @@
-extends Control
+extends Menu
 
 signal start_game
 

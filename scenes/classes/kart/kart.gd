@@ -8,7 +8,7 @@ class_name Kart extends CharacterBody3D
 ## Distance from front to rear wheel
 @export var wheel_spacing: float = 1
 ## Should the kart be enabled?
-@export var kart_enabled: bool = true
+@export var kart_enabled: bool = false
 ## The ID of the player controlling the kart
 @export var player_id: int = 1
 ## The current speed of the kart.

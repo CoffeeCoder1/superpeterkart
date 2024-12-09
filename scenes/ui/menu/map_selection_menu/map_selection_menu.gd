@@ -1,4 +1,4 @@
-extends Control
+extends Menu
 
 ## List of maps to show.
 @export var map_list: MapList
@@ -9,7 +9,6 @@ extends Control
 signal map_selected(map: MapMetadata)
 
 @onready var map_card_container: GridContainer = $MapCardContainer
-@onready var selection_timer: Timer = $SelectionTimer
 
 var selected_map: MapMetadata
 
@@ -24,11 +23,6 @@ func _ready() -> void:
 		button.custom_minimum_size = Vector2(100, 100)
 		
 		button.pressed.connect(self._on_map_selected.bind(map))
-
-
-## Starts the map selection timer.
-func start() -> void:
-	selection_timer.start()
 
 
 ## Called when a map is selected.
@@ -52,7 +46,7 @@ func _set_map_vote(map_id: String, player_id: int) -> void:
 		player.map_vote = map_id
 
 
-func _on_selection_timer_timeout() -> void:
+func _on_next_button() -> void:
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
 		var map_votes: Dictionary
 		

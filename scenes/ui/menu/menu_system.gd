@@ -1,6 +1,11 @@
-class_name Menu extends Control
+class_name MenuSystem extends Control
 
 @export var players: PlayerList
+@export var game: Game
+## Is the next button timed?
+@export var next_button_timed: bool = true
+@export var next_button_timing: float = 15.0
+@export var next_button_label: String = "Next"
 
 signal create_local_game
 ## Emitted when a kart is selected for the local player.
@@ -32,29 +37,52 @@ var creating_game: bool
 ## Has the server already been started?
 var server_started: bool
 ## What menu is currently selected?
-var current_menu: Control
+var current_menu: Menu
+## Used to automatically advance to the next menu.
+var next_button_time_left: float
 
 @onready var menu_container: VBoxContainer = %MenuContainer
 @onready var next_button: Button = %NextButton
-
-@onready var start_menu: Control = %StartMenu
-@onready var main_menu: Control = %MainMenu
-@onready var settings_menu: Control = %SettingsMenu
-@onready var character_selection_menu: Control = %CharacterSelectionMenu
-@onready var map_selection_menu: Control = %MapSelectionMenu
-@onready var game_options_menu: Control = %GameOptionsMenu
-@onready var online_game_menu: Control = %OnlineGameMenu
-@onready var multiplayer_connecting_menu: Control = %MultiplayerConnecting
 @onready var player_list: Control = %PlayerList
+
+@onready var start_menu: Menu = %StartMenu
+@onready var main_menu: Menu = %MainMenu
+@onready var settings_menu: Menu = %SettingsMenu
+@onready var character_selection_menu: Menu = %CharacterSelectionMenu
+@onready var map_selection_menu: Menu = %MapSelectionMenu
+@onready var game_options_menu: Menu = %GameOptionsMenu
+@onready var online_game_menu: Menu = %OnlineGameMenu
+@onready var multiplayer_connecting_menu: Menu = %MultiplayerConnecting
 
 
 func _ready() -> void:
 	player_list.player_list = players
 	map_selection_menu.player_list = players
+	character_selection_menu.game = game
 	
 	next_button.hide()
 
 
+func _process(delta: float) -> void:
+	# Next button timer
+	if is_instance_valid(current_menu) and visible:
+		if next_button_timed and current_menu.has_method("_on_next_button"):
+			if multiplayer.get_unique_id() == get_multiplayer_authority():
+				if next_button_time_left <= 0:
+					# Timout
+					_next_button_timeout_reached.rpc()
+				else:
+					# Decrement timer
+					next_button_time_left -= delta
+					_sync_next_button_time.rpc(next_button_time_left)
+			next_button.text = next_button_label + " (" + str(int(next_button_time_left)) + ")"
+		else:
+			next_button.text = next_button_label
+	
+	next_button.set_disabled(!multiplayer.get_unique_id() == get_multiplayer_authority())
+
+
+@rpc("authority", "reliable", "call_local")
 func open_menu(menu: MenuPage) -> void:
 	menu_stack.append(menu)
 	_show_menu(menu)
@@ -82,13 +110,20 @@ func open_menu_start() -> void:
 ## Opens the character selection menu on local client and doesn't wait for the server.
 func select_local_character() -> void:
 	character_selection_menu.select_local()
+	next_button_timed = false
 	open_menu(MenuPage.CHARACTER_SELECTION)
 
 
 ## Opens the character selection menu and waits for the server.
 func select_characters() -> void:
-	character_selection_menu.select_remote()
+	next_button_timed = true
 	open_menu(MenuPage.CHARACTER_SELECTION)
+
+
+## Initializes the menu for a given player.
+func initialize_player(id: int) -> void:
+	if not game.game_state == Game.GameState.LOBBY:
+		open_menu.rpc_id(id, MenuPage.CHARACTER_SELECTION)
 
 
 func _show_menu(menu: MenuPage) -> void:
@@ -99,6 +134,7 @@ func _show_menu(menu: MenuPage) -> void:
 	elif (menu == MenuPage.MAIN_MENU):
 		current_menu = main_menu
 		creating_game = false
+		game.game_state = Game.GameState.LOBBY
 	elif (menu == MenuPage.SETTINGS):
 		current_menu = settings_menu
 	elif (menu == MenuPage.ONLINE_GAME):
@@ -107,7 +143,6 @@ func _show_menu(menu: MenuPage) -> void:
 		current_menu = character_selection_menu
 	elif (menu == MenuPage.MAP_SELECTION):
 		current_menu = map_selection_menu
-		map_selection_menu.start()
 	elif (menu == MenuPage.GAME_OPTIONS):
 		current_menu = game_options_menu
 	elif (menu == MenuPage.MULTIPLAYER_CONNECTING):
@@ -124,8 +159,22 @@ func _show_menu(menu: MenuPage) -> void:
 		next_button.hide()
 	
 	current_menu.show()
+	next_button_time_left = next_button_timing
 	
 	_start_or_stop_server()
+
+
+## Syncs next button timer to a client.
+@rpc("authority", "reliable")
+func _sync_next_button_time(time: float) -> void:
+	next_button_time_left = time
+
+
+## Called by the authority when the menu timeout is reached.
+## Called locally when timed is false.
+@rpc("authority", "reliable", "call_local")
+func _next_button_timeout_reached() -> void:
+	_on_next_button_pressed()
 
 
 ## Starts or stops the server depending on the state of the menu.
@@ -141,8 +190,9 @@ func _start_or_stop_server() -> void:
 
 
 func _on_next_button_pressed() -> void:
-	if current_menu.has_method("_on_next_button"):
-		current_menu.call("_on_next_button")
+	if is_instance_valid(current_menu):
+		if current_menu.has_method("_on_next_button"):
+			current_menu.call("_on_next_button")
 
 
 func _on_back_button_pressed() -> void:
@@ -169,8 +219,8 @@ func _on_game_options_menu_online_game_toggled(enabled: bool) -> void:
 
 
 func _on_game_options_menu_menu_advance() -> void:
-	character_selection_menu.start()
-	open_menu(MenuPage.CHARACTER_SELECTION)
+	open_menu.rpc(MenuPage.CHARACTER_SELECTION)
+	game.set_game_state(Game.GameState.CREATING)
 
 
 func _on_main_menu_online_game() -> void:

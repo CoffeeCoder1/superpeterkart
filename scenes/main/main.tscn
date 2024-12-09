@@ -13,8 +13,9 @@ script = ExtResource("1_jayv1")
 kart_list = ExtResource("4_hr5qd")
 map_list = ExtResource("5_ftatt")
 
-[node name="Menu" parent="." node_paths=PackedStringArray("players") instance=ExtResource("2_mh2bb")]
+[node name="MenuSystem" parent="." node_paths=PackedStringArray("players", "game") instance=ExtResource("2_mh2bb")]
 players = NodePath("../PlayerList")
+game = NodePath("../Game")
 
 [node name="Game" parent="." node_paths=PackedStringArray("players") instance=ExtResource("1_jxpmy")]
 players = NodePath("../PlayerList")
@@ -37,12 +38,12 @@ vertical_alignment = 1
 unique_name_in_owner = true
 script = ExtResource("7_u4ro4")
 
-[connection signal="create_local_game" from="Menu" to="." method="_on_menu_create_local_game"]
-[connection signal="host_online_game" from="Menu" to="." method="_on_menu_host_online_game"]
-[connection signal="join_online_game" from="Menu" to="." method="_on_menu_join_online_game"]
-[connection signal="kart_selected" from="Menu" to="." method="_on_menu_kart_selected"]
-[connection signal="kart_selection_finished" from="Menu" to="." method="_on_menu_kart_selection_finished"]
-[connection signal="map_selected" from="Menu" to="." method="_on_menu_map_selected"]
+[connection signal="create_local_game" from="MenuSystem" to="." method="_on_menu_create_local_game"]
+[connection signal="host_online_game" from="MenuSystem" to="." method="_on_menu_host_online_game"]
+[connection signal="join_online_game" from="MenuSystem" to="." method="_on_menu_join_online_game"]
+[connection signal="kart_selected" from="MenuSystem" to="." method="_on_menu_kart_selected"]
+[connection signal="kart_selection_finished" from="MenuSystem" to="." method="_on_menu_kart_selection_finished"]
+[connection signal="map_selected" from="MenuSystem" to="." method="_on_menu_map_selected"]
 [connection signal="game_ended" from="Game" to="." method="_on_game_ended"]
 [connection signal="game_started" from="Game" to="." method="_on_game_started"]
 [connection signal="connection_failed" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connection_failed"]

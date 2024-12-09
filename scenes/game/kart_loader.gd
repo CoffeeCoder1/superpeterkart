@@ -47,7 +47,9 @@ func _spawn_kart(player_id: int, kart_id: String) -> void:
 	if player:
 		if is_instance_valid(player.kart):
 			old_transform = player.kart.transform
+			player.kart.get_parent().remove_child(player.kart)
 			player.kart.queue_free()
+			print("old kart exists")
 		player.kart = kart_node
 	
 	# Set the player's ID so the player can control the kart they spawned.
@@ -59,6 +61,7 @@ func _spawn_kart(player_id: int, kart_id: String) -> void:
 	# Spawn in the new kart.
 	kart_node.set_name(kart_id + str(player_id))
 	add_child(kart_node)
+	print(player_id, kart_node.name)
 	
 	if multiplayer.get_unique_id() == get_multiplayer_authority() and old_transform:
 		kart_node.transform = old_transform

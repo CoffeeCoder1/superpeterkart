@@ -1,4 +1,4 @@
-extends Control
+extends Menu
 
 signal local_game
 signal online_game

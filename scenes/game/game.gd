@@ -12,29 +12,40 @@ signal game_ended
 @onready var kart_loader: KartLoader = %KartLoader
 
 enum GameState {
+	LOBBY,
 	CREATING,
 	PLAYING,
 }
 
 ## What state is the game in?
-var game_state: GameState = GameState.CREATING
+var game_state: GameState = GameState.LOBBY
 
 
 func _ready() -> void:
 	kart_loader.players = players
 
 
+## Sets the current game state.
+func set_game_state(new_state: GameState):
+	_set_game_state.rpc(new_state)
+
+
+@rpc("authority", "reliable", "call_local")
+func _set_game_state(new_state: GameState):
+	game_state = new_state
+
+
 ## Starts the game.
 ## Should only be called on the server.
 func start_game() -> void:
 	_start_game.rpc()
+	set_game_state(GameState.PLAYING)
 
 
 ## Starts the game on the client.
 ## Called by the authority.
 @rpc("authority", "reliable", "call_local")
 func _start_game() -> void:
-	game_state = GameState.PLAYING
 	game_started.emit()
 
 
@@ -45,19 +56,22 @@ func end_game() -> void:
 	kart_loader.set_players_enabled(false)
 	_end_game.rpc()
 	kart_loader.spawn_queued_players()
+	set_game_state(GameState.CREATING)
 
 
 ## Ends the game on the client.
 ## Called by the authority.
 @rpc("authority", "reliable", "call_local")
 func _end_game() -> void:
-	game_state = GameState.CREATING
 	game_ended.emit()
 	map_loader.unload_map()
 
 
 ## Adds a player to the game and syncs the map and karts to it.
 func add_player(player_id: int) -> void:
+	# Sync game state
+	_set_game_state.rpc_id(player_id, game_state)
+	
 	_add_player.rpc(player_id, game_state == GameState.PLAYING)
 	
 	# Load the current map and karts.

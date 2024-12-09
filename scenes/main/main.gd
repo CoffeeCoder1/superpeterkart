@@ -3,7 +3,7 @@ extends Node3D
 @export var kart_list: KartList
 @export var map_list: MapList
 
-@onready var menu: Menu = $Menu
+@onready var menu: MenuSystem = $MenuSystem
 @onready var game: Game = $Game
 @onready var multiplayer_lobby: MultiplayerLobby = $MultiplayerLobby
 @onready var multiplayer_status_label: Label = $MultiplayerStatusLabel
@@ -40,11 +40,11 @@ func _on_multiplayer_lobby_connection_failed() -> void:
 	multiplayer_status_label.show()
 	await get_tree().create_timer(2.0).timeout
 	multiplayer_status_label.hide()
-	menu.open_menu(Menu.MenuPage.ONLINE_GAME)
+	menu.open_menu(MenuSystem.MenuPage.ONLINE_GAME)
 
 
 func _on_multiplayer_lobby_server_disconnected() -> void:
-	menu.open_menu(Menu.MenuPage.MAIN_MENU)
+	menu.open_menu(MenuSystem.MenuPage.MAIN_MENU)
 
 
 func _on_menu_kart_selected(kart: KartMetadata) -> void:
@@ -54,7 +54,7 @@ func _on_menu_kart_selected(kart: KartMetadata) -> void:
 func _on_menu_kart_selection_finished() -> void:
 	# Open the next menu
 	if game.game_state == Game.GameState.CREATING:
-		menu.open_menu(Menu.MenuPage.MAP_SELECTION)
+		menu.open_menu(MenuSystem.MenuPage.MAP_SELECTION)
 	elif game.game_state == Game.GameState.PLAYING:
 		menu.close_menu()
 
@@ -71,24 +71,11 @@ func _on_game_started() -> void:
 
 
 func _on_game_ended() -> void:
-	menu.open_menu(Menu.MenuPage.MAP_SELECTION)
+	menu.open_menu(MenuSystem.MenuPage.MAP_SELECTION)
 	print("end", multiplayer.get_unique_id())
 
 
 func _on_player_connected(id: int) -> void:
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
-		# Sends the current game's info to the new player.
-		set_game_info.rpc_id(id, game.game_state)
-		
 		game.add_player(id)
-
-
-## Called by the server when a player joins the game.
-@rpc("authority", "reliable")
-func set_game_info(current_state: Game.GameState) -> void:
-	game.game_state = current_state
-	
-	if game.game_state == Game.GameState.PLAYING:
-		menu.select_local_character()
-	else:
-		menu.select_characters()
+		menu.initialize_player(id)

@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://3phbp3v6np27"]
+[gd_scene load_steps=2 format=3 uid="uid://3phbp3v6np27"]
+
+[ext_resource type="Script" path="res://scenes/classes/menu/menu.gd" id="1_vlo5s"]
 
 [node name="SettingsMenu" type="Control" groups=["menus"]]
 layout_mode = 3
@@ -7,3 +9,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vlo5s")

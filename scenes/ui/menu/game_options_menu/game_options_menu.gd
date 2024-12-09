@@ -1,4 +1,4 @@
-extends Control
+extends Menu
 
 signal online_game_toggled(enabled: bool)
 signal menu_advance
