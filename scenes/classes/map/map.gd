@@ -10,6 +10,9 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if !has_node("SpawnLocation"):
 		warnings.append("Map must have a SpawnLocation.")
 	
+	if !has_node("DriveMesh"):
+		warnings.append("Map must have a DriveMesh.")
+	
 	return warnings
 
 
