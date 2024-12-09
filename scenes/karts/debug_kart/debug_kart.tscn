@@ -29,6 +29,9 @@ size = Vector3(0.25, 0.25, 0.25)
 
 [node name="DebugKart" type="CharacterBody3D"]
 script = ExtResource("1_2hvw2")
+acceleration = 100.0
+top_speed = 50.0
+steering_amount = 0.1
 
 [node name="Pivot" type="Node3D" parent="."]
 
