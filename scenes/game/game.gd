@@ -72,11 +72,19 @@ func add_player(player_id: int) -> void:
 	# Sync game state
 	_set_game_state.rpc_id(player_id, game_state)
 	
+	for player in players.players:
+		sync_player_to_client(player_id, player)
+	
 	_add_player.rpc(player_id, game_state == GameState.PLAYING)
 	
 	# Load the current map and karts.
 	map_loader.sync_to_client(player_id)
 	kart_loader.sync_to_client(player_id)
+
+
+## Adds a player to a client by ID.
+func sync_player_to_client(client_id: int, player: Player) -> void:
+	_add_player.rpc_id(client_id, player.player_id, player.queued)
 
 
 @rpc("authority", "reliable", "call_local")
