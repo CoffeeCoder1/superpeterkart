@@ -1,6 +1,8 @@
 @tool
 class_name Map extends Node3D
 
+@onready var spawn_location: Marker3D = $SpawnLocation
+
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
@@ -12,4 +14,4 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 
 func get_spawn_location() -> Transform3D:
-	return $SpawnLocation.transform
+	return spawn_location.transform
