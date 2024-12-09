@@ -22,13 +22,20 @@ func _set_local_player_kart(kart_id: String) -> void:
 func set_player_kart(player_id: int, kart_id: String) -> void:
 	var player := players.get_player_by_id(player_id)
 	
-	print(player.queued)
-	
-	player.kart_metadata = kart_list.get_kart_by_id(kart_id)
+	_set_player_kart.rpc(player_id, kart_id)
 	
 	# Spawn in the new player's kart
 	if !player.queued:
 		spawn_kart(player_id, kart_id)
+
+
+@rpc("authority", "reliable", "call_local")
+func _set_player_kart(player_id: int, kart_id: String) -> void:
+	var player := players.get_player_by_id(player_id)
+	
+	print(player.queued)
+	
+	player.kart_metadata = kart_list.get_kart_by_id(kart_id)
 
 
 ## Load a kart in.
@@ -72,6 +79,8 @@ func _spawn_kart(player_id: int, kart_id: String) -> void:
 func sync_to_client(player_id: int) -> void:
 	# Add the current players
 	for player in players.players:
+		if player.kart_metadata:
+			_set_player_kart.rpc_id(player_id, player.player_id, kart_list.get_kart_id(player.kart_metadata))
 		if player.kart:
 			_spawn_kart.rpc_id(player_id, player.player_id, kart_list.get_kart_id(player.kart_metadata))
 
