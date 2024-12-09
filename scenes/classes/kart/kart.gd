@@ -17,6 +17,9 @@ class_name Kart extends CharacterBody3D
 @export var off_track_drag: float = 10.0
 ## Rate at which the track drag is changed.
 @export var track_drag_smoothing: float = 10.0
+## The currently loaded map.
+## NOTE: Only set on the server.
+@export var map: Map
 
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var track_ray_cast: RayCast3D = $TrackRayCast
@@ -28,6 +31,8 @@ var _acceleration = acceleration
 var boost_amount = 100
 var on_track: bool
 var track_drag: float = 0
+## Progress through the map [0-1].
+var map_progress: float
 
 var front_wheel: Vector3
 var rear_wheel: Vector3
@@ -61,6 +66,8 @@ func _process(delta: float) -> void:
 	elif !kart_enabled:
 		if is_instance_valid(preview_camera):
 			preview_camera.make_current()
+	
+	print(map_progress)
 
 
 func _physics_process(delta: float) -> void:
@@ -129,6 +136,10 @@ func _physics_process(delta: float) -> void:
 		
 		# Rotate the kart
 		look_at(transform.origin + new_heading, transform.basis.y)
+		
+		if is_instance_valid(map):
+			var drive_curve := map.get_drive_curve()
+			map_progress = drive_curve.get_closest_offset(global_position) / drive_curve.get_baked_length()
 		
 		move_and_slide()
 

@@ -24,3 +24,5 @@ map_list = ExtResource("3_vl22w")
 unique_name_in_owner = true
 script = ExtResource("3_tl0et")
 kart_list = ExtResource("6_6cv6b")
+
+[connection signal="map_loaded" from="MapLoader" to="." method="_on_map_loader_map_loaded"]

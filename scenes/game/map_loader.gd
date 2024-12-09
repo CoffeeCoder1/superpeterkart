@@ -2,6 +2,9 @@ class_name MapLoader extends Node
 
 @export var map_list: MapList
 
+## Emitted on the server when a map is loaded.
+signal map_loaded(map: Map)
+
 var loaded_map_id: String
 var loaded_map: Map
 
@@ -12,6 +15,7 @@ func load_map(map: MapMetadata) -> void:
 	var map_id := map_list.get_map_id(map)
 	loaded_map_id = map_id
 	_load_map.rpc(map_id)
+	map_loaded.emit(loaded_map)
 
 
 ## Loads a new map.

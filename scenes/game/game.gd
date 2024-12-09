@@ -10,6 +10,7 @@ signal game_ended
 @onready var heads_up_display: HeadsUpDisplay = $HeadsUpDisplay
 @onready var map_loader: MapLoader = %MapLoader
 @onready var kart_loader: KartLoader = %KartLoader
+@onready var drive_path: Path3D = $DrivePath
 
 enum GameState {
 	LOBBY,
@@ -117,3 +118,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_game_end"):
 		## TODO: Actually add proper game end logic.
 		end_game.rpc_id(1)
+
+
+func _on_map_loader_map_loaded(map: Map) -> void:
+	kart_loader.set_players_map(map)

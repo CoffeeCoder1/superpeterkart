@@ -2,6 +2,7 @@
 class_name Map extends Node3D
 
 @onready var spawn_location: Marker3D = $SpawnLocation
+@onready var drive_path: Path3D = $DrivePath
 
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -18,3 +19,11 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 func get_spawn_location() -> Transform3D:
 	return spawn_location.transform
+
+
+func get_drive_path() -> Path3D:
+	return drive_path
+
+
+func get_drive_curve() -> Curve3D:
+	return drive_path.curve

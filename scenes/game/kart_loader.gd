@@ -4,6 +4,7 @@ class_name KartLoader extends Node
 @export var kart_list: KartList
 
 var enabled: bool = false
+var current_map: Map
 
 
 ## Sets the kart of the local player.
@@ -65,6 +66,9 @@ func _spawn_kart(player_id: int, kart_id: String) -> void:
 	# Disable the kart if the game hasn't started yet
 	kart_node.kart_enabled = enabled
 	
+	# Set the current map.
+	kart_node.map = current_map
+	
 	# Spawn in the new kart.
 	kart_node.set_name(kart_id + str(player_id))
 	add_child(kart_node)
@@ -125,3 +129,11 @@ func prepare_players(map_spawn_location: Transform3D) -> void:
 	
 	# Enable players
 	set_players_enabled(true)
+
+
+## Sets the map property on all players.
+func set_players_map(map: Map) -> void:
+	current_map = map
+	for player in players.players:
+		if is_instance_valid(player.kart):
+			player.kart.map = map
