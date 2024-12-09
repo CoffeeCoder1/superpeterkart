@@ -3,11 +3,10 @@ class_name KartLoader extends Node
 @export var players: PlayerList
 @export var kart_list: KartList
 
-signal lap_reached(lap: int)
+signal lap_finished(player_id: int)
 
 var enabled: bool = false
 var current_map: Map
-var highest_lap: int
 
 
 ## Sets the kart of the local player.
@@ -73,7 +72,7 @@ func _spawn_kart(player_id: int, kart_id: String) -> void:
 	kart_node.map = current_map
 	
 	# Connect the lap_finished signal.
-	kart_node.lap_finished.connect(lap_finished.bind(player_id))
+	kart_node.lap_finished.connect(_on_lap_finished.bind(player_id))
 	
 	# Spawn in the new kart.
 	kart_node.set_name(kart_id + str(player_id))
@@ -145,10 +144,6 @@ func set_players_map(map: Map) -> void:
 			player.kart.map = map
 
 
-## Adds a lap to a player.
-func lap_finished(player_id: int) -> void:
-	var player := players.get_player_by_id(player_id)
-	player.lap += 1
-	if player.lap > highest_lap:
-		highest_lap = player.lap
-		lap_reached.emit(highest_lap)
+## Called when a player finishes a lap.
+func _on_lap_finished(player_id: int) -> void:
+	lap_finished.emit(player_id)

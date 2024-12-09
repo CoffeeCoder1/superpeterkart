@@ -16,3 +16,5 @@ class_name Player extends Node
 @export var map_vote: String
 ## What lap is the player on?
 @export var lap: int
+## What place did the player end in?
+@export var place: int

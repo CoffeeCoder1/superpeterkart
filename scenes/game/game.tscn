@@ -26,4 +26,4 @@ script = ExtResource("3_tl0et")
 kart_list = ExtResource("6_6cv6b")
 
 [connection signal="map_loaded" from="MapLoader" to="." method="_on_map_loader_map_loaded"]
-[connection signal="lap_reached" from="KartLoader" to="." method="_on_lap_reached"]
+[connection signal="lap_finished" from="KartLoader" to="." method="_on_lap_finished"]

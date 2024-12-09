@@ -20,6 +20,10 @@ enum GameState {
 
 ## What state is the game in?
 var game_state: GameState = GameState.LOBBY
+## What is the highest lap that has been reached this game?
+var highest_lap: int
+## What will the place of the next player to win be?
+var current_place: int
 
 
 func _ready() -> void:
@@ -50,11 +54,12 @@ func start_game() -> void:
 func _start_game() -> void:
 	game_started.emit()
 	heads_up_display.show()
+	highest_lap = 0
+	current_place = 0
 
 
 ## Ends the game.
 ## Should only be called on the server.
-@rpc("any_peer", "reliable", "call_local")
 func end_game() -> void:
 	kart_loader.set_players_enabled(false)
 	set_game_state(GameState.CREATING)
@@ -118,14 +123,36 @@ func set_player_kart(kart: KartMetadata) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_game_end"):
+	if event.is_action_pressed("debug_game_end") and multiplayer.get_unique_id() == get_multiplayer_authority():
 		## TODO: Actually add proper game end logic.
-		end_game.rpc_id(1)
+		end_game()
 
 
 func _on_map_loader_map_loaded(map: Map) -> void:
 	kart_loader.set_players_map(map)
 
 
-func _on_lap_reached(lap: int) -> void:
-	print("reached lap ", lap)
+func _on_lap_finished(player_id: int) -> void:
+	var player := players.get_player_by_id(player_id)
+	player.lap += 1
+	
+	# Player finished last lap
+	if player.lap == map_loader.get_lap_count():
+		print(player_id, "won! :3")
+		player.kart.kart_enabled = false
+		
+		player.place = current_place
+		current_place += 1
+		
+		if current_place == len(players.players):
+			print("game end")
+			end_game()
+	
+	# Player is the first to enter next lap
+	if player.lap > highest_lap:
+		highest_lap = player.lap
+		
+		if highest_lap == map_loader.get_lap_count() - 1:
+			print("final lap")
+		elif highest_lap == map_loader.get_lap_count():
+			print("final lap finished")
