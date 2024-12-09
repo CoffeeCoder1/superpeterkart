@@ -54,9 +54,9 @@ func _start_game() -> void:
 @rpc("any_peer", "reliable", "call_local")
 func end_game() -> void:
 	kart_loader.set_players_enabled(false)
+	set_game_state(GameState.CREATING)
 	_end_game.rpc()
 	kart_loader.spawn_queued_players()
-	set_game_state(GameState.CREATING)
 
 
 ## Ends the game on the client.
@@ -106,6 +106,6 @@ func set_player_kart(kart: KartMetadata) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("debug_game_end"):
 		## TODO: Actually add proper game end logic.
 		end_game.rpc_id(1)
