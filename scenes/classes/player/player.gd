@@ -14,3 +14,5 @@ class_name Player extends Node
 @export var queued: bool
 ## What map has the player voted for?
 @export var map_vote: String
+## What lap is the player on?
+@export var lap: int

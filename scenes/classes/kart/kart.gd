@@ -21,6 +21,9 @@ class_name Kart extends CharacterBody3D
 ## NOTE: Only set on the server.
 @export var map: Map
 
+## Emitted when the kart finishes a lap.
+signal lap_finished
+
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var track_ray_cast: RayCast3D = $TrackRayCast
 @onready var camera: Camera3D = $Camera3D
@@ -31,8 +34,10 @@ var _acceleration = acceleration
 var boost_amount = 100
 var on_track: bool
 var track_drag: float = 0
-## Progress through the map [0-1].
-var map_progress: float
+## Position on the track [0-1].
+var track_position: float
+## Progress through the track [0-1].
+var track_progress: float
 
 var front_wheel: Vector3
 var rear_wheel: Vector3
@@ -66,8 +71,6 @@ func _process(delta: float) -> void:
 	elif !kart_enabled:
 		if is_instance_valid(preview_camera):
 			preview_camera.make_current()
-	
-	print(map_progress)
 
 
 func _physics_process(delta: float) -> void:
@@ -139,7 +142,13 @@ func _physics_process(delta: float) -> void:
 		
 		if is_instance_valid(map):
 			var drive_curve := map.get_drive_curve()
-			map_progress = drive_curve.get_closest_offset(global_position) / drive_curve.get_baked_length()
+			track_position = drive_curve.get_closest_offset(global_position) / drive_curve.get_baked_length()
+		
+		if track_position >= track_progress and abs(track_progress - track_position) < 0.1:
+			track_progress = track_position
+		elif abs(0.0 - track_position) < 0.1 and abs(1.0 - track_progress) < 0.1:
+			lap_finished.emit()
+			track_progress = track_position
 		
 		move_and_slide()
 

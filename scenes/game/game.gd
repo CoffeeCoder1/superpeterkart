@@ -122,3 +122,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_map_loader_map_loaded(map: Map) -> void:
 	kart_loader.set_players_map(map)
+
+
+func _on_lap_reached(lap: int) -> void:
+	print("reached lap ", lap)
