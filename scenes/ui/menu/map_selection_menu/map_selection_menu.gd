@@ -66,6 +66,10 @@ func _on_next_button() -> void:
 			if map_votes[key] == highest_value:
 				selected_maps.append(key)
 		
+		# If nobody chose a map, pick a random one.
+		if selected_maps.is_empty():
+			selected_maps.append(map_list.get_maps().pick_random().get_map_id())
+		
 		_map_selected.rpc(selected_maps.pick_random())
 
 
