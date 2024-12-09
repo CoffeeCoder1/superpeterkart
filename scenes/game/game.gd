@@ -24,6 +24,7 @@ var game_state: GameState = GameState.LOBBY
 
 func _ready() -> void:
 	kart_loader.players = players
+	heads_up_display.hide()
 
 
 ## Sets the current game state.
@@ -48,6 +49,7 @@ func start_game() -> void:
 @rpc("authority", "reliable", "call_local")
 func _start_game() -> void:
 	game_started.emit()
+	heads_up_display.show()
 
 
 ## Ends the game.
@@ -66,6 +68,7 @@ func end_game() -> void:
 func _end_game() -> void:
 	game_ended.emit()
 	map_loader.unload_map()
+	heads_up_display.hide()
 
 
 ## Adds a player to the game and syncs the map and karts to it.
