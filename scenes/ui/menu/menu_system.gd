@@ -26,6 +26,7 @@ enum MenuPage {
 	MAP_SELECTION,
 	GAME_OPTIONS,
 	MULTIPLAYER_CONNECTING,
+	LEADERBOARD,
 }
 var menu_stack: Array[MenuPage] = []
 
@@ -43,7 +44,7 @@ var next_button_time_left: float
 
 @onready var menu_container: VBoxContainer = %MenuContainer
 @onready var next_button: Button = %NextButton
-@onready var player_list: Control = %PlayerList
+@onready var player_list: PlayerListDisplay = %PlayerList
 
 @onready var start_menu: Menu = %StartMenu
 @onready var main_menu: Menu = %MainMenu
@@ -53,11 +54,13 @@ var next_button_time_left: float
 @onready var game_options_menu: Menu = %GameOptionsMenu
 @onready var online_game_menu: Menu = %OnlineGameMenu
 @onready var multiplayer_connecting_menu: Menu = %MultiplayerConnecting
+@onready var leaderboard: Menu = %Leaderboard
 
 
 func _ready() -> void:
 	player_list.player_list = players
 	map_selection_menu.player_list = players
+	leaderboard.player_list = players
 	character_selection_menu.game = game
 	
 	next_button.hide()
@@ -147,19 +150,27 @@ func _show_menu(menu: MenuPage) -> void:
 		current_menu = game_options_menu
 	elif (menu == MenuPage.MULTIPLAYER_CONNECTING):
 		current_menu = multiplayer_connecting_menu
+	elif (menu == MenuPage.LEADERBOARD):
+		current_menu = leaderboard
 	
 	if (menu == MenuPage.START_MENU):
 		menu_container.hide()
 	else:
 		menu_container.show()
 	
+	if current_menu.has_method("_update"):
+		current_menu.call("_update")
+	
 	if current_menu.has_method("_on_next_button"):
 		next_button.show()
 	else:
 		next_button.hide()
 	
+	next_button_time_left = current_menu.get_meta("next_button_timing", next_button_timing)
+	player_list.visible = current_menu.get_meta("show_player_list", false)
+	player_list.show_map_vote = current_menu.get_meta("show_player_map_vote", false)
+	
 	current_menu.show()
-	next_button_time_left = next_button_timing
 	
 	_start_or_stop_server()
 
@@ -243,3 +254,7 @@ func _on_character_selection_menu_menu_advance() -> void:
 
 func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
 	map_selected.emit(map)
+
+
+func _on_leaderboard_menu_advance() -> void:
+	open_menu(MenuPage.MAP_SELECTION)

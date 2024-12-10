@@ -2,13 +2,22 @@ class_name CharacterCard extends Control
 
 @export var player: Player
 @export var map_list: MapList
+## Show what place that the player ended in.
+@export var show_places: bool = false
+## Show what map the player voted for.
+@export var show_map_vote: bool = false
 
+@onready var place_label: Label = %PlaceLabel
 @onready var name_label: Label = %NameLabel
 @onready var character_display: CharacterPreviewRect = %CharacterDisplay
 @onready var map_label: Label = %MapLabel
 
 
 func _process(delta: float) -> void:
+	place_label.visible = show_places
+	map_label.visible = show_map_vote
+	
+	place_label.text = str(player.place + 1)
 	name_label.text = player.nick
 	
 	# If no preview kart exists, create one

@@ -12,6 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j30jl")
 map_list = ExtResource("2_veyyl")
+metadata/show_player_list = true
+metadata/show_player_map_vote = true
 
 [node name="MapCardContainer" type="GridContainer" parent="."]
 layout_mode = 0

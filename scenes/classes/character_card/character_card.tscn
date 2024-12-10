@@ -16,6 +16,10 @@ map_list = ExtResource("2_llijl")
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="PlaceLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="NameLabel" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

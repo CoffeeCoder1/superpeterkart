@@ -12,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7867g")
 kart_list = ExtResource("2_epd7e")
+metadata/show_player_list = true
 
 [node name="ButtonContainer" type="GridContainer" parent="."]
 layout_mode = 1

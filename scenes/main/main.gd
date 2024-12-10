@@ -70,8 +70,9 @@ func _on_game_started() -> void:
 	menu.close_menu()
 
 
+## Called on all clients when the game ends.
 func _on_game_ended() -> void:
-	menu.open_menu(MenuSystem.MenuPage.MAP_SELECTION)
+	menu.open_menu(MenuSystem.MenuPage.LEADERBOARD)
 	print("end", multiplayer.get_unique_id())
 
 

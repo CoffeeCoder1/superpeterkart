@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjnlqa08ri6y4"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/leaderboard/leaderboard.gd" id="1_lvvwx"]
+[ext_resource type="Script" path="res://scenes/classes/player_list_display/player_list_display.gd" id="2_kaokg"]
+
+[node name="Leaderboard" type="Control" groups=["menus"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lvvwx")
+metadata/next_button_timing = 10.0
+
+[node name="PlayerListDisplay" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_kaokg")
+show_places = true
