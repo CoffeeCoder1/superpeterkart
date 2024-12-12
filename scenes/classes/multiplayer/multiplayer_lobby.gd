@@ -38,6 +38,10 @@ func create_game():
 	multiplayer.multiplayer_peer = peer
 
 
+func leave_game():
+	multiplayer.multiplayer_peer.close()
+
+
 func _on_connected_ok():
 	connected_to_server.emit()
 

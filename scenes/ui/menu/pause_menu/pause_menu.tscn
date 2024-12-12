@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://3xosltnkd6pk"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/pause_menu/pause_menu.gd" id="1_rvn7f"]
+
+[node name="PauseMenu" type="Control" groups=["menus"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rvn7f")
+metadata/show_player_list = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="GameOptionsButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Game Options"
+
+[node name="ChangeCharacterButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Change Character"
+
+[node name="EndGameButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "End Game"
+
+[node name="ExitButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Exit to Main Menu"
+
+[connection signal="pressed" from="GridContainer/GameOptionsButton" to="." method="_on_game_options_button_pressed"]
+[connection signal="pressed" from="GridContainer/ChangeCharacterButton" to="." method="_on_change_character_button_pressed"]
+[connection signal="pressed" from="GridContainer/EndGameButton" to="." method="_on_end_game_button_pressed"]
+[connection signal="pressed" from="GridContainer/ExitButton" to="." method="_on_exit_button_pressed"]

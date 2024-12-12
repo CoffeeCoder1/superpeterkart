@@ -39,6 +39,8 @@ unique_name_in_owner = true
 script = ExtResource("7_u4ro4")
 
 [connection signal="create_local_game" from="MenuSystem" to="." method="_on_menu_create_local_game"]
+[connection signal="end_game" from="MenuSystem" to="." method="_on_menu_system_end_game"]
+[connection signal="exit" from="MenuSystem" to="." method="_on_menu_system_exit"]
 [connection signal="host_online_game" from="MenuSystem" to="." method="_on_menu_host_online_game"]
 [connection signal="join_online_game" from="MenuSystem" to="." method="_on_menu_join_online_game"]
 [connection signal="kart_selected" from="MenuSystem" to="." method="_on_menu_kart_selected"]

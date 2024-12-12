@@ -16,6 +16,8 @@ signal join_online_game(ip_address: String)
 signal host_online_game
 signal stop_online_server
 signal map_selected(map: MapMetadata)
+signal end_game
+signal exit
 
 enum MenuPage {
 	START_MENU,
@@ -27,6 +29,7 @@ enum MenuPage {
 	GAME_OPTIONS,
 	MULTIPLAYER_CONNECTING,
 	LEADERBOARD,
+	PAUSE_MENU,
 }
 var menu_stack: Array[MenuPage] = []
 
@@ -41,6 +44,8 @@ var server_started: bool
 var current_menu: Menu
 ## Used to automatically advance to the next menu.
 var next_button_time_left: float
+## Is the pause menu active?
+var pause_menu_active: bool
 
 @onready var menu_container: VBoxContainer = %MenuContainer
 @onready var next_button: Button = %NextButton
@@ -55,6 +60,7 @@ var next_button_time_left: float
 @onready var online_game_menu: Menu = %OnlineGameMenu
 @onready var multiplayer_connecting_menu: Menu = %MultiplayerConnecting
 @onready var leaderboard: Menu = %Leaderboard
+@onready var pause_menu: Menu = %PauseMenu
 
 
 func _ready() -> void:
@@ -101,6 +107,7 @@ func back_menu() -> void:
 
 func close_menu() -> void:
 	menu_stack = []
+	pause_menu_active = false
 	hide()
 
 
@@ -112,7 +119,6 @@ func open_menu_start() -> void:
 
 ## Opens the character selection menu on local client and doesn't wait for the server.
 func select_local_character() -> void:
-	character_selection_menu.select_local()
 	next_button_timed = false
 	open_menu(MenuPage.CHARACTER_SELECTION)
 
@@ -127,6 +133,13 @@ func select_characters() -> void:
 func initialize_player(id: int) -> void:
 	if not game.game_state == Game.GameState.LOBBY:
 		open_menu.rpc_id(id, MenuPage.CHARACTER_SELECTION)
+
+
+## Opens the pause menu for the local player.
+func pause() -> void:
+	if len(menu_stack) == 0:
+		pause_menu_active = true
+		open_menu(MenuPage.PAUSE_MENU)
 
 
 func _show_menu(menu: MenuPage) -> void:
@@ -152,6 +165,8 @@ func _show_menu(menu: MenuPage) -> void:
 		current_menu = multiplayer_connecting_menu
 	elif (menu == MenuPage.LEADERBOARD):
 		current_menu = leaderboard
+	elif (menu == MenuPage.PAUSE_MENU):
+		current_menu = pause_menu
 	
 	if (menu == MenuPage.START_MENU):
 		menu_container.hide()
@@ -161,7 +176,7 @@ func _show_menu(menu: MenuPage) -> void:
 	if current_menu.has_method("_update"):
 		current_menu.call("_update")
 	
-	if current_menu.has_method("_on_next_button"):
+	if current_menu.has_method("_on_next_button") and !pause_menu_active:
 		next_button.show()
 	else:
 		next_button.hide()
@@ -258,3 +273,21 @@ func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
 
 func _on_leaderboard_menu_advance() -> void:
 	open_menu(MenuPage.MAP_SELECTION)
+
+
+func _on_pause_menu_game_options() -> void:
+	open_menu(MenuPage.GAME_OPTIONS)
+
+
+func _on_pause_menu_change_character() -> void:
+	select_local_character()
+
+
+func _on_pause_menu_end_game() -> void:
+	pause_menu_active = false
+	end_game.emit()
+
+
+func _on_pause_menu_exit() -> void:
+	pause_menu_active = false
+	exit.emit()

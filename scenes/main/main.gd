@@ -21,6 +21,11 @@ func _ready() -> void:
 		menu.open_menu_start()
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause") and game.game_state == Game.GameState.PLAYING:
+		menu.pause()
+
+
 func _on_menu_create_local_game() -> void:
 	# Add the server to the new game
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
@@ -44,7 +49,7 @@ func _on_multiplayer_lobby_connection_failed() -> void:
 
 
 func _on_multiplayer_lobby_server_disconnected() -> void:
-	menu.open_menu(MenuSystem.MenuPage.MAIN_MENU)
+	get_tree().reload_current_scene()
 
 
 func _on_menu_kart_selected(kart: KartMetadata) -> void:
@@ -80,3 +85,11 @@ func _on_player_connected(id: int) -> void:
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
 		game.add_player(id)
 		menu.initialize_player(id)
+
+
+func _on_menu_system_end_game() -> void:
+	game.end_game()
+
+
+func _on_menu_system_exit() -> void:
+	multiplayer_lobby.leave_game()
