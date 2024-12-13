@@ -28,7 +28,7 @@ var current_place: int
 
 func _ready() -> void:
 	kart_loader.players = players
-	heads_up_display.hide()
+	hide()
 
 
 ## Sets the current game state.
@@ -52,10 +52,10 @@ func start_game() -> void:
 ## Called by the authority.
 @rpc("authority", "reliable", "call_local")
 func _start_game() -> void:
-	game_started.emit()
-	heads_up_display.show()
+	show()
 	highest_lap = 0
 	current_place = 0
+	game_started.emit()
 
 
 ## Ends the game.
@@ -73,7 +73,7 @@ func end_game() -> void:
 func _end_game() -> void:
 	game_ended.emit()
 	map_loader.unload_map()
-	heads_up_display.hide()
+	hide()
 
 
 ## Adds a player to the game and syncs the map and karts to it.

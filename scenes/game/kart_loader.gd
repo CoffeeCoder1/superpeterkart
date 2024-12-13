@@ -1,4 +1,4 @@
-class_name KartLoader extends Node
+class_name KartLoader extends Node3D
 
 @export var players: PlayerList
 @export var kart_list: KartList

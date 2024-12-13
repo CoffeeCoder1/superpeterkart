@@ -1,4 +1,4 @@
-class_name MapLoader extends Node
+class_name MapLoader extends Node3D
 
 @export var map_list: MapList
 

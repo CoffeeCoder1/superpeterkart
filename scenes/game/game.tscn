@@ -15,12 +15,12 @@ transform = Transform3D(1, 0, 0, 0, 0.790262, 0.612769, 0, -0.612769, 0.790262, 
 
 [node name="HeadsUpDisplay" parent="." instance=ExtResource("2_bxdhk")]
 
-[node name="MapLoader" type="Node" parent="."]
+[node name="MapLoader" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("5_soshv")
 map_list = ExtResource("3_vl22w")
 
-[node name="KartLoader" type="Node" parent="."]
+[node name="KartLoader" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_tl0et")
 kart_list = ExtResource("6_6cv6b")
