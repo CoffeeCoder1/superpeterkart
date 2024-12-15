@@ -27,8 +27,13 @@ var current_place: int
 
 
 func _ready() -> void:
+	visibility_changed.connect(_on_visibility_changed)
 	kart_loader.players = players
 	hide()
+
+
+func _on_visibility_changed() -> void:
+	heads_up_display.visible = visible
 
 
 ## Sets the current game state.
@@ -130,6 +135,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_map_loader_map_loaded(map: Map) -> void:
 	kart_loader.set_players_map(map)
+	heads_up_display.lap_count = map_loader.get_lap_count()
 
 
 func _on_lap_finished(player_id: int) -> void:

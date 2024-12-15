@@ -13,12 +13,12 @@ script = ExtResource("1_jayv1")
 kart_list = ExtResource("4_hr5qd")
 map_list = ExtResource("5_ftatt")
 
+[node name="Game" parent="." node_paths=PackedStringArray("players") instance=ExtResource("1_jxpmy")]
+players = NodePath("../PlayerList")
+
 [node name="MenuSystem" parent="." node_paths=PackedStringArray("players", "game") instance=ExtResource("2_mh2bb")]
 players = NodePath("../PlayerList")
 game = NodePath("../Game")
-
-[node name="Game" parent="." node_paths=PackedStringArray("players") instance=ExtResource("1_jxpmy")]
-players = NodePath("../PlayerList")
 
 [node name="MultiplayerLobby" type="Node" parent="." node_paths=PackedStringArray("game_node")]
 script = ExtResource("4_vjoha")
@@ -38,6 +38,8 @@ vertical_alignment = 1
 unique_name_in_owner = true
 script = ExtResource("7_u4ro4")
 
+[connection signal="game_ended" from="Game" to="." method="_on_game_ended"]
+[connection signal="game_started" from="Game" to="." method="_on_game_started"]
 [connection signal="create_local_game" from="MenuSystem" to="." method="_on_menu_create_local_game"]
 [connection signal="end_game" from="MenuSystem" to="." method="_on_menu_system_end_game"]
 [connection signal="exit" from="MenuSystem" to="." method="_on_menu_system_exit"]
@@ -46,7 +48,5 @@ script = ExtResource("7_u4ro4")
 [connection signal="kart_selected" from="MenuSystem" to="." method="_on_menu_kart_selected"]
 [connection signal="kart_selection_finished" from="MenuSystem" to="." method="_on_menu_kart_selection_finished"]
 [connection signal="map_selected" from="MenuSystem" to="." method="_on_menu_map_selected"]
-[connection signal="game_ended" from="Game" to="." method="_on_game_ended"]
-[connection signal="game_started" from="Game" to="." method="_on_game_started"]
 [connection signal="connection_failed" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connection_failed"]
 [connection signal="server_disconnected" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_server_disconnected"]
