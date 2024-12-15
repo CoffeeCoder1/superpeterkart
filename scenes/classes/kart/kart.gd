@@ -71,6 +71,7 @@ func _process(delta: float) -> void:
 	elif !kart_enabled:
 		if is_instance_valid(preview_camera):
 			preview_camera.make_current()
+		speed = 0.0
 
 
 func _physics_process(delta: float) -> void:
