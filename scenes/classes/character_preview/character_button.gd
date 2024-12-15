@@ -60,4 +60,5 @@ func _on_draw() -> void:
 	
 	# Set the button texture to the viewport texture
 	await RenderingServer.frame_post_draw
-	icon = character_preview_world.get_texture()
+	if is_instance_valid(character_preview_world):
+		icon = character_preview_world.get_texture()
