@@ -7,6 +7,7 @@ extends Node3D
 @onready var game: Game = $Game
 @onready var multiplayer_lobby: MultiplayerLobby = $MultiplayerLobby
 @onready var multiplayer_status_label: Label = $MultiplayerStatusLabel
+@onready var scene_transition_rect: SceneTransitionRect = $SceneTransitionRect
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +20,8 @@ func _ready() -> void:
 		_on_menu_join_online_game("127.0.0.1")
 	else:
 		menu.open_menu_start()
+	
+	scene_transition_rect.fade_in()
 
 
 func _input(event: InputEvent) -> void:
@@ -72,7 +75,11 @@ func _on_menu_map_selected(map: MapMetadata) -> void:
 
 
 func _on_game_started() -> void:
+	scene_transition_rect.fade_out()
+	await scene_transition_rect.finished
 	menu.close_menu()
+	game.show()
+	scene_transition_rect.fade_in()
 
 
 ## Called on all clients when the game ends.

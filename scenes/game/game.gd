@@ -57,7 +57,6 @@ func start_game() -> void:
 ## Called by the authority.
 @rpc("authority", "reliable", "call_local")
 func _start_game() -> void:
-	show()
 	highest_lap = 0
 	current_place = 0
 	game_started.emit()
