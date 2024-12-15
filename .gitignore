@@ -4,3 +4,7 @@
 
 # MacOS
 .DS_Store
+
+# Temporary files
+*~
+*.blend1
