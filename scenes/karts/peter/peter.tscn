@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgnjjxnw3i7dy"]
+
+[ext_resource type="Script" path="res://scenes/classes/kart/kart.gd" id="1_37cxw"]
+[ext_resource type="PackedScene" uid="uid://ctj3r6ec6rbgs" path="res://scenes/karts/peter/assets/peter.blend" id="2_hyy88"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_esxf2"]
+radius = 0.357652
+height = 3.19621
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3nwol"]
+
+[node name="Peter" type="CharacterBody3D"]
+script = ExtResource("1_37cxw")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="peter" parent="Pivot" instance=ExtResource("2_hyy88")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59605, 0)
+shape = SubResource("CapsuleShape3D_esxf2")
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["karts"]]
+transform = Transform3D(1, 0, 0, 0, 0.912292, 0.409541, 0, -0.409541, 0.912292, 0, 3.88429, 3.37129)
+
+[node name="PreviewCamera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 7.38134e-08, -4.68437e-08, 5.04056e-08, 0.924613, 0.380909, 7.14284e-08, 0.380909, -0.924613, 0, 2.70344, -2.54507)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3nwol")
+
+[node name="TrackRayCast" type="RayCast3D" parent="."]
+hit_from_inside = true
+collide_with_areas = true
