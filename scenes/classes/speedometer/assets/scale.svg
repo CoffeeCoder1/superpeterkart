@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="scale.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.3514197"
+     inkscape:cx="225.68858"
+     inkscape:cy="248.25744"
+     inkscape:window-width="1920"
+     inkscape:window-height="1172"
+     inkscape:window-x="0"
+     inkscape:window-y="43"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="Stop"
+       refX="0"
+       refY="-3"
+       orient="auto"
+       inkscape:stockid="Stop"
+       markerWidth="0.5"
+       markerHeight="0.2"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="none">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1"
+         d="M 0,4 V -4"
+         id="path23" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:6.855;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:13.4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Stop);marker-mid:url(#Stop);marker-end:url(#Stop)"
+       id="path1"
+       sodipodi:type="arc"
+       sodipodi:cx="49.941143"
+       sodipodi:cy="-49.939083"
+       sodipodi:rx="46.514"
+       sodipodi:ry="46.513809"
+       sodipodi:start="5.7595865"
+       sodipodi:end="3.6651914"
+       sodipodi:arc-type="arc"
+       d="m 90.223449,-73.195988 a 46.514,46.513809 0 0 1 -10.383683,58.88855 46.514,46.513809 0 0 1 -59.797246,0 46.514,46.513809 0 0 1 -10.3836825,-58.88855"
+       sodipodi:open="true"
+       transform="scale(1,-1)" />
+  </g>
+</svg>

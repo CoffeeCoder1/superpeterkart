@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bprwvg8c8kry1"]
+
+[ext_resource type="Texture2D" uid="uid://dl02kv01oarup" path="res://scenes/classes/speedometer/assets/needle.svg" id="1_2by10"]
+[ext_resource type="Script" path="res://scenes/classes/speedometer/speedometer.gd" id="1_orgbl"]
+[ext_resource type="Texture2D" uid="uid://b8pg5i26tsayh" path="res://scenes/classes/speedometer/assets/scale.svg" id="3_4w2r7"]
+
+[node name="Speedometer" type="Control"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 378.0
+offset_bottom = 378.0
+script = ExtResource("1_orgbl")
+
+[node name="Needle" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2by10")
+expand_mode = 1
+
+[node name="Scale" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4w2r7")
+expand_mode = 1

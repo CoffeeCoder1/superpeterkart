@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi8hv8llm0ieu"]
+[gd_scene load_steps=3 format=3 uid="uid://bi8hv8llm0ieu"]
 
 [ext_resource type="Script" path="res://scenes/ui/heads_up_display/heads_up_display.gd" id="1_ktlgt"]
+[ext_resource type="PackedScene" uid="uid://bprwvg8c8kry1" path="res://scenes/classes/speedometer/speedometer.tscn" id="2_yk5l2"]
 
 [node name="HeadsUpDisplay" type="Control"]
 layout_mode = 3
@@ -30,8 +31,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="SpeedLabel" type="Label" parent="MarginContainer"]
+[node name="Speedometer" parent="MarginContainer" instance=ExtResource("2_yk5l2")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
