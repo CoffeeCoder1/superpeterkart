@@ -16,6 +16,7 @@ signal join_online_game(ip_address: String)
 signal host_online_game
 signal stop_online_server
 signal map_selected(map: MapMetadata)
+signal leaderboard_end
 signal end_game
 signal exit
 
@@ -272,7 +273,7 @@ func _on_map_selection_menu_map_selected(map: MapMetadata) -> void:
 
 
 func _on_leaderboard_menu_advance() -> void:
-	open_menu(MenuPage.MAP_SELECTION)
+	leaderboard_end.emit()
 
 
 func _on_pause_menu_game_options() -> void:

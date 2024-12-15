@@ -58,6 +58,7 @@ script = ExtResource("8_e3pbn")
 [connection signal="join_online_game" from="MenuSystem" to="." method="_on_menu_join_online_game"]
 [connection signal="kart_selected" from="MenuSystem" to="." method="_on_menu_kart_selected"]
 [connection signal="kart_selection_finished" from="MenuSystem" to="." method="_on_menu_kart_selection_finished"]
+[connection signal="leaderboard_end" from="MenuSystem" to="." method="_on_menu_system_leaderboard_end"]
 [connection signal="map_selected" from="MenuSystem" to="." method="_on_menu_map_selected"]
 [connection signal="connection_failed" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_connection_failed"]
 [connection signal="server_disconnected" from="MultiplayerLobby" to="." method="_on_multiplayer_lobby_server_disconnected"]

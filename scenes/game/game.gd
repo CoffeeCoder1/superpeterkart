@@ -76,6 +76,10 @@ func end_game() -> void:
 @rpc("authority", "reliable", "call_local")
 func _end_game() -> void:
 	game_ended.emit()
+
+
+## Unloads things.
+func unload() -> void:
 	map_loader.unload_map()
 	hide()
 

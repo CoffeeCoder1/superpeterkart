@@ -94,6 +94,14 @@ func _on_player_connected(id: int) -> void:
 		menu.initialize_player(id)
 
 
+func _on_menu_system_leaderboard_end() -> void:
+	scene_transition_rect.fade_out()
+	await scene_transition_rect.finished
+	game.unload()
+	menu.open_menu(MenuSystem.MenuPage.MAP_SELECTION)
+	scene_transition_rect.fade_in()
+
+
 func _on_menu_system_end_game() -> void:
 	game.end_game()
 
