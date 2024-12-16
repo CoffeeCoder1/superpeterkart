@@ -18,3 +18,12 @@ class_name Player extends Node
 @export var lap: int
 ## What place did the player end in?
 @export var place: int
+
+
+## Frees the player and all associated nodes.
+func remove() -> void:
+	if is_instance_valid(kart):
+		kart.queue_free()
+	if is_instance_valid(preview_kart):
+		preview_kart.queue_free()
+	queue_free()

@@ -118,6 +118,16 @@ func _add_player(player_id: int, queued: bool = true) -> void:
 		heads_up_display.player = player
 
 
+## Removes a player from the game.
+func remove_player(player_id: int) -> void:
+	_remove_player.rpc(player_id)
+
+
+@rpc("authority", "reliable", "call_local")
+func _remove_player(player_id: int) -> void:
+	players.remove_player_by_id(player_id)
+
+
 ## Loads a map and prepares the players.
 ## Should only be called on the server.
 func load_map(map: MapMetadata) -> void:

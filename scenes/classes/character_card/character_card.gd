@@ -17,16 +17,17 @@ func _process(delta: float) -> void:
 	place_label.visible = show_places
 	map_label.visible = show_map_vote
 	
-	place_label.text = str(player.place + 1)
-	name_label.text = player.nick
-	
-	# If no preview kart exists, create one
-	# TODO: Remove this from process loop
-	if !is_instance_valid(player.preview_kart) and player.kart_metadata:
-		player.preview_kart = player.kart_metadata.instantiate()
-	
-	character_display.kart = player.preview_kart
-	
-	var map_vote := map_list.get_map_by_id(player.map_vote)
-	if is_instance_valid(map_vote):
-		map_label.text = map_vote.get_map_name()
+	if is_instance_valid(player):
+		place_label.text = str(player.place + 1)
+		name_label.text = player.nick
+		
+		# If no preview kart exists, create one
+		# TODO: Remove this from process loop
+		if !is_instance_valid(player.preview_kart) and player.kart_metadata:
+			player.preview_kart = player.kart_metadata.instantiate()
+		
+		character_display.kart = player.preview_kart
+		
+		var map_vote := map_list.get_map_by_id(player.map_vote)
+		if is_instance_valid(map_vote):
+			map_label.text = map_vote.get_map_name()

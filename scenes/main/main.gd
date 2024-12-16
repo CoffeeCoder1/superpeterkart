@@ -13,6 +13,7 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
+	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	
 	if (OS.get_cmdline_args().has("host")):
 		menu._on_main_menu_local_game()
@@ -92,6 +93,11 @@ func _on_player_connected(id: int) -> void:
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
 		game.add_player(id)
 		menu.initialize_player(id)
+
+
+func _on_player_disconnected(id: int) -> void:
+	if multiplayer.get_unique_id() == get_multiplayer_authority():
+		game.remove_player(id)
 
 
 func _on_menu_system_leaderboard_end() -> void:

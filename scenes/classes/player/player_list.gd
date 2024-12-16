@@ -7,10 +7,17 @@ func add_player(player: Player) -> void:
 	players.append(player)
 
 
+func remove_player_by_id(player_id: int) -> void:
+	var player := get_player_by_id(player_id)
+	players.erase(player)
+	player.remove()
+
+
 func get_player_by_id(id: int) -> Player:
 	for player in players:
-		if player.player_id == id:
-			return player
+		if is_instance_valid(player):
+			if player.player_id == id:
+				return player
 	return null
 
 
