@@ -128,7 +128,7 @@ func prepare_players(map_spawn_location: Transform3D) -> void:
 			if is_instance_valid(player.preview_kart):
 				player.preview_kart.queue_free()
 			# Move the kart to the spawn location
-			player.kart.transform = map_spawn_location.translated(Vector3.RIGHT * (2 * i))
+			player.kart.transform = map_spawn_location.translated_local(Vector3.RIGHT * (2 * i))
 			# Set their velocity to 0
 			player.kart.velocity = Vector3.ZERO
 	
