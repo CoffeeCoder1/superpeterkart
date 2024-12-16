@@ -13,21 +13,20 @@ var loaded_map: Map
 ## Loads a new map on all clients.
 ## Should only be called on the authority.
 func load_map(map: MapMetadata) -> void:
-	loaded_map_metadata = map
-	
 	var map_id := map_list.get_map_id(map)
-	loaded_map_id = map_id
 	
 	_load_map.rpc(map_id)
-	map_loaded.emit(loaded_map)
 
 
 ## Loads a new map.
 ## Called by the authority on all clients.
 @rpc("authority", "reliable", "call_local")
 func _load_map(map_id: String) -> void:
+	loaded_map_id = map_id
+	loaded_map_metadata = map_list.get_map_by_id(map_id)
+	
 	# Instantiate the map
-	var map_node := map_list.get_map_by_id(map_id).instantiate() as Map
+	var map_node := loaded_map_metadata.instantiate() as Map
 	
 	unload_map()
 	
@@ -36,6 +35,8 @@ func _load_map(map_id: String) -> void:
 	
 	# Save the map so it can be unloaded later
 	loaded_map = map_node
+	
+	map_loaded.emit(loaded_map)
 
 
 ## Tells a client what the current map is.

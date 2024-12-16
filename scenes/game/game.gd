@@ -171,11 +171,17 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_map_loader_map_loaded(map: Map) -> void:
-	kart_loader.set_players_map(map)
+	if multiplayer.get_unique_id() == get_multiplayer_authority():
+		kart_loader.set_players_map(map)
 	heads_up_display.lap_count = map_loader.get_lap_count()
 
 
 func _on_lap_finished(player_id: int) -> void:
+	_increment_player_lap.rpc(player_id)
+
+
+@rpc("authority", "reliable", "call_local")
+func _increment_player_lap(player_id: int) -> void:
 	var player := players.get_player_by_id(player_id)
 	player.lap += 1
 	
