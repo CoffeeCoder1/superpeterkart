@@ -15,6 +15,8 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	
+	GameSettings.load_settings()
+	
 	if (OS.get_cmdline_args().has("host")):
 		menu._on_main_menu_local_game()
 	elif (OS.get_cmdline_args().has("join")):

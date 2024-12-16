@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3phbp3v6np27"]
 
-[ext_resource type="Script" path="res://scenes/classes/menu/menu.gd" id="1_vlo5s"]
+[ext_resource type="Script" path="res://scenes/ui/menu/settings_menu/settings_menu.gd" id="1_8dlhf"]
 
 [node name="SettingsMenu" type="Control" groups=["menus"]]
 layout_mode = 3
@@ -9,4 +9,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vlo5s")
+script = ExtResource("1_8dlhf")
+
+[node name="NicknameEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 67.0625
+offset_bottom = 31.0
+
+[connection signal="text_submitted" from="NicknameEdit" to="." method="_on_nickname_edit_text_submitted"]

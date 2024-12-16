@@ -29,6 +29,7 @@ var current_place: int
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 	kart_loader.players = players
+	GameSettings.profile_changed.connect(set_player_profile)
 	hide()
 
 
@@ -94,6 +95,8 @@ func add_player(player_id: int) -> void:
 	
 	_add_player.rpc(player_id, game_state == GameState.PLAYING)
 	
+	sync_player_profile.rpc_id(player_id)
+	
 	# Load the current map and karts.
 	map_loader.sync_to_client(player_id)
 	kart_loader.sync_to_client(player_id)
@@ -138,6 +141,27 @@ func load_map(map: MapMetadata) -> void:
 ## Sets the kart of the local player.
 func set_player_kart(kart: KartMetadata) -> void:
 	kart_loader.set_local_player_kart(kart)
+
+
+func sync_player_profile() -> void:
+	set_player_profile(GameSettings.profile)
+
+
+func set_player_profile(new_profile: PlayerProfile) -> void:
+	_set_player_profile.rpc(new_profile.nickname)
+
+
+@rpc("any_peer", "reliable", "call_local")
+func _set_player_profile(nickname: String) -> void:
+	var player := players.get_player_by_id(multiplayer.get_remote_sender_id())
+	
+	if is_instance_valid(player):
+		# Create a new profile if one doesn't already exist.
+		if !is_instance_valid(player.profile):
+			player.profile = PlayerProfile.new()
+		
+		# Sync profile parameters to client.
+		player.profile.nickname = nickname
 
 
 func _input(event: InputEvent) -> void:

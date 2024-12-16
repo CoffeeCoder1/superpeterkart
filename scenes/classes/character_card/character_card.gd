@@ -19,7 +19,9 @@ func _process(delta: float) -> void:
 	
 	if is_instance_valid(player):
 		place_label.text = str(player.place + 1)
-		name_label.text = player.nick
+		
+		if is_instance_valid(player.profile):
+			name_label.text = player.profile.nickname
 		
 		# If no preview kart exists, create one
 		# TODO: Remove this from process loop
