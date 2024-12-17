@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="MapList" load_steps=5 format=3 uid="uid://dk5gglgb3xy1a"]
+[gd_resource type="Resource" script_class="MapList" load_steps=6 format=3 uid="uid://dk5gglgb3xy1a"]
 
 [ext_resource type="Script" path="res://scenes/classes/map/map_metadata.gd" id="1_12qaw"]
 [ext_resource type="Resource" uid="uid://6gvuydbjt16o" path="res://scenes/maps/unreal/unreal.tres" id="2_fx7np"]
 [ext_resource type="Script" path="res://scenes/classes/map/map_list.gd" id="2_l8gsw"]
 [ext_resource type="Resource" uid="uid://dcfoqbbe4cjh7" path="res://scenes/maps/test_map/test_map.tres" id="3_stuek"]
+[ext_resource type="Resource" uid="uid://8bvnis8kjoey" path="res://scenes/maps/forest/forest.tres" id="4_k3e7o"]
 
 [resource]
 script = ExtResource("2_l8gsw")
-maps = Array[ExtResource("1_12qaw")]([ExtResource("2_fx7np"), ExtResource("3_stuek")])
+maps = Array[ExtResource("1_12qaw")]([ExtResource("2_fx7np"), ExtResource("3_stuek"), ExtResource("4_k3e7o")])

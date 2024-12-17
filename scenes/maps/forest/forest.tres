@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MapMetadata" load_steps=3 format=3 uid="uid://8bvnis8kjoey"]
+
+[ext_resource type="PackedScene" uid="uid://ovfj37sef3u7" path="res://scenes/maps/forest/forest.tscn" id="1_0crwm"]
+[ext_resource type="Script" path="res://scenes/classes/map/map_metadata.gd" id="1_4m5ee"]
+
+[resource]
+script = ExtResource("1_4m5ee")
+id = "forest"
+name = ""
+scene = ExtResource("1_0crwm")
+lap_count = 3
