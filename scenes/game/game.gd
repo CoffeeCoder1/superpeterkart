@@ -77,6 +77,8 @@ func end_game() -> void:
 @rpc("authority", "reliable", "call_local")
 func _end_game() -> void:
 	game_ended.emit()
+	for player in players.players:
+		player.lap = 0
 
 
 ## Unloads things.
