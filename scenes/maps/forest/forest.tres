@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_4m5ee")
 id = "forest"
-name = ""
+name = "Forest"
 scene = ExtResource("1_0crwm")
 lap_count = 3
