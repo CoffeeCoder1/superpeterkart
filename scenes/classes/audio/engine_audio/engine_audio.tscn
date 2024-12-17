@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://vksxvneqmyvm"]
+
+[ext_resource type="Script" path="res://scenes/classes/audio/engine_audio/engine_audio.gd" id="1_v2sgt"]
+[ext_resource type="AudioStream" uid="uid://bgdef4wkf4rxl" path="res://assets/sfx/engine_large.tres" id="2_sfqar"]
+[ext_resource type="AudioStream" uid="uid://d0s2mxg75tgm3" path="res://assets/sfx/engine_rev.tres" id="3_7okl4"]
+
+[node name="EngineAudio" type="Node3D"]
+script = ExtResource("1_v2sgt")
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_sfqar")
+bus = &"EngineFx"
+
+[node name="RevSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_7okl4")

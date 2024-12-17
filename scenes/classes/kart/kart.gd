@@ -24,6 +24,8 @@ class_name Kart extends CharacterBody3D
 ## Emitted when the kart finishes a lap.
 signal lap_finished
 
+const ENGINE_AUDIO = preload("res://scenes/classes/audio/engine_audio/engine_audio.tscn")
+
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var track_ray_cast: RayCast3D = $TrackRayCast
 @onready var camera: Camera3D = $Camera3D
@@ -43,12 +45,16 @@ var front_wheel: Vector3
 var rear_wheel: Vector3
 
 var input_proxy: InputProxy
+var engine_audio: EngineAudio
 
 
 func _ready() -> void:
 	input_proxy = InputProxy.new()
 	add_child(input_proxy)
 	input_proxy.set_name("InputProxy")
+	
+	engine_audio = ENGINE_AUDIO.instantiate()
+	add_child(engine_audio)
 	
 	# Set up the MultiplayerSynchronizer
 	multiplayer_synchronizer.replication_config.add_property(":position")
@@ -72,6 +78,8 @@ func _process(delta: float) -> void:
 		if is_instance_valid(preview_camera):
 			preview_camera.make_current()
 		speed = 0.0
+	
+	engine_audio.kart_speed = speed / 50
 
 
 func _physics_process(delta: float) -> void:
