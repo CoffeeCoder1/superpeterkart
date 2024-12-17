@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcb2i6n2iaj8v"
-path.s3tc="res://.godot/imported/MEME.JPG-3bd43b8113b77488bf3cbbb775999e03.s3tc.ctex"
+uid="uid://ccnaemvahb1uf"
+path.s3tc="res://.godot/imported/Finish Line_0.png-c453a668426483da8f78173b436d0b76.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "f531aeb7a29336972ef8ddd78b922d34"
+}
 
 [deps]
 
-source_file="res://Track File/MEME.JPG"
-dest_files=["res://.godot/imported/MEME.JPG-3bd43b8113b77488bf3cbbb775999e03.s3tc.ctex"]
+source_file="res://Track File/finish-line/source/Finish Line_0.png"
+dest_files=["res://.godot/imported/Finish Line_0.png-c453a668426483da8f78173b436d0b76.s3tc.ctex"]
 
 [params]
 

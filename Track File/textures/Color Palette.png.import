@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcb2i6n2iaj8v"
-path.s3tc="res://.godot/imported/MEME.JPG-3bd43b8113b77488bf3cbbb775999e03.s3tc.ctex"
+uid="uid://5o7dcd4wcyh5"
+path.s3tc="res://.godot/imported/Color Palette.png-2265b3f68fe7c2b22dc5f229ce51703e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Track File/MEME.JPG"
-dest_files=["res://.godot/imported/MEME.JPG-3bd43b8113b77488bf3cbbb775999e03.s3tc.ctex"]
+source_file="res://Track File/textures/Color Palette.png"
+dest_files=["res://.godot/imported/Color Palette.png-2265b3f68fe7c2b22dc5f229ce51703e.s3tc.ctex"]
 
 [params]
 

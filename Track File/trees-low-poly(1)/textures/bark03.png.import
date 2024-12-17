@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcb2i6n2iaj8v"
-path.s3tc="res://.godot/imported/MEME.JPG-3bd43b8113b77488bf3cbbb775999e03.s3tc.ctex"
+uid="uid://dp3tr4kbpene4"
+path.s3tc="res://.godot/imported/bark03.png-1fa299b43e10d7b5f5eccc63d75841bf.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Track File/MEME.JPG"
-dest_files=["res://.godot/imported/MEME.JPG-3bd43b8113b77488bf3cbbb775999e03.s3tc.ctex"]
+source_file="res://Track File/trees-low-poly(1)/textures/bark03.png"
+dest_files=["res://.godot/imported/bark03.png-1fa299b43e10d7b5f5eccc63d75841bf.s3tc.ctex"]
 
 [params]
 
