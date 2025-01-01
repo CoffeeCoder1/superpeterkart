@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c841v0k8psts"]
 
-[ext_resource type="PackedScene" uid="uid://dauintsonlbbi" path="res://Track File/Track3.blend" id="1_xho6m"]
-[ext_resource type="Texture2D" uid="uid://bcb2i6n2iaj8v" path="res://Track File/MEME.JPG" id="2_qcmqj"]
+[ext_resource type="PackedScene" uid="uid://dauintsonlbbi" path="res://scenes/maps/forest/assets/track_3.blend" id="1_xho6m"]
+[ext_resource type="Texture2D" uid="uid://bcb2i6n2iaj8v" path="res://scenes/maps/forest/assets/MEME.JPG" id="2_qcmqj"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xyet4"]
 

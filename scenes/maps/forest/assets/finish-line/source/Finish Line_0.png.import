@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccnaemvahb1uf"
-path.s3tc="res://.godot/imported/Finish Line_0.png-c453a668426483da8f78173b436d0b76.s3tc.ctex"
+path.s3tc="res://.godot/imported/Finish Line_0.png-2d7d7da3be5748d706bb99e3a69f2c1b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Track File/finish-line/source/Finish Line_0.png"
-dest_files=["res://.godot/imported/Finish Line_0.png-c453a668426483da8f78173b436d0b76.s3tc.ctex"]
+source_file="res://scenes/maps/forest/assets/finish-line/source/Finish Line_0.png"
+dest_files=["res://.godot/imported/Finish Line_0.png-2d7d7da3be5748d706bb99e3a69f2c1b.s3tc.ctex"]
 
 [params]
 

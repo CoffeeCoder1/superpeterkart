@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dauintsonlbbi"
-path="res://.godot/imported/Track3.blend-5b840040a1cf02a963c248da4d8ac225.scn"
+path="res://.godot/imported/track_3.blend-39e8a82144939dbe4084d1b0ac653563.scn"
 
 [deps]
 
-source_file="res://Track File/Track3.blend"
-dest_files=["res://.godot/imported/Track3.blend-5b840040a1cf02a963c248da4d8ac225.scn"]
+source_file="res://scenes/maps/forest/assets/track_3.blend"
+dest_files=["res://.godot/imported/track_3.blend-39e8a82144939dbe4084d1b0ac653563.scn"]
 
 [params]
 

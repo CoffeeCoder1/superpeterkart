@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://din3gw15kq68h"
-path="res://.godot/imported/trees.fbx-a1f7e74d157ffa9d5ca4b5eca99eae9c.scn"
+uid="uid://c3igpob2yjqh1"
+path="res://.godot/imported/Finish Line.fbx-6b8d690053777fa6e266009e11862043.scn"
 
 [deps]
 
-source_file="res://Track File/trees-low-poly(1)/source/trees.fbx"
-dest_files=["res://.godot/imported/trees.fbx-a1f7e74d157ffa9d5ca4b5eca99eae9c.scn"]
+source_file="res://scenes/maps/forest/assets/finish-line/source/Finish Line.fbx"
+dest_files=["res://.godot/imported/Finish Line.fbx-6b8d690053777fa6e266009e11862043.scn"]
 
 [params]
 

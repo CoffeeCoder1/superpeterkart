@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b87cc1jn3dwdo"
-path="res://.godot/imported/billboard.fbx-2d1395e952ab7b9b22406ab26ebacab0.scn"
+path="res://.godot/imported/billboard.fbx-841cd635321dd2bd27a5b594cd94c809.scn"
 
 [deps]
 
-source_file="res://Track File/billboard/source/billboard.fbx"
-dest_files=["res://.godot/imported/billboard.fbx-2d1395e952ab7b9b22406ab26ebacab0.scn"]
+source_file="res://scenes/maps/forest/assets/billboard/source/billboard.fbx"
+dest_files=["res://.godot/imported/billboard.fbx-841cd635321dd2bd27a5b594cd94c809.scn"]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu88jiv2rndbg"
-path.s3tc="res://.godot/imported/colors.png-cee2e772ab6016bf3000e31360538314.s3tc.ctex"
+uid="uid://khsjpkifr0ml"
+path.s3tc="res://.godot/imported/Green and Yellow Retro Hot Dog Restaurant Grand Opening Billboard Ad(1).png-9ed9183c4e42acad3b671f51dd9e977f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Track File/billboard/textures/colors.png"
-dest_files=["res://.godot/imported/colors.png-cee2e772ab6016bf3000e31360538314.s3tc.ctex"]
+source_file="res://scenes/maps/forest/assets/Green and Yellow Retro Hot Dog Restaurant Grand Opening Billboard Ad(1).png"
+dest_files=["res://.godot/imported/Green and Yellow Retro Hot Dog Restaurant Grand Opening Billboard Ad(1).png-9ed9183c4e42acad3b671f51dd9e977f.s3tc.ctex"]
 
 [params]
 

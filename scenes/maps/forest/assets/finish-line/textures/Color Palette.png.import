@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d24ghvex367cl"
-path="res://.godot/imported/Color Palette.png-2cd34f268c908eb995e097a1610f4099.ctex"
+path="res://.godot/imported/Color Palette.png-bc131976c69b966347a153f00fad25e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Track File/finish-line/textures/Color Palette.png"
-dest_files=["res://.godot/imported/Color Palette.png-2cd34f268c908eb995e097a1610f4099.ctex"]
+source_file="res://scenes/maps/forest/assets/finish-line/textures/Color Palette.png"
+dest_files=["res://.godot/imported/Color Palette.png-bc131976c69b966347a153f00fad25e2.ctex"]
 
 [params]
 

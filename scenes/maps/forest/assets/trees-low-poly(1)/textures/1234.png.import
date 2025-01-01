@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2x083wmkicii"
-path.s3tc="res://.godot/imported/Black and White Simple Promotion Billboard Landscape(1).png-669e0da3973390fc8a9426b19d4bf0b3.s3tc.ctex"
+uid="uid://cobbes7aeasxt"
+path.s3tc="res://.godot/imported/1234.png-9220a2c9df4dc6151cc822f421963df1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Track File/Black and White Simple Promotion Billboard Landscape(1).png"
-dest_files=["res://.godot/imported/Black and White Simple Promotion Billboard Landscape(1).png-669e0da3973390fc8a9426b19d4bf0b3.s3tc.ctex"]
+source_file="res://scenes/maps/forest/assets/trees-low-poly(1)/textures/1234.png"
+dest_files=["res://.godot/imported/1234.png-9220a2c9df4dc6151cc822f421963df1.s3tc.ctex"]
 
 [params]
 
