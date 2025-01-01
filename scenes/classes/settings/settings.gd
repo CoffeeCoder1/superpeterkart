@@ -1,8 +1,13 @@
 class_name Settings extends Node
 
 @export var profile: PlayerProfile
+@export var fps_counter_enabled: bool = true:
+	set(new_fps_counter_enabled):
+		fps_counter_enabled_changed.emit(new_fps_counter_enabled)
+		fps_counter_enabled = new_fps_counter_enabled
 
 signal profile_changed(new_profile: PlayerProfile)
+signal fps_counter_enabled_changed(enabled: bool)
 
 
 #func serialize() -> Dictionary:
@@ -56,3 +61,7 @@ func load_settings() -> void:
 func _on_nickname_changed(new_nickname: String) -> void:
 	profile_changed.emit(profile)
 	save_settings()
+
+
+func is_fps_counter_enabled() -> bool:
+	return fps_counter_enabled

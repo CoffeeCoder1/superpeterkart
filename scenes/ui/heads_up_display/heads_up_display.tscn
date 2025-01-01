@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi8hv8llm0ieu"]
+[gd_scene load_steps=4 format=3 uid="uid://bi8hv8llm0ieu"]
 
 [ext_resource type="Script" path="res://scenes/ui/heads_up_display/heads_up_display.gd" id="1_ktlgt"]
 [ext_resource type="PackedScene" uid="uid://bprwvg8c8kry1" path="res://scenes/classes/speedometer/speedometer.tscn" id="2_yk5l2"]
+[ext_resource type="Script" path="res://scenes/classes/debug/fps_counter/fps_counter.gd" id="3_jkqii"]
 
 [node name="HeadsUpDisplay" type="Control"]
 layout_mode = 3
@@ -37,3 +38,12 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+
+[node name="FPSCounter" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+script = ExtResource("3_jkqii")
