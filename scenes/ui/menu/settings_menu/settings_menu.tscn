@@ -11,10 +11,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8dlhf")
 
-[node name="NicknameEdit" type="LineEdit" parent="."]
-unique_name_in_owner = true
+[node name="GridContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 67.0625
-offset_bottom = 31.0
+offset_right = 150.0
+offset_bottom = 86.0
 
-[connection signal="text_submitted" from="NicknameEdit" to="." method="_on_nickname_edit_text_submitted"]
+[node name="NicknameEdit" type="LineEdit" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FPSCounterButton" type="CheckButton" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FPS Counter"
+
+[connection signal="text_submitted" from="GridContainer/NicknameEdit" to="." method="_on_nickname_edit_text_submitted"]
+[connection signal="toggled" from="GridContainer/FPSCounterButton" to="." method="_on_fps_counter_button_toggled"]

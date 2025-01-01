@@ -1,7 +1,7 @@
 class_name Settings extends Node
 
 @export var profile: PlayerProfile
-@export var fps_counter_enabled: bool = true:
+@export var fps_counter_enabled: bool:
 	set(new_fps_counter_enabled):
 		fps_counter_enabled_changed.emit(new_fps_counter_enabled)
 		fps_counter_enabled = new_fps_counter_enabled
