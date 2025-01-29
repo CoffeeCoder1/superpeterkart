@@ -1,0 +1,64 @@
+name: Godot CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - identifier: linux-x86
+            os: ubuntu-latest
+            export-preset: Linux x86
+            export-filename: superpeterkart-x86.tar.gz
+          - identifier: windows-x86
+            os: ubuntu-latest
+            export-preset: Windows Desktop x86
+            export-filename: superpeterkart-x86.exe
+          - identifier: macos
+            os: macos-latest
+            export-preset: macOS
+            export-filename: superpeterkart-universal.dmg
+          - identifier: web
+            os: ubuntu-latest
+            export-preset: Web
+            export-filename: SuperPeterKart.html
+    runs-on: ${{ matrix.os }}
+    name: Build (${{ matrix.export-preset }})
+    steps:
+      - uses: actions/checkout@v4.1.7
+        with:
+          lfs: true
+      - uses: chickensoft-games/setup-godot@v2.1.1
+        name: Setup Godot
+        with:
+          version: 4.3.0
+          include-templates: true
+      - name: Build
+        run: |
+          mkdir -v -p "${{ github.workspace }}/export"
+          godot --headless --export-release "${{ matrix.export-preset }}" "${{ github.workspace }}/export/${{ matrix.export-filename }}"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4.3.6
+        with:
+          name: superpeterkart-${{ matrix.identifier }}
+          path: ${{ github.workspace }}/export
+  
+  # Creates a release if the commit has a tag associated with it
+  release:
+    needs: [build]
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download build
+      uses: actions/download-artifact@v4.1.8
+      with:
+        path: dist
+        merge-multiple: true
+    - name: Create release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/*
