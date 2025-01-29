@@ -115,4 +115,7 @@ func _on_menu_system_end_game() -> void:
 
 
 func _on_menu_system_exit() -> void:
-	multiplayer_lobby.leave_game()
+	# TODO: Gracefully disconnect clients
+	if not multiplayer.get_unique_id() == get_multiplayer_authority():
+		multiplayer_lobby.leave_game()
+	get_tree().reload_current_scene()
