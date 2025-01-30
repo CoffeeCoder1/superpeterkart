@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2x083wmkicii"
 path.s3tc="res://.godot/imported/Black and White Simple Promotion Billboard Landscape(1).png-a14414c3ea8060b7785711064614ee7d.s3tc.ctex"
+path.etc2="res://.godot/imported/Black and White Simple Promotion Billboard Landscape(1).png-a14414c3ea8060b7785711064614ee7d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://scenes/maps/forest/assets/Black and White Simple Promotion Billboard Landscape(1).png"
-dest_files=["res://.godot/imported/Black and White Simple Promotion Billboard Landscape(1).png-a14414c3ea8060b7785711064614ee7d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Black and White Simple Promotion Billboard Landscape(1).png-a14414c3ea8060b7785711064614ee7d.s3tc.ctex", "res://.godot/imported/Black and White Simple Promotion Billboard Landscape(1).png-a14414c3ea8060b7785711064614ee7d.etc2.ctex"]
 
 [params]
 

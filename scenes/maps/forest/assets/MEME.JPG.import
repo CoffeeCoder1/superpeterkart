@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcb2i6n2iaj8v"
 path.s3tc="res://.godot/imported/MEME.JPG-03c7bc5ff0b44d90f46955dbd023dbba.s3tc.ctex"
+path.etc2="res://.godot/imported/MEME.JPG-03c7bc5ff0b44d90f46955dbd023dbba.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://scenes/maps/forest/assets/MEME.JPG"
-dest_files=["res://.godot/imported/MEME.JPG-03c7bc5ff0b44d90f46955dbd023dbba.s3tc.ctex"]
+dest_files=["res://.godot/imported/MEME.JPG-03c7bc5ff0b44d90f46955dbd023dbba.s3tc.ctex", "res://.godot/imported/MEME.JPG-03c7bc5ff0b44d90f46955dbd023dbba.etc2.ctex"]
 
 [params]
 
