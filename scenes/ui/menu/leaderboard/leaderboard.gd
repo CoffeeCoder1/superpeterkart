@@ -4,7 +4,6 @@ extends Menu
 
 signal menu_advance
 
-@onready var leaderboard_text: RichTextLabel = $LeaderboardText
 @onready var player_list_display: PlayerListDisplay = $PlayerListDisplay
 
 

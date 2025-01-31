@@ -10,7 +10,6 @@ signal game_ended
 @onready var heads_up_display: HeadsUpDisplay = $HeadsUpDisplay
 @onready var map_loader: MapLoader = %MapLoader
 @onready var kart_loader: KartLoader = %KartLoader
-@onready var drive_path: Path3D = $DrivePath
 
 enum GameState {
 	LOBBY,
